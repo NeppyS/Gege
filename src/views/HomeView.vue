@@ -73,21 +73,20 @@
       </div>
     </div>
 
-    <!-- Right Video Diagonal Split -->
-    <div
-      class="absolute inset-0 w-full h-[160px] sm:relative sm:w-full sm:h-[260px] lg:w-1/2 lg:h-auto z-0 sm:z-10 clip-slash overflow-hidden"
-    >
-      <video
-        autoplay
-        muted
-        loop
-        playsinline
-        class="w-full h-full object-cover filter grayscale contrast-150"
-      >
-        <source src="@/assets/video1.mp4" type="video/mp4" />
-      </video>
-      <div class="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"></div>
-    </div>
+<!-- Right Video Diagonal Split -->
+<div class="w-full h-[180px] sm:h-[260px] lg:w-1/2 lg:h-auto relative z-10 overflow-hidden clip-slash">
+  <video
+    autoplay
+    muted
+    loop
+    playsinline
+    class="w-full h-full object-cover filter grayscale contrast-150"
+  >
+    <source src="@/assets/video1.mp4" type="video/mp4" />
+  </video>
+  <div class="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"></div>
+</div>
+
   </section>
 </template>
 
