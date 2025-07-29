@@ -1,49 +1,43 @@
 <template>
   <section
     id="contact"
-    class="relative w-full min-h-screen flex flex-col items-center justify-center text-center px-6 sm:px-10 py-20
-          from-gray-950 via-gray-900 to-gray-950 overflow-hidden text-white"
+    class="relative w-full min-h-screen flex flex-col items-center justify-center text-center px-4 sm:px-8 md:px-12 py-20  from-gray-950 via-gray-900 to-gray-950 text-white"
   >
     <!-- Floating Particles Background -->
     <canvas id="particles-bg" class="absolute inset-0 pointer-events-none z-0"></canvas>
 
     <!-- Heading -->
-    <h1
-      class="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-6 leading-tight opacity-0 animate-fade-down relative z-10"
-    >
+    <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-4 leading-tight animate-fade-down relative z-10">
       Get in
       <span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400">
         Touch
       </span>
     </h1>
 
-    <p
-      class="text-base sm:text-lg md:text-xl max-w-2xl mx-auto mb-12 leading-relaxed text-gray-400 opacity-0 animate-fade-up relative z-10"
-    >
+    <!-- Subheading -->
+    <p class="text-base sm:text-lg md:text-xl max-w-2xl mx-auto mb-10 leading-relaxed text-gray-400 animate-fade-up relative z-10">
       Want to collaborate or just say hello? Fill out the form below or connect with me on social media!
     </p>
 
     <!-- Contact Card -->
-<div
-  class="w-full max-w-2xl backdrop-blur-xl border border-white/10 rounded-2xl px-4 sm:px-8 py-10 shadow-lg shadow-indigo-500/10
-         relative z-10 opacity-0 animate-scale-up flex justify-center"
->
-  <form @submit.prevent="submitForm" class="w-full max-w-md space-y-6">
+<div class="w-full max-w-xl bg-black/40 backdrop-blur-xl border border-white/10 rounded-2xl px-4 sm:px-6 py-10 shadow-lg shadow-indigo-500/10 animate-scale-up relative z-10">
+  <form @submit.prevent="submitForm" class="w-full space-y-6">
+    
     <!-- Name -->
     <div class="relative">
-      <i class="fas fa-user absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"></i>
+      <i class="fas fa-user absolute sm:left-3 md:left-4 top-1/2 -translate-y-1/2 text-gray-400 sm:-ml-[5px] md:ml-0"></i>
       <input
         v-model="name"
         type="text"
         required
         placeholder=" "
-        class="w-full pl-12 pr-4 py-3 bg-black/40 border border-white/10 rounded-xl text-white
-               focus:outline-none focus:ring-4 focus:ring-indigo-500/30 transition-all duration-300 peer"
+        class="w-full -ml-[5px] pr-4 py-3 bg-transparent border border-white/10 rounded-xl text-white placeholder-transparent
+               focus:outline-none focus:ring-4 focus:ring-indigo-500/30 peer"
       />
       <label
-        class="absolute left-12 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none transition-all duration-300
-               peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-gray-500
-               peer-placeholder-shown:-translate-y-1/2 peer-focus:top-2 peer-focus:text-xs peer-focus:text-indigo-400"
+        class="absolute left-12 top-1/2 -translate-y-1/2 text-gray-400 transition-all duration-300
+               peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-gray-500 peer-placeholder-shown:-translate-y-1/2
+               peer-focus:top-2 peer-focus:text-xs peer-focus:text-indigo-400"
       >
         Your Name
       </label>
@@ -51,19 +45,19 @@
 
     <!-- Email -->
     <div class="relative">
-      <i class="fas fa-envelope absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"></i>
+      <i class="fas fa-envelope absolute sm:left-3 md:left-4 top-1/2 -translate-y-1/2 text-gray-400 sm:-ml-[5px] md:ml-0"></i>
       <input
         v-model="email"
         type="email"
         required
         placeholder=" "
-        class="w-full pl-12 pr-4 py-3 bg-black/40 border border-white/10 rounded-xl text-white
-               focus:outline-none focus:ring-4 focus:ring-indigo-500/30 transition-all duration-300 peer"
+        class="w-full -ml-[5px] pr-4 py-3 bg-transparent border border-white/10 rounded-xl text-white placeholder-transparent
+               focus:outline-none focus:ring-4 focus:ring-indigo-500/30 peer"
       />
       <label
-        class="absolute left-12 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none transition-all duration-300
-               peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-gray-500
-               peer-placeholder-shown:-translate-y-1/2 peer-focus:top-2 peer-focus:text-xs peer-focus:text-indigo-400"
+        class="absolute left-12 top-1/2 -translate-y-1/2 text-gray-400 transition-all duration-300
+               peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-gray-500 peer-placeholder-shown:-translate-y-1/2
+               peer-focus:top-2 peer-focus:text-xs peer-focus:text-indigo-400"
       >
         Your Email
       </label>
@@ -71,17 +65,17 @@
 
     <!-- Message -->
     <div class="relative">
-      <i class="fas fa-comment-dots absolute left-4 top-5 text-gray-400"></i>
+      <i class="fas fa-comment-dots absolute sm:left-3 md:left-4 top-5 text-gray-400 sm:-ml-[5px] md:ml-0"></i>
       <textarea
         v-model="message"
         rows="4"
         required
         placeholder=" "
-        class="w-full pl-12 pr-4 py-3 bg-black/40 border border-white/10 rounded-xl text-white
-               focus:outline-none focus:ring-4 focus:ring-indigo-500/30 transition-all duration-300 resize-none peer"
+        class="w-full -ml-[5px] pr-4 py-3 bg-transparent border border-white/10 rounded-xl text-white resize-none placeholder-transparent
+               focus:outline-none focus:ring-4 focus:ring-indigo-500/30 peer"
       ></textarea>
       <label
-        class="absolute left-12 top-4 text-gray-400 pointer-events-none transition-all duration-300
+        class="absolute left-12 top-4 text-gray-400 transition-all duration-300
                peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:text-gray-500
                peer-focus:top-2 peer-focus:text-xs peer-focus:text-indigo-400"
       >
@@ -89,23 +83,28 @@
       </label>
     </div>
 
-    <!-- Submit Button -->
-    <div class="flex justify-center">
-      <button
-        type="submit"
-        class="px-6 py-3 w-40 text-base font-semibold rounded-xl
-               bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700
-               text-white shadow-lg shadow-indigo-500/30 hover:shadow-indigo-500/50
-               transition duration-300 transform hover:scale-105"
-      >
-        🚀 Send
-      </button>
-    </div>
-  </form>
-</div>
 
-    <!-- Direct Email & Socials -->
-    <div class="mt-12 text-gray-400 text-sm relative z-10 space-y-3 opacity-0 animate-fade-up">
+
+
+
+
+        <!-- Submit Button -->
+        <div class="flex justify-center">
+          <button
+            type="submit"
+            class="px-6 py-3 w-full sm:w-40 text-base font-semibold rounded-xl
+                   bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700
+                   text-white shadow-lg shadow-indigo-500/30 hover:shadow-indigo-500/50
+                   transition duration-300 transform hover:scale-105"
+          >
+            🚀 Send
+          </button>
+        </div>
+      </form>
+    </div>
+
+    <!-- Email & Socials -->
+    <div class="mt-10 text-gray-400 text-sm relative z-10 space-y-3 animate-fade-up text-center">
       <p>
         Or email me directly at
         <a href="mailto:nephtenilon@gmail.com" class="text-indigo-400 hover:text-indigo-300 underline">
@@ -113,15 +112,9 @@
         </a>
       </p>
       <div class="flex justify-center gap-6 mt-4 text-xl">
-        <a href="#" class="hover:text-indigo-400 transition transform hover:scale-110">
-          <i class="fab fa-facebook"></i>
-        </a>
-        <a href="#" class="hover:text-indigo-400 transition transform hover:scale-110">
-          <i class="fab fa-github"></i>
-        </a>
-        <a href="#" class="hover:text-indigo-400 transition transform hover:scale-110">
-          <i class="fab fa-linkedin"></i>
-        </a>
+        <a href="#" class="hover:text-indigo-400 transition transform hover:scale-110"><i class="fab fa-facebook"></i></a>
+        <a href="#" class="hover:text-indigo-400 transition transform hover:scale-110"><i class="fab fa-github"></i></a>
+        <a href="#" class="hover:text-indigo-400 transition transform hover:scale-110"><i class="fab fa-linkedin"></i></a>
       </div>
     </div>
   </section>
@@ -141,7 +134,6 @@ const submitForm = () => {
   message.value = ''
 }
 
-// Floating particles
 onMounted(() => {
   const canvas = document.getElementById('particles-bg')
   const ctx = canvas.getContext('2d')

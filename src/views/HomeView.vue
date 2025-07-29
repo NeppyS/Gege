@@ -78,18 +78,23 @@
       </div>
     </div>
 
-    <!-- Right Video Blob -->
-    <div class="flex-1 flex justify-center items-center w-full lg:w-auto relative z-10 animate-slide-up">
-      <div
-        class="relative w-64 h-64 sm:w-80 sm:h-80 md:w-125 md:h-125 shadow-[0_0_50px_rgba(99,102,241,0.45)] border-4 border-indigo-500/30 transform hover:scale-105 rotate-2 hover:rotate-0 transition duration-700 ease-in-out overflow-hidden animate-float"
-        style="clip-path: polygon(70% 0%, 100% 30%, 90% 70%, 60% 100%, 20% 90%, 0% 50%, 10% 10%)"
-      >
-        <video autoplay muted loop playsinline class="w-full h-full object-cover filter grayscale contrast-150">
-          <source src="@/assets/video1.mp4" type="video/mp4" />
-        </video>
-        <div class="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"></div>
-      </div>
-    </div>
+<!-- Right Video Diagonal Split -->
+<div
+  class="absolute inset-0 w-full h-[120px] sm:relative sm:w-full sm:h-[250px] lg:w-1/2 lg:h-auto z-0 sm:z-10 clip-slash overflow-hidden"
+>
+  <video
+    autoplay
+    muted
+    loop
+    playsinline
+    class="w-full h-full object-cover filter grayscale contrast-150"
+  >
+    <source src="@/assets/video1.mp4" type="video/mp4" />
+  </video>
+  <div class="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"></div>
+</div>
+
+
   </section>
 </template>
 
@@ -165,6 +170,18 @@ onMounted(() => {
   border-radius: 50%;
   transition: all 0.3s ease;
 }
+
+.clip-slash {
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 80%);
+}
+@media (min-width: 1024px) {
+  .clip-slash {
+    clip-path: polygon(0 0, 100% 10%, 100% 100%, 0 90%);
+  }
+}
+
+
+
 
 canvas#particles-bg { position: absolute; inset: 0; width: 100%; height: 100%; }
 </style>

@@ -10,15 +10,14 @@
     <canvas id="particles-bg" class="absolute inset-0 z-0 pointer-events-none"></canvas>
 
     <div
-      class="relative w-full max-w-7xl grid lg:grid-cols-2 gap-12 items-center z-10
-             animate-fade-in"
+      class="relative w-full max-w-7xl grid grid-cols-1 lg:grid-cols-2 gap-12 items-center justify-items-center text-center lg:text-left z-10 animate-fade-in"
     >
       <!-- Left: Text Content -->
-      <div class="space-y-10 text-base sm:text-lg leading-relaxed text-gray-300 animate-slide-up">
+      <div class="space-y-10 text-base sm:text-lg leading-relaxed text-gray-300 animate-slide-up max-w-2xl">
         <div>
           <h2
             id="about-title"
-            class="text-4xl sm:text-5xl font-extrabold mb-6 tracking-wider text-center lg:text-left
+            class="text-4xl sm:text-5xl font-extrabold mb-6 tracking-wider
                    bg-gradient-to-r from-indigo-400 via-purple-400 to-indigo-400 bg-clip-text text-transparent animate-gradient"
           >
             About Me
@@ -33,7 +32,7 @@
           </p>
         </div>
 
-        <!-- Tech Stack with Staggered Animation -->
+        <!-- Tech Stack -->
         <div>
           <h3 class="text-xl font-bold text-indigo-300 mb-3">🚀 Tech Stack</h3>
           <ul class="grid grid-cols-2 sm:grid-cols-3 gap-3 text-sm sm:text-base">
@@ -48,7 +47,7 @@
           </ul>
         </div>
 
-        <!-- Experience with stagger -->
+        <!-- Experience -->
         <div>
           <h3 class="text-xl font-bold text-indigo-300 mb-3">📌 Experience</h3>
           <ul class="list-disc list-inside space-y-2 text-gray-300">
@@ -84,14 +83,14 @@
         </div>
       </div>
 
-      <!-- Right: Profile Card / Orbiting Icons -->
-      <div class="flex justify-center items-center animate-slide-up relative">
+      <!-- Right: Profile Card -->
+      <div class="w-full flex justify-center items-center animate-slide-up relative">
         <!-- Orbiting Tech Icons -->
         <div
           v-for="(icon, i) in orbitingIcons"
           :key="i"
           class="absolute w-12 h-12 rounded-full bg-white/10 border border-indigo-400/30 flex justify-center items-center
-                 text-indigo-300 text-xl animate-orbit"
+                 text-indigo-300 text-xl animate-orbit hidden sm:flex"
           :style="{'animation-delay': (i * 1.5) + 's'}"
         >
           <i :class="icon"></i>
