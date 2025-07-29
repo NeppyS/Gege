@@ -43,12 +43,15 @@
         class="w-full px-6 py-4 bg-gray-800 border border-gray-700 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:ring-4 focus:ring-indigo-500 transition resize-none"
       ></textarea>
 
-      <button
-        type="submit"
-        class="w-full px-6 py-4 text-lg font-semibold rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white shadow-lg hover:shadow-indigo-700 transition duration-300 focus:outline-none focus:ring-4 focus:ring-indigo-400"
-      >
-        Send Message
-      </button>
+      <!-- ✅ Centered, Smaller Button -->
+      <div class="flex justify-center">
+        <button
+          type="submit"
+          class="px-6 py-3 w-40 text-sm sm:text-base font-semibold rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white shadow-lg hover:shadow-indigo-700 transition duration-300 focus:outline-none focus:ring-4 focus:ring-indigo-400"
+        >
+          Send Message
+        </button>
+      </div>
     </form>
 
     <p class="text-sm text-gray-500 mt-10">

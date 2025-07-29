@@ -1,7 +1,7 @@
 <template>
   <section
     id="projects"
-    class="w-full min-h-screen flex flex-col items-center justify-start px-4 sm:px-6 pt-20 pb-28 bg-black text-white relative overflow-hidden"
+    class="w-full min-h-screen flex flex-col items-center justify-start px-4 sm:px-6 pt-20 pb-28 text-white relative overflow-hidden"
   >
     <!-- Particles BG -->
     <canvas id="particles-bg" class="absolute inset-0 z-0 pointer-events-none"></canvas>
@@ -16,7 +16,8 @@
       <!-- Arrow Left -->
       <button
         @click="prevSlide"
-        class="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 z-20 bg-indigo-700/20 hover:bg-indigo-500/30 backdrop-blur-md p-3 sm:p-4 rounded-full border border-indigo-500/50 shadow-xl transition-all"
+        class="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 z-20 bg-indigo-700/10 hover:bg-indigo-500/20 backdrop-blur-md p-3 sm:p-4 rounded-full border border-indigo-400/40 shadow-xl transition"
+        aria-label="Previous project"
       >
         <ChevronLeft class="w-5 h-5 sm:w-6 sm:h-6 text-indigo-200" />
       </button>
@@ -33,7 +34,7 @@
             class="w-full flex-shrink-0 flex justify-center px-2"
           >
             <div
-              class="w-full max-w-md sm:max-w-xl p-6 sm:p-8 md:p-10 rounded-2xl bg-gradient-to-br from-[#0f0f23]/70 to-[#1a1a40]/50 border border-indigo-400/30 shadow-xl backdrop-blur-xl relative transform transition-all duration-700 hover:scale-[1.02] neon-border"
+              class="w-full max-w-md sm:max-w-xl p-6 sm:p-8 md:p-10 rounded-2xl bg-gradient-to-br from-[#0f0f23]/70 to-[#1a1a40]/50 border border-indigo-400/30 shadow-xl backdrop-blur-xl relative transform transition-transform duration-700 hover:scale-105 neon-border"
             >
               <div class="absolute inset-0 z-[-1] pointer-events-none animated-glow-border rounded-2xl"></div>
 
@@ -61,14 +62,14 @@
       <!-- Arrow Right -->
       <button
         @click="nextSlide"
-        class="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 z-20 bg-indigo-700/20 hover:bg-indigo-500/30 backdrop-blur-md p-3 sm:p-4 rounded-full border border-indigo-500/50 shadow-xl transition-all"
+        class="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 z-20 bg-indigo-700/10 hover:bg-indigo-500/20 backdrop-blur-md p-3 sm:p-4 rounded-full border border-indigo-400/40 shadow-xl transition"
+        aria-label="Next project"
       >
         <ChevronRight class="w-5 h-5 sm:w-6 sm:h-6 text-indigo-200" />
       </button>
     </div>
   </section>
 </template>
-
 
 <script setup>
 import { ref, onMounted } from 'vue'
@@ -113,9 +114,11 @@ function nextSlide() {
     currentIndex.value === projects.length - 1 ? 0 : currentIndex.value + 1
 }
 
-// Optional: particles.js background
+// Particle BG Setup
 onMounted(() => {
   const canvas = document.getElementById('particles-bg')
+  if (!canvas) return
+
   const ctx = canvas.getContext('2d')
   let particles = []
 
