@@ -1,6 +1,6 @@
 <template>
   <section
-    class="h-screen w-full flex flex-col-reverse md:flex-row items-center justify-center px-6 sm:px-10 text-white bg-gradient-to-br from-black via-gray-900 to-black overflow-hidden relative"
+    class="min-h-screen w-full flex flex-col-reverse md:flex-row items-center justify-center gap-10 px-4 sm:px-10 py-10 text-white bg-gradient-to-br from-black via-gray-900 to-black overflow-hidden relative"
   >
     <!-- Particles BG -->
     <canvas id="particles-bg" class="absolute inset-0 z-0 pointer-events-none"></canvas>
@@ -8,15 +8,14 @@
     <!-- Text Content -->
     <div
       class="flex-1 flex flex-col justify-center animate-fade-in text-center md:text-left relative z-10"
-      style="min-height: 80vh;"
     >
-      <h1 class="text-6xl sm:text-7xl lg:text-8xl font-extrabold mb-6 leading-tight tracking-tight">
+      <h1 class="text-4xl sm:text-6xl lg:text-7xl font-extrabold mb-6 leading-tight tracking-tight">
         Hello, I'm <br />
         <span class="text-indigo-500">Nephten Fajardo Ilon</span>
       </h1>
 
       <p
-        class="text-xl sm:text-2xl lg:text-3xl max-w-xl mx-auto md:mx-0 mb-10 text-gray-400 leading-relaxed"
+        class="text-lg sm:text-xl lg:text-2xl max-w-xl mx-auto md:mx-0 mb-8 text-gray-400 leading-relaxed"
       >
         A passionate Full Stack Developer crafting clean, efficient, and beautiful web apps.
       </p>
@@ -31,16 +30,16 @@
     <!-- Styled Image -->
     <div
       class="flex-1 flex justify-center items-center animate-slide-up relative z-10"
-      style="min-height: 80vh;"
     >
       <img
         :src="picture"
         alt="Nephten Ilon"
-        class="w-80 h-80 sm:w-[360px] sm:h-[360px] md:w-[420px] md:h-[420px] object-cover rounded-[50%_30%_50%_30%/40%_50%_40%_50%] border-4 border-indigo-500/30 shadow-2xl transform rotate-3 hover:rotate-0 transition duration-700 ease-in-out"
+        class="w-52 h-52 sm:w-72 sm:h-72 md:w-96 md:h-96 object-cover rounded-[50%_30%_50%_30%/40%_50%_40%_50%] border-4 border-indigo-500/30 shadow-2xl transform rotate-3 hover:rotate-0 transition duration-700 ease-in-out"
       />
     </div>
   </section>
 </template>
+
 
 
 <script setup>
@@ -128,13 +127,12 @@ onMounted(() => {
   animation: slide-up 1.1s ease-out forwards;
 }
 
-/* Canvas styling */
 canvas#particles-bg {
   position: absolute;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
+  width: 100% !important;
+  height: 100% !important;
   z-index: 0;
   pointer-events: none;
 }

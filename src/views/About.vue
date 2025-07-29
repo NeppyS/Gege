@@ -1,21 +1,21 @@
 <template>
   <section
     id="about"
-    class="relative h-screen w-full flex items-start justify-center pt-5 sm:pt-5 -mt-20 px-4 text-gray-100"
+    class="relative min-h-screen w-full flex items-start justify-center pt-24 px-4 text-gray-100"
     role="region"
     aria-labelledby="about-title"
   >
     <div
-      class="relative w-full max-w-6xl shadow-2xl rounded-3xl p-8 sm:p-12 overflow-y-auto animate-fade-in"
+      class="relative w-full max-w-6xl shadow-2xl rounded-3xl p-6 sm:p-10 lg:p-12 animate-fade-in bg-black/20 backdrop-blur-lg"
     >
       <h2
         id="about-title"
-        class="text-4xl sm:text-5xl font-extrabold text-center text-indigo-400 border-b-4 border-indigo-500 pb-4 mb-10 tracking-wide"
+        class="text-3xl sm:text-5xl font-extrabold text-center text-indigo-400 border-b-4 border-indigo-500 pb-4 mb-10 tracking-wide"
       >
         About Me
       </h2>
 
-      <div class="space-y-10 text-[0.95rem] md:text-lg px-1 md:px-2 text-gray-200 animate-slide-up">
+      <div class="space-y-10 text-base sm:text-lg px-1 md:px-2 text-gray-200 animate-slide-up">
         <p>
           I'm <span class="text-indigo-300 font-semibold">Nephten Fajardo Ilon</span>, a passionate
           <span class="text-indigo-400 font-semibold">Full-Stack Developer</span> currently pursuing a BS in IT at
@@ -42,7 +42,7 @@
 
         <div>
           <h3 class="text-xl font-bold text-indigo-300 mb-3">Experience</h3>
-          <ul class="list-disc list-inside text-gray-300">
+          <ul class="list-disc list-inside text-gray-300 space-y-1">
             <li>OJT Developer at <span class="text-indigo-400">GreenRoute GPS</span> – Built internal UI & dashboards.</li>
             <li>Developed full CRUD apps with authentication & role-based access.</li>
             <li>Designed modern UIs inspired by ChatGPT and SaaS platforms.</li>
@@ -76,6 +76,7 @@
     </div>
   </section>
 </template>
+
 
 <style scoped>
 @keyframes fade-in {

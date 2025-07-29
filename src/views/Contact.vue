@@ -1,16 +1,16 @@
 <template>
   <div
     id="contact"
-    class="w-full h-screen flex flex-col items-center justify-center text-center overflow-hidden p-4 sm:p-8  from-gray-950 via-gray-900 to-gray-950 text-white"
+    class="w-full min-h-screen flex flex-col items-center justify-center text-center overflow-hidden p-6 sm:p-10 bg-gradient-to-br from-gray-950 via-gray-900 to-gray-950 text-white"
   >
     <h1
-      class="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-6 leading-tight animate-fade-in"
+      class="text-3xl sm:text-5xl md:text-6xl font-extrabold mb-6 leading-tight animate-fade-in"
     >
       Get in <span class="text-indigo-500">Touch</span>
     </h1>
 
     <p
-      class="text-base sm:text-lg md:text-xl lg:text-2xl max-w-3xl mx-auto mb-10 leading-relaxed text-gray-400 animate-slide-up"
+      class="text-base sm:text-lg md:text-xl max-w-2xl mx-auto mb-10 leading-relaxed text-gray-400 animate-slide-up"
     >
       Want to collaborate or just say hello? Drop me a message — I’d love to connect!
     </p>
@@ -56,11 +56,13 @@
       <a
         href="mailto:nephtenilon@gmail.com"
         class="text-indigo-400 hover:text-indigo-300 underline"
-        >nephtenilon@gmail.com</a
       >
+        nephtenilon@gmail.com
+      </a>
     </p>
   </div>
 </template>
+
 
 <script setup>
 import { ref } from 'vue'
