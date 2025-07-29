@@ -1,16 +1,16 @@
 <template>
   <section
     id="about"
-    class="relative min-h-screen w-full flex items-start justify-center pt-24 px-4 text-gray-100"
+    class="w-full min-h-screen flex items-start justify-center px-4 text-gray-100 pt-24 pb-16"
     role="region"
     aria-labelledby="about-title"
   >
     <div
-      class="relative w-full max-w-6xl shadow-2xl rounded-3xl p-6 sm:p-10 lg:p-12 animate-fade-in bg-gradient-to-br from-black/30 to-gray-900/30 backdrop-blur-xl border border-white/10"
+      class="relative w-full max-w-6xl flex flex-col justify-start shadow-2xl rounded-3xl p-6 sm:p-10 lg:p-12 animate-fade-in backdrop-blur-xl border border-white/10"
     >
       <h2
         id="about-title"
-        class="text-4xl sm:text-5xl font-extrabold text-center text-indigo-400 border-b-4 border-indigo-500 pb-4 mb-12 tracking-wider"
+        class="text-4xl sm:text-5xl font-extrabold text-center text-indigo-400 border-b-4 border-indigo-500 pb-4 mb-10 tracking-wider"
       >
         About Me
       </h2>

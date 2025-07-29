@@ -1,12 +1,12 @@
 <template>
   <div
-    class="h-screen w-screen bg-gradient-to-br from-black via-gray-900 to-black text-gray-100 overflow-hidden"
+    class="min-h-screen w-full bg-gradient-to-br from-black via-gray-900 to-black text-gray-100"
   >
     <!-- Fixed Navbar -->
     <Navbar class="fixed top-0 left-0 w-full z-50" />
 
-    <!-- Main Content Centered Below Navbar -->
-    <main class="h-full w-full flex items-center justify-center pt-20 px-4">
+    <!-- Main Content -->
+    <main class="pt-20 px-4 sm:px-6 md:px-8">
       <router-view />
     </main>
   </div>
@@ -48,13 +48,17 @@ section:focus-visible {
   outline-offset: 6px;
 }
 
-/* Fully prevent scroll */
+/* ✅ Enable full scroll & mobile support */
 html,
 body,
 #app {
   margin: 0;
   padding: 0;
-  height: 100%;
-  overflow: hidden;
+  min-height: 100%;
+  width: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  scroll-behavior: smooth;
+  font-family: 'Inter', sans-serif;
 }
 </style>
