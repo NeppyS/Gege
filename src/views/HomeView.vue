@@ -1,6 +1,6 @@
 <template>
   <section
-    class="relative min-w-screen w-center flex  lg:flex-row items-center justify-center px-6 sm:px-10 text-white pt-8 sm:pt-10 lg:pt-12 pb-12 overflow-hidden"
+    class="relative w-screen flex flex-col-reverse lg:flex-row items-center justify-center px-6 sm:px-10 text-white pt-10 lg:pt-16 pb-16 lg:pb-20 overflow-hidden space-y-10 lg:space-y-0 lg:space-x-10"
   >
     <!-- Particle Background -->
     <canvas id="particles-bg" class="absolute inset-0 z-0 pointer-events-none"></canvas>
@@ -9,10 +9,7 @@
     <div
       class="flex-1 flex flex-col justify-center items-center lg:items-start text-center lg:text-left relative z-10 space-y-6 animate-fade-in"
     >
-      <!-- Hero Heading -->
-      <h1
-        class="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-extrabold leading-tight tracking-tight"
-      >
+      <h1 class="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-extrabold leading-tight tracking-tight">
         Hello, I'm
         <br />
         <span
@@ -22,56 +19,49 @@
         </span>
       </h1>
 
-      <!-- Subtitle / Typewriter -->
       <p
         class="text-lg sm:text-xl lg:text-2xl text-gray-300 max-w-lg leading-relaxed animate-typewriter overflow-hidden whitespace-nowrap border-r-4 border-indigo-400 pr-2"
       >
         Full Stack Developer & UI Enthusiast
       </p>
 
-<!-- CTA Buttons -->
-<div class="flex flex-wrap justify-center lg:justify-start gap-4 pt-6">
-  <!-- View Projects -->
-  <router-link
-    to="/projects"
-    class="px-6 sm:px-8 py-3 sm:py-3.5 text-base sm:text-lg font-semibold rounded-xl
-           bg-gradient-to-r from-indigo-600 to-purple-600
-           hover:from-indigo-500 hover:to-purple-500
-           shadow-[0_0_20px_rgba(99,102,241,0.4)]
-           hover:shadow-[0_0_30px_rgba(139,92,246,0.6)]
-           transform hover:scale-105 active:scale-95
-           transition-all duration-300
-           text-white no-underline"
-  >
-    🚀 View Projects
-  </router-link>
+      <!-- CTA Buttons -->
+      <div class="flex flex-wrap justify-center lg:justify-start gap-4 pt-6">
+        <!-- View Projects -->
+        <router-link
+          to="/projects"
+          class="px-6 sm:px-8 py-3 sm:py-3.5 text-base sm:text-lg font-semibold rounded-xl
+                 bg-gradient-to-r from-indigo-600 to-purple-600
+                 hover:from-indigo-500 hover:to-purple-500
+                 shadow-[0_0_20px_rgba(99,102,241,0.4)]
+                 hover:shadow-[0_0_30px_rgba(139,92,246,0.6)]
+                 transform hover:scale-105 active:scale-95
+                 transition-all duration-300
+                 text-white no-underline"
+        >
+          🚀 View Projects
+        </router-link>
 
-  <!-- Contact Me -->
-  <router-link
-    to="/contact"
-    class="px-6 sm:px-8 py-3 sm:py-3.5 text-base sm:text-lg font-semibold rounded-xl
-           border border-indigo-400/60 bg-white/5 backdrop-blur-sm
-           hover:bg-indigo-500/20 hover:border-indigo-400
-           shadow-[0_0_15px_rgba(99,102,241,0.2)]
-           hover:shadow-[0_0_25px_rgba(99,102,241,0.4)]
-           transform hover:scale-105 active:scale-95
-           transition-all duration-300
-           text-white no-underline"
-  >
-    📩 Contact Me
-  </router-link>
-</div>
-
+        <!-- Contact Me -->
+        <router-link
+          to="/contact"
+          class="px-6 sm:px-8 py-3 sm:py-3.5 text-base sm:text-lg font-semibold rounded-xl
+                 border border-indigo-400/60 bg-white/5 backdrop-blur-sm
+                 hover:bg-indigo-500/20 hover:border-indigo-400
+                 shadow-[0_0_15px_rgba(99,102,241,0.2)]
+                 hover:shadow-[0_0_25px_rgba(99,102,241,0.4)]
+                 transform hover:scale-105 active:scale-95
+                 transition-all duration-300
+                 text-white no-underline"
+        >
+          📩 Contact Me
+        </router-link>
+      </div>
 
       <!-- Social Links -->
       <div class="flex flex-wrap justify-center lg:justify-start gap-4 mt-6">
         <!-- Facebook -->
-        <a
-          href="https://www.facebook.com/nephtenllon"
-          target="_blank"
-          class="social-btn"
-          style="background-color:#1877f2"
-        >
+        <a href="https://www.facebook.com/nephtenllon" target="_blank" class="social-btn" style="background-color:#1877f2">
           <svg class="w-5 h-5" fill="white" viewBox="0 0 24 24">
             <path
               d="M22 12c0-5.522-4.478-10-10-10S2 6.478 2 12c0 5.007 3.66 9.128 8.438 9.877v-6.987H7.898v-2.89h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562v1.875h2.773l-.443 2.89h-2.33v6.987C18.34 21.128 22 17.007 22 12z"
@@ -94,33 +84,19 @@
         </a>
 
         <!-- Gmail -->
-        <a
-          href="mailto:nephtenilon@gmail.com"
-          class="social-btn"
-          style="background-color:#ea4335"
-        >
+        <a href="mailto:nephtenilon@gmail.com" class="social-btn" style="background-color:#ea4335">
           <svg class="w-5 h-5" fill="white" viewBox="0 0 24 24">
-            <path
-              d="M1.5 4.5h21v15h-21v-15zm10.5 7.837l-9-5.837v12.5h18v-12.5l-9 5.837z"
-            />
+            <path d="M1.5 4.5h21v15h-21v-15zm10.5 7.837l-9-5.837v12.5h18v-12.5l-9 5.837z" />
           </svg>
         </a>
 
         <!-- X / Twitter -->
-        <a
-          href="https://x.com/Nephten2"
-          target="_blank"
-          class="social-btn"
-          style="background-color:#000000"
-        >
+        <a href="https://x.com/Nephten2" target="_blank" class="social-btn" style="background-color:#000000">
           <svg class="w-5 h-5" fill="white" viewBox="0 0 1200 1227">
-            <path
-              d="M1024 0H840L600 400 360 0H176l308 489L0 1227h232l368-592 368 592h232L692 497 1024 0Z"
-            />
+            <path d="M1024 0H840L600 400 360 0H176l308 489L0 1227h232l368-592 368 592h232L692 497 1024 0Z" />
           </svg>
         </a>
       </div>
- 
 
       <!-- Tech Stack Badges -->
       <div class="flex flex-wrap justify-center lg:justify-start gap-3 mt-8">
@@ -132,16 +108,16 @@
     </div>
 
     <!-- Right Video (Floating Blob) -->
-    <div class="flex-1 flex justify-center items-center mb-8 lg:mb-0 relative z-10 animate-slide-up">
+    <div class="flex-1 flex justify-center items-center w-full lg:w-auto relative z-10 animate-slide-up">
       <div
-        class="relative w-72 h-72 sm:w-96 sm:h-96 md:w-[600px] md:h-[600px]
+        class="relative w-60 h-60 sm:w-80 sm:h-80 md:w-96 md:h-96
                shadow-[0_0_50px_rgba(99,102,241,0.45)]
                border-4 border-indigo-500/30
                transform hover:scale-105 rotate-2 hover:rotate-0
                transition duration-700 ease-in-out overflow-hidden animate-float"
         style="clip-path: polygon(70% 0%, 100% 30%, 90% 70%, 60% 100%, 20% 90%, 0% 50%, 10% 10%)"
       >
-        <video autoplay muted loop playsinline class="w-full h-full object-cover">
+        <video autoplay muted loop playsinline class="w-full h-full object-cover filter grayscale contrast-150">
           <source src="@/assets/video1.mp4" type="video/mp4" />
         </video>
         <div class="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"></div>
@@ -149,6 +125,7 @@
     </div>
   </section>
 </template>
+
 
 <script setup>
 import { onMounted } from 'vue'
