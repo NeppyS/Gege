@@ -1,0 +1,8 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #0f0f0f; /* Dark background */
+  color: #fff;
+  font-family: 'Inter', sans-serif;
+}
