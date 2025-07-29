@@ -1,6 +1,6 @@
 <template>
   <section
-    class="min-h-screen w-full flex flex-col-reverse md:flex-row items-center justify-center gap-10 px-4 sm:px-10 py-10 text-white bg-gradient-to-br from-black via-gray-900 to-black overflow-hidden relative"
+    class="min-h-screen w-full flex flex-col-reverse md:flex-row items-center justify-center gap-10 px-4 sm:px-6 py-10 text-white bg-gradient-to-br from-black via-gray-900 to-black overflow-hidden relative"
   >
     <!-- Particles BG -->
     <canvas id="particles-bg" class="absolute inset-0 z-0 pointer-events-none"></canvas>
@@ -9,19 +9,21 @@
     <div
       class="flex-1 flex flex-col justify-center animate-fade-in text-center md:text-left relative z-10"
     >
-      <h1 class="text-4xl sm:text-6xl lg:text-7xl font-extrabold mb-6 leading-tight tracking-tight">
+      <h1
+        class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold mb-4 leading-snug tracking-tight"
+      >
         Hello, I'm <br />
         <span class="text-indigo-500">Nephten Fajardo Ilon</span>
       </h1>
 
       <p
-        class="text-lg sm:text-xl lg:text-2xl max-w-xl mx-auto md:mx-0 mb-8 text-gray-400 leading-relaxed"
+        class="text-base sm:text-lg md:text-xl max-w-md sm:max-w-lg mx-auto md:mx-0 mb-6 text-gray-400 leading-relaxed px-2 sm:px-0"
       >
         A passionate Full Stack Developer crafting clean, efficient, and beautiful web apps.
       </p>
 
       <button
-        class="mx-auto md:mx-0 px-6 py-2 w-40 text-base font-semibold rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white shadow-xl transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-indigo-400 focus:ring-opacity-50"
+        class="mx-auto md:mx-0 px-6 py-3 w-40 text-sm sm:text-base font-semibold rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white shadow-xl transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-indigo-400 focus:ring-opacity-50"
       >
         Learn More
       </button>
@@ -34,13 +36,11 @@
       <img
         :src="picture"
         alt="Nephten Ilon"
-        class="w-52 h-52 sm:w-72 sm:h-72 md:w-96 md:h-96 object-cover rounded-[50%_30%_50%_30%/40%_50%_40%_50%] border-4 border-indigo-500/30 shadow-2xl transform rotate-3 hover:rotate-0 transition duration-700 ease-in-out"
+        class="w-40 h-40 sm:w-60 sm:h-60 md:w-80 md:h-80 object-cover rounded-[50%_30%_50%_30%/40%_50%_40%_50%] border-4 border-indigo-500/30 shadow-2xl transform rotate-3 hover:rotate-0 transition duration-700 ease-in-out"
       />
     </div>
   </section>
 </template>
-
-
 
 <script setup>
 import { onMounted } from 'vue'
