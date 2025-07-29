@@ -5,15 +5,16 @@ import UnoCSS from 'unocss/vite'
 import path from 'path'
 
 export default defineConfig({
+  base: './', // ✅ Add this for Netlify compatibility
   plugins: [vue(), UnoCSS()],
   resolve: {
     alias: {
-      '@': path.resolve(__dirname, './src'), // ✅ Use @ for src/
+      '@': path.resolve(__dirname, './src'),
     },
   },
   server: {
-    port: 3000, // Change this if needed
-    open: true, // Auto open browser on dev
+    port: 3000,
+    open: true,
   },
   preview: {
     port: 4173,
