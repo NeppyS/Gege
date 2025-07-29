@@ -1,6 +1,6 @@
 <template>
   <nav
-    class="fixed top-0 left-0 w-full z-50 backdrop-blur-md bg-transparent"
+    class="fixed"
     role="navigation"
     aria-label="Primary"
   >

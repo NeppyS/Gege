@@ -1,7 +1,7 @@
 <template>
   <div
     id="contact"
-    class="w-full min-h-screen flex flex-col items-center justify-center text-center overflow-hidden p-6 sm:p-10 bg-gradient-to-br from-gray-950 via-gray-900 to-gray-950 text-white"
+    class="w-full min-h-screen flex flex-col items-center justify-center text-center overflow-hidden p-6 sm:p-10 via-gray-900 to-gray-950 text-white"
   >
     <h1
       class="text-3xl sm:text-5xl md:text-6xl font-extrabold mb-6 leading-tight opacity-0 animate-fade-in"
