@@ -2,7 +2,7 @@
   <section
     id="contact"
     class="relative w-full min-h-screen flex flex-col items-center justify-center text-center px-6 sm:px-10 py-20
-           bg-gradient-to-b from-gray-950 via-gray-900 to-gray-950 overflow-hidden text-white"
+          from-gray-950 via-gray-900 to-gray-950 overflow-hidden text-white"
   >
     <!-- Floating Particles Background -->
     <canvas id="particles-bg" class="absolute inset-0 pointer-events-none z-0"></canvas>

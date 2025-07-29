@@ -110,7 +110,7 @@
     <!-- Right Video (Floating Blob) -->
     <div class="flex-1 flex justify-center items-center w-full lg:w-auto relative z-10 animate-slide-up">
       <div
-        class="relative w-60 h-60 sm:w-80 sm:h-80 md:w-96 md:h-96
+        class="relative w-70 h-70 sm:w-100 sm:h-100 md:w-125 md:h-125
                shadow-[0_0_50px_rgba(99,102,241,0.45)]
                border-4 border-indigo-500/30
                transform hover:scale-105 rotate-2 hover:rotate-0
