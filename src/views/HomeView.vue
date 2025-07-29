@@ -1,85 +1,56 @@
 <template>
   <section
-    class="relative w-screen flex flex-col-reverse lg:flex-row items-center justify-center px-6 sm:px-10 text-white pt-10 lg:pt-16 pb-16 lg:pb-20 overflow-hidden space-y-10 lg:space-y-0 lg:space-x-10"
+    class="relative w-full max-w-screen-xl mx-auto flex flex-col-reverse lg:flex-row items-center justify-center px-4 sm:px-6 pt-10 lg:pt-16 pb-16 lg:pb-20 overflow-hidden gap-y-12 lg:gap-y-0 lg:gap-x-10 text-white"
   >
     <!-- Particle Background -->
     <canvas id="particles-bg" class="absolute inset-0 z-0 pointer-events-none"></canvas>
 
-    <!-- Left Text / Hero -->
-    <div
-      class="flex-1 flex flex-col justify-center items-center lg:items-start text-center lg:text-left relative z-10 space-y-6 animate-fade-in"
-    >
+    <!-- Left: Text & Actions -->
+    <div class="flex-1 flex flex-col items-center lg:items-start text-center lg:text-left relative z-10 space-y-6 animate-fade-in max-w-md w-full">
       <h1 class="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-extrabold leading-tight tracking-tight">
         Hello, I'm
         <br />
-        <span
-          class="bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent animate-gradient-move"
-        >
+        <span class="bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent animate-gradient-move">
           Nephten Fajardo Ilon
         </span>
       </h1>
 
       <p
-        class="text-lg sm:text-xl lg:text-2xl text-gray-300 max-w-lg leading-relaxed animate-typewriter overflow-hidden whitespace-nowrap border-r-4 border-indigo-400 pr-2"
+        class="text-lg sm:text-xl lg:text-2xl text-gray-300 leading-relaxed animate-typewriter overflow-hidden whitespace-nowrap border-r-4 border-indigo-400 pr-2 max-w-full"
       >
         Full Stack Developer & UI Enthusiast
       </p>
 
       <!-- CTA Buttons -->
-      <div class="flex flex-wrap justify-center lg:justify-start gap-4 pt-6">
-        <!-- View Projects -->
+      <div class="flex flex-wrap justify-center lg:justify-start gap-4 pt-4 w-full">
         <router-link
           to="/projects"
-          class="px-6 sm:px-8 py-3 sm:py-3.5 text-base sm:text-lg font-semibold rounded-xl
-                 bg-gradient-to-r from-indigo-600 to-purple-600
-                 hover:from-indigo-500 hover:to-purple-500
-                 shadow-[0_0_20px_rgba(99,102,241,0.4)]
-                 hover:shadow-[0_0_30px_rgba(139,92,246,0.6)]
-                 transform hover:scale-105 active:scale-95
-                 transition-all duration-300
-                 text-white no-underline"
+          class="px-6 py-3 text-base sm:text-lg font-semibold rounded-xl bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 shadow-lg hover:shadow-xl transform hover:scale-105 active:scale-95 transition-all duration-300 text-white no-underline"
         >
           🚀 View Projects
         </router-link>
 
-        <!-- Contact Me -->
         <router-link
           to="/contact"
-          class="px-6 sm:px-8 py-3 sm:py-3.5 text-base sm:text-lg font-semibold rounded-xl
-                 border border-indigo-400/60 bg-white/5 backdrop-blur-sm
-                 hover:bg-indigo-500/20 hover:border-indigo-400
-                 shadow-[0_0_15px_rgba(99,102,241,0.2)]
-                 hover:shadow-[0_0_25px_rgba(99,102,241,0.4)]
-                 transform hover:scale-105 active:scale-95
-                 transition-all duration-300
-                 text-white no-underline"
+          class="px-6 py-3 text-base sm:text-lg font-semibold rounded-xl border border-indigo-400/60 bg-white/5 backdrop-blur-sm hover:bg-indigo-500/20 hover:border-indigo-400 shadow-md hover:shadow-lg transform hover:scale-105 active:scale-95 transition-all duration-300 text-white no-underline"
         >
           📩 Contact Me
         </router-link>
       </div>
 
-      <!-- Social Links -->
+      <!-- Social Icons -->
       <div class="flex flex-wrap justify-center lg:justify-start gap-4 mt-6">
         <!-- Facebook -->
         <a href="https://www.facebook.com/nephtenllon" target="_blank" class="social-btn" style="background-color:#1877f2">
           <svg class="w-5 h-5" fill="white" viewBox="0 0 24 24">
-            <path
-              d="M22 12c0-5.522-4.478-10-10-10S2 6.478 2 12c0 5.007 3.66 9.128 8.438 9.877v-6.987H7.898v-2.89h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562v1.875h2.773l-.443 2.89h-2.33v6.987C18.34 21.128 22 17.007 22 12z"
-            />
+            <path d="M22 12c0-5.522-4.478-10-10-10S2 6.478 2 12c0 5.007 3.66 9.128 8.438 9.877v-6.987H7.898v-2.89h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562v1.875h2.773l-.443 2.89h-2.33v6.987C18.34 21.128 22 17.007 22 12z" />
           </svg>
         </a>
 
         <!-- Instagram -->
-        <a
-          href="https://www.instagram.com/nephtenllon"
-          target="_blank"
-          class="social-btn"
-          style="background: radial-gradient(circle at 30% 30%, #feda75,#d62976,#962fbf,#4f5bd5)"
-        >
+        <a href="https://www.instagram.com/nephtenllon" target="_blank" class="social-btn" style="background: radial-gradient(circle at 30% 30%, #feda75,#d62976,#962fbf,#4f5bd5)">
           <svg class="w-5 h-5" fill="white" viewBox="0 0 24 24">
-            <path
-              d="M12 2.163c3.204 0 3.584.012 4.85.07 1.366.062 2.633.344 3.608 1.32.976.976 1.258 2.242 1.32 3.608.058 1.266.07 1.646.07 4.84s-.012 3.574-.07 4.84c-.062 1.366-.344 2.633-1.32 3.608-.976.976-2.242 1.258-3.608 1.32-1.266.058-1.646.07-4.84.07s-3.574-.012-4.84-.07c-1.366-.062-2.633-.344-3.608-1.32-.976-.976-1.258-2.242-1.32-3.608C2.175 15.574 2.163 15.194 2.163 12s.012-3.574.07-4.84c.062-1.366.344-2.633 1.32-3.608.976-.976 2.242-1.258 3.608-1.32C8.426 2.175 8.806 2.163 12 2.163z"
-            />
+            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 1.366.062 2.633.344 3.608 1.32.976.976 1.258 2.242 1.32 3.608.058 1.266.07 1.646.07 4.84s-.012 3.574-.07 4.84c-.062 1.366-.344 2.633-1.32 3.608-.976.976-2.242 1.258-3.608 1.32-1.266.058-1.646.07-4.84.07s-3.574-.012-4.84-.07c-1.366-.062-2.633-.344-3.608-1.32-.976-.976-1.258-2.242-1.32-3.608C2.175 15.574 2.163 15.194 2.163 12s.012-3.574.07-4.84c.062-1.366.344-2.633 1.32-3.608.976-.976 2.242-1.258 3.608-1.32C8.426 2.175 8.806 2.163 12 2.163z" />
           </svg>
         </a>
 
@@ -98,7 +69,7 @@
         </a>
       </div>
 
-      <!-- Tech Stack Badges -->
+      <!-- Tech Badges -->
       <div class="flex flex-wrap justify-center lg:justify-start gap-3 mt-8">
         <span class="px-3 py-1 bg-indigo-500/20 border border-indigo-400/50 rounded-lg text-sm backdrop-blur-md">Vue.js</span>
         <span class="px-3 py-1 bg-purple-500/20 border border-purple-400/50 rounded-lg text-sm backdrop-blur-md">TailwindCSS</span>
@@ -107,14 +78,10 @@
       </div>
     </div>
 
-    <!-- Right Video (Floating Blob) -->
+    <!-- Right Video Blob -->
     <div class="flex-1 flex justify-center items-center w-full lg:w-auto relative z-10 animate-slide-up">
       <div
-        class="relative w-70 h-70 sm:w-100 sm:h-100 md:w-125 md:h-125
-               shadow-[0_0_50px_rgba(99,102,241,0.45)]
-               border-4 border-indigo-500/30
-               transform hover:scale-105 rotate-2 hover:rotate-0
-               transition duration-700 ease-in-out overflow-hidden animate-float"
+        class="relative w-64 h-64 sm:w-80 sm:h-80 md:w-125 md:h-125 shadow-[0_0_50px_rgba(99,102,241,0.45)] border-4 border-indigo-500/30 transform hover:scale-105 rotate-2 hover:rotate-0 transition duration-700 ease-in-out overflow-hidden animate-float"
         style="clip-path: polygon(70% 0%, 100% 30%, 90% 70%, 60% 100%, 20% 90%, 0% 50%, 10% 10%)"
       >
         <video autoplay muted loop playsinline class="w-full h-full object-cover filter grayscale contrast-150">
@@ -125,6 +92,7 @@
     </div>
   </section>
 </template>
+
 
 
 <script setup>
