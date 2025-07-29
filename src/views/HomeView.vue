@@ -40,28 +40,24 @@
 
       <!-- Social Icons -->
       <div class="flex flex-wrap justify-center lg:justify-start gap-4 mt-6">
-        <!-- Facebook -->
         <a href="https://www.facebook.com/nephtenllon" target="_blank" class="social-btn" style="background-color:#1877f2">
           <svg class="w-5 h-5" fill="white" viewBox="0 0 24 24">
             <path d="M22 12c0-5.522-4.478-10-10-10S2 6.478 2 12c0 5.007 3.66 9.128 8.438 9.877v-6.987H7.898v-2.89h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562v1.875h2.773l-.443 2.89h-2.33v6.987C18.34 21.128 22 17.007 22 12z" />
           </svg>
         </a>
 
-        <!-- Instagram -->
         <a href="https://www.instagram.com/nephtenllon" target="_blank" class="social-btn" style="background: radial-gradient(circle at 30% 30%, #feda75,#d62976,#962fbf,#4f5bd5)">
           <svg class="w-5 h-5" fill="white" viewBox="0 0 24 24">
             <path d="M12 2.163c3.204 0 3.584.012 4.85.07 1.366.062 2.633.344 3.608 1.32.976.976 1.258 2.242 1.32 3.608.058 1.266.07 1.646.07 4.84s-.012 3.574-.07 4.84c-.062 1.366-.344 2.633-1.32 3.608-.976.976-2.242 1.258-3.608 1.32-1.266.058-1.646.07-4.84.07s-3.574-.012-4.84-.07c-1.366-.062-2.633-.344-3.608-1.32-.976-.976-1.258-2.242-1.32-3.608C2.175 15.574 2.163 15.194 2.163 12s.012-3.574.07-4.84c.062-1.366.344-2.633 1.32-3.608.976-.976 2.242-1.258 3.608-1.32C8.426 2.175 8.806 2.163 12 2.163z" />
           </svg>
         </a>
 
-        <!-- Gmail -->
         <a href="mailto:nephtenilon@gmail.com" class="social-btn" style="background-color:#ea4335">
           <svg class="w-5 h-5" fill="white" viewBox="0 0 24 24">
             <path d="M1.5 4.5h21v15h-21v-15zm10.5 7.837l-9-5.837v12.5h18v-12.5l-9 5.837z" />
           </svg>
         </a>
 
-        <!-- X / Twitter -->
         <a href="https://x.com/Nephten2" target="_blank" class="social-btn" style="background-color:#000000">
           <svg class="w-5 h-5" fill="white" viewBox="0 0 1200 1227">
             <path d="M1024 0H840L600 400 360 0H176l308 489L0 1227h232l368-592 368 592h232L692 497 1024 0Z" />
@@ -69,7 +65,6 @@
         </a>
       </div>
 
-      <!-- Tech Badges -->
       <div class="flex flex-wrap justify-center lg:justify-start gap-3 mt-8">
         <span class="px-3 py-1 bg-indigo-500/20 border border-indigo-400/50 rounded-lg text-sm backdrop-blur-md">Vue.js</span>
         <span class="px-3 py-1 bg-purple-500/20 border border-purple-400/50 rounded-lg text-sm backdrop-blur-md">TailwindCSS</span>
@@ -78,25 +73,24 @@
       </div>
     </div>
 
-<!-- Right Video Diagonal Split -->
-<div
-  class="absolute inset-0 w-full h-[120px] sm:relative sm:w-full sm:h-[250px] lg:w-1/2 lg:h-auto z-0 sm:z-10 clip-slash overflow-hidden"
->
-  <video
-    autoplay
-    muted
-    loop
-    playsinline
-    class="w-full h-full object-cover filter grayscale contrast-150"
-  >
-    <source src="@/assets/video1.mp4" type="video/mp4" />
-  </video>
-  <div class="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"></div>
-</div>
-
-
+    <!-- Right Video Diagonal Split -->
+    <div
+      class="absolute inset-0 w-full h-[160px] sm:relative sm:w-full sm:h-[260px] lg:w-1/2 lg:h-auto z-0 sm:z-10 clip-slash overflow-hidden"
+    >
+      <video
+        autoplay
+        muted
+        loop
+        playsinline
+        class="w-full h-full object-cover filter grayscale contrast-150"
+      >
+        <source src="@/assets/video1.mp4" type="video/mp4" />
+      </video>
+      <div class="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"></div>
+    </div>
   </section>
 </template>
+
 
 
 
