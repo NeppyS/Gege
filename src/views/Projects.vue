@@ -1,7 +1,7 @@
 <template>
   <section
   id="projects"
-  class="relative w-full min-h-screen flex flex-col items-center justify-start px-4 sm:px-8 py-24 overflow-hidden text-white bg-gradient-to-b from-black via-gray-900 to-black"
+  class="relative w-full min-h-screen flex flex-col items-center justify-start px-4 sm:px-8 py-24 overflow-hidden text-white  from-black via-gray-900 to-black"
 >
   <!-- Particle Background -->
   <canvas id="particles-bg" class="absolute inset-0 z-0 pointer-events-none"></canvas>
