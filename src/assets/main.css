@@ -1,11 +1,69 @@
 /* src/main.css */
-html, body {
+
+/* Global Reset and Base Styles */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
+}
+
+html, body {
   width: 100%;
   height: 100%;
-  background-color: #0f0f0f; /* Same as bg-gray-950 */
-  color: #f3f4f6; /* text-gray-100 */
-  font-family: 'Inter', sans-serif;
   overflow-x: hidden;
+  font-family: 'Inter', sans-serif;
+  background-color: #0f0f0f; /* Equivalent to Tailwind's bg-gray-950 */
+  color: #f3f4f6; /* Equivalent to Tailwind's text-gray-100 */
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  scroll-behavior: smooth;
+}
+
+/* Remove default scrollbar space on mobile browsers */
+body {
+  touch-action: manipulation;
+  overscroll-behavior-y: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Anchor tag defaults */
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Image defaults */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Form element resets */
+input, button, textarea, select {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: none;
+  outline: none;
+}
+
+/* Smooth transitions for interactive elements */
+button,
+a,
+input[type="submit"] {
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+}
+
+/* Utility */
+.container {
+  max-width: 100%;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  margin-left: auto;
+  margin-right: auto;
 }
