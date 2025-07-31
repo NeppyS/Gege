@@ -1,6 +1,6 @@
 <template>
   <div
-    class="relative min-h-screen w-full bg-gradient-to-br from-black via-gray-900 to-black text-gray-100 overflow-x-hidden"
+    class="relative min-h-screen w-full bg-gradient-to-br from-black via-gray-900 to-black text-gray-100 overflow-x-hidden flex flex-col"
   >
     <!-- Animated Background Glow -->
     <div class="absolute inset-0 overflow-hidden pointer-events-none z-0">
@@ -13,11 +13,24 @@
     />
 
     <!-- Main Content with Smooth Transitions -->
-    <main class="relative pt-24 pb-16 px-4 sm:px-6 md:px-8 z-10">
+    <main class="relative pt-24 pb-16 px-4 sm:px-6 md:px-8 z-10 flex-grow">
       <Transition name="fade-slide" mode="out-in">
         <router-view :key="$route.fullPath" />
       </Transition>
     </main>
+
+   <!-- Footer -->
+<footer class="relative z-10 bg-black/40 border-t border-white/10 text-sm text-center py-6 px-4 backdrop-blur-md">
+  <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4 text-white">
+    <div>&copy; 2025 Nephten. All rights reserved.</div>
+    <div class="flex gap-4">
+      <a href="#" class="hover:text-gray-300 transition">Privacy Policy</a>
+      <a href="#" class="hover:text-gray-300 transition">Terms of Service</a>
+      <a href="#" class="hover:text-gray-300 transition">Contact</a>
+    </div>
+  </div>
+</footer>
+
 
     <!-- Floating Scroll-to-Top Button -->
     <transition name="fade">
