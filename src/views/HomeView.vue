@@ -1,37 +1,33 @@
 <template>
   <section
-    class="relative w-full min-h-screen flex flex-col lg:flex-row items-center justify-center px-4 sm:px-6 text-white z-0 overflow-x-hidden"
+    class="relative w-full min-h-screen flex flex-col-reverse lg:flex-row items-center justify-center px-4 sm:px-6 pt-10 pb-16 text-white z-0 overflow-x-hidden"
     role="region"
     aria-label="Hero Section"
   >
     <!-- Particle Background -->
     <canvas id="particles-bg" class="absolute inset-0 z-0 pointer-events-none"></canvas>
 
-    <!-- Left Content -->
-    <div
-      class="relative z-10 w-full max-w-2xl flex flex-col items-center lg:items-start text-center lg:text-left space-y-6 animate-fade-in p-4 sm:p-8 lg:pl-12"
-    >
-      <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-tight tracking-tight">
+    <!-- Content Area -->
+    <div class="relative z-10 w-full max-w-3xl mx-auto flex flex-col items-center lg:items-start text-center lg:text-left space-y-6 p-4 sm:p-8 lg:pl-12">
+      <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-tight tracking-tight">
         Hello, I'm <br />
         <span class="bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent animate-gradient-move">
           Nephten Fajardo Ilon
         </span>
       </h1>
 
-      <p
-        class="text-lg sm:text-xl lg:text-2xl text-white/90 leading-relaxed animate-typewriter overflow-hidden whitespace-nowrap border-r-4 border-indigo-400 pr-2 max-w-full"
-      >
+      <p class="text-base sm:text-lg lg:text-xl text-white/90 leading-relaxed animate-typewriter overflow-hidden whitespace-nowrap border-r-4 border-indigo-400 pr-2 max-w-full">
         Full Stack Developer & UI Enthusiast
       </p>
 
-      <p class="text-base sm:text-lg text-white/80 max-w-xl leading-relaxed">
+      <p class="text-sm sm:text-base text-white/80 max-w-prose leading-relaxed">
         I build interactive websites and applications with clean UI and a focus on performance, responsiveness, and user experience. Vue.js and Tailwind are my go-to tools.
       </p>
 
       <!-- CTA Buttons -->
-      <div class="flex flex-wrap justify-center lg:justify-start gap-4 pt-4">
-        <router-link to="/projects" class="btn-primary no-underline">🚀 View Projects</router-link>
-        <router-link to="/contact" class="btn-secondary no-underline">📩 Contact Me</router-link>
+      <div class="flex flex-col sm:flex-row justify-center lg:justify-start gap-3 pt-4 w-full sm:w-auto">
+        <router-link to="/projects" class="btn-primary w-full sm:w-auto text-center">🚀 View Projects</router-link>
+        <router-link to="/contact" class="btn-secondary w-full sm:w-auto text-center">📩 Contact Me</router-link>
       </div>
 
       <!-- Social Icons -->
@@ -68,8 +64,8 @@
 
       <!-- Tech Stack -->
       <div class="mt-10 w-full">
-        <h2 class="text-2xl font-bold mb-6 text-center lg:text-left">Tech Stack</h2>
-        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 justify-items-center">
+        <h2 class="text-xl sm:text-2xl font-bold mb-4 text-center lg:text-left">Tech Stack</h2>
+        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 justify-items-center">
           <span class="tech-tag">💚 Vue.js</span>
           <span class="tech-tag">🎨 TailwindCSS</span>
           <span class="tech-tag">🖥 Node.js</span>
@@ -83,14 +79,15 @@
     </div>
 
     <!-- Right Video Panel -->
-    <div class="w-full h-[250px] lg:w-1/2 lg:h-full relative z-10 clip-slash">
-      <video autoplay muted loop playsinline class="w-full h-full object-cover filter grayscale contrast-150">
+    <div class="w-full max-w-2xl h-48 sm:h-64 md:h-80 lg:w-1/2 lg:h-full relative z-10 clip-slash mb-6 lg:mb-0">
+      <video autoplay muted loop playsinline class="w-full h-full object-cover filter grayscale contrast-150 rounded-xl lg:rounded-none">
         <source src="@/assets/video1.mp4" type="video/mp4" />
       </video>
       <div class="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
     </div>
   </section>
 </template>
+
 
 
 <script setup>

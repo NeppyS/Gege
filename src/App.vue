@@ -13,26 +13,34 @@
     />
 
     <!-- Main Content with Smooth Transitions -->
-    <main class="relative pt-24 pb-16 px-4 sm:px-6 md:px-8 z-10 flex-grow">
+    <main
+      class="relative z-10 flex-grow pt-24 pb-20 px-4 sm:px-6 md:px-8"
+      id="main-scroll"
+    >
       <Transition name="fade-slide" mode="out-in">
         <router-view :key="$route.fullPath" />
       </Transition>
     </main>
 
-<!-- Footer -->
-<footer class="relative z-10 bg-black/40 border-t border-white/10 text-sm text-center py-6 px-4 backdrop-blur-md">
-  <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4 text-white">
-    <div class="opacity-80">&copy; 2025 Nephten. All rights reserved.</div>
-    <div class="flex gap-4 text-white/80 text-xs uppercase tracking-wide font-semibold">
-      <a href="#" class="hover:text-indigo-400 transition no-underline">Privacy Policy</a>
-      <a href="#" class="hover:text-indigo-400 transition no-underline">Terms of Service</a>
-      <a href="#" class="hover:text-indigo-400 transition no-underline">Contact</a>
-    </div>
-  </div>
-</footer>
+    <!-- Footer -->
+    <footer
+      class="relative z-10 bg-black/40 border-t border-white/10 text-sm text-center py-6 px-4 backdrop-blur-md"
+    >
+      <div
+        class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4 text-white"
+      >
+        <div class="opacity-80">&copy; 2025 Nephten. All rights reserved.</div>
+        <div
+          class="flex gap-4 text-white/80 text-xs uppercase tracking-wide font-semibold"
+        >
+          <a href="#" class="hover:text-indigo-400 transition no-underline">Privacy Policy</a>
+          <a href="#" class="hover:text-indigo-400 transition no-underline">Terms of Service</a>
+          <a href="#" class="hover:text-indigo-400 transition no-underline">Contact</a>
+        </div>
+      </div>
+    </footer>
 
-
-    <!-- Floating Scroll-to-Top Button -->
+    <!-- Scroll-to-Top Button -->
     <transition name="fade">
       <button
         v-show="showScrollTop"
@@ -71,7 +79,7 @@ const scrollToTop = () => {
 </script>
 
 <style scoped>
-/* Smooth page transitions */
+/* Transitions */
 .fade-slide-enter-active,
 .fade-slide-leave-active {
   transition: all 0.5s ease;
@@ -85,7 +93,6 @@ const scrollToTop = () => {
   transform: translateY(-30px);
 }
 
-/* Fade for scroll-to-top */
 .fade-enter-active,
 .fade-leave-active {
   transition: opacity 0.3s ease;
@@ -95,7 +102,7 @@ const scrollToTop = () => {
   opacity: 0;
 }
 
-/* Background Glow using transform instead of background-position */
+/* Background Glow */
 .bg-glow {
   position: absolute;
   inset: -50%;
@@ -105,25 +112,25 @@ const scrollToTop = () => {
               radial-gradient(circle at 70% 70%, rgba(236,72,153,0.08), transparent 60%);
   animation: bgMove 20s linear infinite;
 }
-
 @keyframes bgMove {
   0% { transform: translate(0,0) rotate(0deg); }
   50% { transform: translate(-5%, 5%) rotate(180deg); }
   100% { transform: translate(0,0) rotate(360deg); }
 }
 
-/* Mobile Safe Area */
+/* Base Layout Styles */
 html,
 body,
 #app {
   margin: 0;
-  padding: env(safe-area-inset-top, 0) env(safe-area-inset-right, 0) 
+  padding: env(safe-area-inset-top, 0) env(safe-area-inset-right, 0)
            env(safe-area-inset-bottom, 0) env(safe-area-inset-left, 0);
-  min-height: 100%;
+  height: 100%;
   width: 100%;
   overflow-x: hidden;
   font-family: 'Inter', sans-serif;
   -webkit-tap-highlight-color: transparent;
   scroll-behavior: smooth;
+  background-color: #000; /* fallback */
 }
 </style>
