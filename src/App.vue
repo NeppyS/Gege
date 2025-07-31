@@ -19,14 +19,14 @@
       </Transition>
     </main>
 
-   <!-- Footer -->
+<!-- Footer -->
 <footer class="relative z-10 bg-black/40 border-t border-white/10 text-sm text-center py-6 px-4 backdrop-blur-md">
   <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4 text-white">
-    <div>&copy; 2025 Nephten. All rights reserved.</div>
-    <div class="flex gap-4">
-      <a href="#" class="hover:text-gray-300 transition">Privacy Policy</a>
-      <a href="#" class="hover:text-gray-300 transition">Terms of Service</a>
-      <a href="#" class="hover:text-gray-300 transition">Contact</a>
+    <div class="opacity-80">&copy; 2025 Nephten. All rights reserved.</div>
+    <div class="flex gap-4 text-white/80 text-xs uppercase tracking-wide font-semibold">
+      <a href="#" class="hover:text-indigo-400 transition no-underline">Privacy Policy</a>
+      <a href="#" class="hover:text-indigo-400 transition no-underline">Terms of Service</a>
+      <a href="#" class="hover:text-indigo-400 transition no-underline">Contact</a>
     </div>
   </div>
 </footer>

@@ -1,7 +1,7 @@
 <template>
   <nav
-    class="fixed top-0 left-0 w-full z-50 transition-all duration-500 border-b border-white/10 overflow-hidden"
-    :class="{ 'backdrop-blur-xl bg-black/30 shadow-lg shadow-indigo-500/20': scrolled }"
+    class="fixed top-0 left-0 w-full z-50 transition-all duration-500 overflow-hidden border-b border-white/10"
+    :class="{ 'backdrop-blur-xl bg-black/40 shadow-lg shadow-indigo-500/20': scrolled }"
   >
     <!-- Scroll Progress Bar -->
     <div
@@ -10,34 +10,27 @@
     ></div>
 
     <div class="max-w-7xl mx-auto px-6 py-3 flex justify-between items-center">
-      
-      <!-- Logo -->
-      <router-link
-        to="/"
-        class="flex items-center gap-3 select-none group"
-        aria-label="Homepage"
-      >
-        <!-- Pulsing Gradient Logo -->
-        <div
-          class="relative w-10 h-10 flex items-center justify-center"
-        >
-          <div
-            class="absolute w-10 h-10 rounded-full bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500
-                   animate-spin-slow shadow-lg shadow-indigo-500/50"
-          ></div>
-          <div
-            class="absolute w-14 h-14 rounded-full bg-indigo-500/10 blur-xl animate-pulse"
-          ></div>
-        </div>
+      <!-- New Logo -->
+      <router-link to="/" class="flex items-center gap-3 select-none group" aria-label="Homepage">
+        <svg class="w-10 h-10 text-white" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 2L2 7l10 5 10-5-10-5z" fill="url(#grad1)" />
+          <path d="M2 17l10 5 10-5" stroke="url(#grad1)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+          <defs>
+            <linearGradient id="grad1" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#6366f1" />
+              <stop offset="50%" stop-color="#a855f7" />
+              <stop offset="100%" stop-color="#ec4899" />
+            </linearGradient>
+          </defs>
+        </svg>
         <span
-          class="text-2xl font-extrabold bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400
-                 bg-clip-text text-transparent tracking-wide group-hover:opacity-80 transition"
+          class="text-2xl font-extrabold bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent tracking-wide group-hover:opacity-80 transition"
         >
           Nephten
         </span>
       </router-link>
 
-      <!-- Desktop Nav Links -->
+      <!-- Desktop Nav -->
       <ul class="hidden md:flex gap-10 text-sm font-semibold uppercase tracking-widest">
         <li
           v-for="(link, idx) in links"
@@ -47,54 +40,34 @@
         >
           <router-link
             :to="link.path"
-            class="px-2 py-1 text-white no-underline transition duration-300
-                   hover:text-indigo-400"
+            class="px-2 py-1 text-white no-underline transition duration-300 hover:text-indigo-400"
             active-class="text-indigo-400"
           >
             {{ link.name }}
             <span
-              class="absolute left-0 bottom-0 w-0 h-0.5 bg-gradient-to-r from-indigo-400 to-purple-500
-                     transition-all duration-300 group-hover:w-full"
+              class="absolute left-0 bottom-0 w-0 h-0.5 bg-gradient-to-r from-indigo-400 to-purple-500 transition-all duration-300 group-hover:w-full"
             ></span>
           </router-link>
         </li>
       </ul>
 
-      <!-- Mobile Menu Button -->
+      <!-- Mobile Menu Toggle -->
       <button
         @click="toggleMenu"
         aria-label="Toggle menu"
         :aria-expanded="isOpen.toString()"
         class="md:hidden text-white hover:text-indigo-400 transition duration-300"
       >
-        <svg
-          v-if="!isOpen"
-          class="w-7 h-7"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          viewBox="0 0 24 24"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        >
+        <svg v-if="!isOpen" class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
           <path d="M4 6h16M4 12h16M4 18h16" />
         </svg>
-        <svg
-          v-else
-          class="w-7 h-7"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          viewBox="0 0 24 24"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        >
+        <svg v-else class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
           <path d="M6 18L18 6M6 6l12 12" />
         </svg>
       </button>
     </div>
 
-    <!-- Mobile Dropdown -->
+    <!-- Mobile Nav -->
     <transition name="slide-fade">
       <div
         v-if="isOpen"
@@ -105,8 +78,7 @@
             <router-link
               :to="link.path"
               @click="toggleMenu"
-              class="block px-4 py-2 rounded-lg no-underline
-                     hover:bg-indigo-600/30 transition duration-300 hover:shadow-[0_0_15px_#6366f1]"
+              class="block px-4 py-2 rounded-lg no-underline hover:bg-indigo-600/30 transition duration-300 hover:shadow-[0_0_15px_#6366f1]"
             >
               {{ link.name }}
             </router-link>

@@ -1,8 +1,7 @@
 <template>
   <section
     id="about"
-    class="relative w-full min-h-screen flex items-center justify-center px-4 py-16 sm:py-20 lg:py-24
-          from-black via-gray-900 to-black text-gray-100 overflow-hidden"
+    class="relative w-full min-h-screen flex items-center justify-center px-4 py-16 sm:py-20 lg:py-24 from-black via-gray-900 to-black text-gray-100 overflow-hidden"
     role="region"
     aria-labelledby="about-title"
   >
@@ -17,41 +16,43 @@
         <div>
           <h2
             id="about-title"
-            class="text-4xl sm:text-5xl font-extrabold mb-6 tracking-wider
-                   bg-gradient-to-r from-indigo-400 via-purple-400 to-indigo-400 bg-clip-text text-transparent animate-gradient"
+            class="text-4xl sm:text-5xl font-extrabold mb-6 tracking-wider bg-gradient-to-r from-indigo-400 via-purple-400 to-indigo-400 bg-clip-text text-transparent animate-gradient"
           >
             About Me
           </h2>
           <p>
             I'm <span class="text-indigo-300 font-semibold">Nephten Fajardo Ilon</span>, a
-            <span class="text-indigo-400 font-semibold">Full-Stack Developer</span> and
-            UI enthusiast currently completing my BS in IT at
-            <span class="text-indigo-300 font-semibold">LCCB Bacolod</span>.  
-            I recently finished my OJT at
-            <span class="text-indigo-300 font-semibold">GREENROUTE</span> where I contributed to GPS & fuel dashboards.
+            <span class="text-indigo-400 font-semibold">Full-Stack Developer</span> and UI enthusiast currently completing my Bachelor of Science in Information Technology at
+            <span class="text-indigo-300 font-semibold">La Consolacion College Bacolod</span>. I recently finished my OJT at
+            <span class="text-indigo-300 font-semibold">GREENROUTE</span> where I contributed to configure and install GPS & fuel dashboards.
           </p>
         </div>
 
         <!-- Tech Stack -->
         <div>
           <h3 class="text-xl font-bold text-indigo-300 mb-3">🚀 Tech Stack</h3>
-          <ul class="grid grid-cols-2 sm:grid-cols-3 gap-3 text-sm sm:text-base">
-            <li v-for="(tech, i) in techStack" :key="tech"
-              class="px-3 py-2 rounded-lg bg-white/5 border border-white/10
-                     hover:bg-indigo-500/10 hover:border-indigo-400 transition duration-300
-                     text-center cursor-default select-none animate-stagger"
+          <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 justify-items-start">
+            <span
+              v-for="(tech, i) in techStack"
+              :key="tech"
+              class="tech-tag animate-stagger"
               :style="{ animationDelay: `${i * 0.15}s` }"
             >
               {{ tech }}
-            </li>
-          </ul>
+            </span>
+          </div>
         </div>
 
         <!-- Experience -->
         <div>
           <h3 class="text-xl font-bold text-indigo-300 mb-3">📌 Experience</h3>
           <ul class="list-disc list-inside space-y-2 text-gray-300">
-            <li v-for="(exp, i) in experiences" :key="i" class="animate-stagger" :style="{ animationDelay: `${i * 0.2}s` }">
+            <li
+              v-for="(exp, i) in experiences"
+              :key="i"
+              class="animate-stagger"
+              :style="{ animationDelay: `${i * 0.2}s` }"
+            >
               <span v-html="exp"></span>
             </li>
           </ul>
@@ -61,7 +62,12 @@
           <div>
             <h3 class="text-xl font-bold text-indigo-300 mb-3">💡 Core Values</h3>
             <ul class="space-y-1">
-              <li v-for="(val, i) in coreValues" :key="i" class="animate-stagger" :style="{ animationDelay: `${i * 0.15}s` }">
+              <li
+                v-for="(val, i) in coreValues"
+                :key="i"
+                class="animate-stagger"
+                :style="{ animationDelay: `${i * 0.15}s` }"
+              >
                 {{ val }}
               </li>
             </ul>
@@ -69,8 +75,7 @@
           <div>
             <h3 class="text-xl font-bold text-indigo-300 mb-3">🌍 Outside Tech</h3>
             <p class="animate-stagger" style="animation-delay: 0.6s;">
-              I enjoy dev content, open-source tools, gaming, and tech meetups.  
-              I love helping others in their coding journey.
+              I enjoy dev content, open-source tools, gaming, and tech meetups. I love helping others in their coding journey.
             </p>
           </div>
         </div>
@@ -89,8 +94,7 @@
         <div
           v-for="(icon, i) in orbitingIcons"
           :key="i"
-          class="absolute w-12 h-12 rounded-full bg-white/10 border border-indigo-400/30 flex justify-center items-center
-                 text-indigo-300 text-xl animate-orbit hidden sm:flex"
+          class="absolute w-12 h-12 rounded-full bg-white/10 border border-indigo-400/30 flex justify-center items-center text-indigo-300 text-xl animate-orbit hidden sm:flex"
           :style="{'animation-delay': (i * 1.5) + 's'}"
         >
           <i :class="icon"></i>
@@ -98,10 +102,7 @@
 
         <!-- Profile Image -->
         <div
-          class="relative w-72 h-72 sm:w-80 sm:h-80 lg:w-96 lg:h-96
-                 rounded-full overflow-hidden border-2 border-indigo-500/40
-                 shadow-[0_0_50px_rgba(99,102,241,0.5)]
-                 hover:scale-105 transition duration-500 animate-glow"
+          class="relative w-72 h-72 sm:w-80 sm:h-80 lg:w-96 lg:h-96 rounded-full overflow-hidden border-2 border-indigo-500/40 shadow-[0_0_50px_rgba(99,102,241,0.5)] hover:scale-105 transition duration-500 animate-glow"
         >
           <img
             src="@/assets/profile.jpg"
@@ -119,11 +120,11 @@
 import { onMounted } from 'vue'
 
 const techStack = [
-  'Vue.js / Nuxt', 
-  'React / Next.js', 
-  'Tailwind CSS / SCSS', 
-  'Node.js / Express', 
-  'MySQL / MongoDB', 
+  'Vue.js / Nuxt',
+  'React / Next.js',
+  'Tailwind CSS / SCSS',
+  'Node.js / Express',
+  'MySQL / MongoDB',
   'Docker / Git / REST APIs'
 ]
 
@@ -135,15 +136,8 @@ const experiences = [
 
 const coreValues = ['Clean Code', 'UX First', 'Performance', 'Lifelong Learning']
 
-// Orbiting font-awesome icons
-const orbitingIcons = [
-  'fab fa-vuejs', 
-  'fab fa-react', 
-  'fab fa-node', 
-  'fas fa-database'
-]
+const orbitingIcons = ['fab fa-vuejs', 'fab fa-react', 'fab fa-node', 'fas fa-database']
 
-// Particle Animation
 onMounted(() => {
   const canvas = document.getElementById('particles-bg')
   const ctx = canvas.getContext('2d')
@@ -224,4 +218,8 @@ onMounted(() => {
 .animate-glow { animation: glow 3s infinite ease-in-out; }
 .animate-orbit { animation: orbit 12s linear infinite; transform-origin: center; }
 .animate-stagger { animation: staggerFadeScale 0.6s ease forwards; opacity: 0; }
+
+.tech-tag {
+  @apply text-white text-sm font-medium px-4 py-2 rounded-full border border-white/20 backdrop-blur-md bg-white/5 hover:bg-white/10 transition-all duration-300 shadow-md hover:shadow-lg hover:scale-105 cursor-default tracking-wide;
+}
 </style>

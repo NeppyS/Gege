@@ -1,18 +1,16 @@
 <template>
   <section
     id="projects"
-    class="relative w-full min-h-screen flex flex-col items-center justify-start px-4 sm:px-8 py-24 overflow-hidden text-white"
+    class="relative w-full min-h-screen flex flex-col items-center justify-start px-4 sm:px-8 py-24 overflow-hidden text-white from-black via-gray-900 to-black"
   >
     <!-- Particle Background -->
     <canvas id="particles-bg" class="absolute inset-0 z-0 pointer-events-none"></canvas>
 
     <!-- Section Title -->
     <h2
-      class="text-4xl sm:text-5xl font-extrabold text-center mb-20 tracking-widest relative z-10 animate-fade-down"
+      class="text-4xl sm:text-5xl font-extrabold text-center mb-20 tracking-widest relative z-10 animate-fade-down bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent animate-gradient"
     >
-      <span class="bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
-        My Projects
-      </span>
+      My Projects
     </h2>
 
     <!-- Project Timeline -->
@@ -31,7 +29,7 @@
 
         <!-- Project Card -->
         <div
-          class="flex-1 w-full max-w-md sm:max-w-lg backdrop-blur-md bg-white/5 rounded-2xl border border-white/10 p-6 sm:p-8 shadow-lg transition transform hover:scale-105 hover:shadow-[0_0_30px_rgba(139,92,246,0.4)]"
+          class="flex-1 w-full max-w-md sm:max-w-lg backdrop-blur-md bg-white/5 rounded-2xl border border-white/10 p-6 sm:p-8 shadow-lg transition transform hover:scale-105 hover:shadow-[0_0_30px_rgba(139,92,246,0.4)] hover:border-indigo-400"
         >
           <h3 class="text-2xl sm:text-3xl font-bold text-indigo-300 mb-3">
             {{ project.title }}
@@ -51,7 +49,7 @@
               v-for="(tag, i) in project.tech"
               :key="i"
               class="text-xs sm:text-sm px-3 py-1 rounded-full bg-white/5 border border-white/10
-                     hover:bg-indigo-500/10 hover:border-indigo-400 transition select-none"
+                     hover:bg-indigo-500/10 hover:border-indigo-400 transition select-none backdrop-blur-sm"
             >
               {{ tag }}
             </span>
@@ -64,7 +62,7 @@
             rel="noopener"
             class="inline-block mt-2 px-6 py-2.5 rounded-lg text-sm font-semibold
                    bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700
-                   transition transform hover:scale-105 shadow-lg shadow-indigo-500/30"
+                   transition transform hover:scale-105 shadow-lg shadow-indigo-500/30 animate-glow"
           >
             🚀 Visit Project
           </a>
@@ -91,7 +89,7 @@ const projects = [
   },
   {
     title: 'GreenRoute Dashboard',
-    description: 'Real-time vehicle and fuel tracking dashboard for OJT project.',
+    description: 'Real-time vehicle and fuel tracking dashboard to finish my OJT.',
     features: [
       'GPS map with live updates',
       'Fuel consumption analytics',
@@ -182,6 +180,16 @@ onMounted(() => {
   from { opacity: 0; transform: translateY(30px); }
   to { opacity: 1; transform: translateY(0); }
 }
+@keyframes gradientMove {
+  0%,100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+@keyframes glow {
+  0%,100% { box-shadow: 0 0 30px rgba(99,102,241,0.3); }
+  50% { box-shadow: 0 0 60px rgba(139,92,246,0.6); }
+}
 .animate-fade-down { animation: fade-down 0.8s ease-out both; }
 .animate-slide-up { animation: slide-up 0.8s ease-out both; }
+.animate-gradient { background-size: 200% 200%; animation: gradientMove 5s ease infinite; }
+.animate-glow { animation: glow 3s infinite ease-in-out; }
 </style>
