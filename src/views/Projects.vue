@@ -1,75 +1,83 @@
 <template>
   <section
-    id="projects"
-    class="relative w-full min-h-screen flex flex-col items-center justify-start px-4 sm:px-8 py-24 overflow-hidden text-white from-black via-gray-900 to-black"
+  id="projects"
+  class="relative w-full min-h-screen flex flex-col items-center justify-start px-4 sm:px-8 py-24 overflow-hidden text-white bg-gradient-to-b from-black via-gray-900 to-black"
+>
+  <!-- Particle Background -->
+  <canvas id="particles-bg" class="absolute inset-0 z-0 pointer-events-none"></canvas>
+
+  <!-- Optional Stars Layer -->
+  <div class="absolute inset-0 bg-stars bg-repeat opacity-10 z-0"></div>
+
+  <!-- Section Title -->
+  <h2
+    class="text-4xl sm:text-5xl font-extrabold text-center mb-20 tracking-widest relative z-10 animate-fade-down bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent animate-gradient"
   >
-    <!-- Particle Background -->
-    <canvas id="particles-bg" class="absolute inset-0 z-0 pointer-events-none"></canvas>
+    My Projects
+  </h2>
 
-    <!-- Section Title -->
-    <h2
-      class="text-4xl sm:text-5xl font-extrabold text-center mb-20 tracking-widest relative z-10 animate-fade-down bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent animate-gradient"
+  <!-- Project Cards -->
+  <div class="w-full max-w-6xl relative z-10">
+    <div
+      v-for="(project, index) in projects"
+      :key="index"
+      class="relative flex flex-col lg:flex-row items-center gap-8 lg:gap-16 mb-20 lg:mb-32 group"
+      :class="{ 'lg:flex-row-reverse': index % 2 }"
     >
-      My Projects
-    </h2>
-
-    <!-- Project Timeline -->
-    <div class="w-full max-w-6xl relative z-10">
+      <!-- Timeline and Dot -->
+      <div class="absolute left-1/2 top-0 hidden lg:block w-1 bg-gradient-to-b from-indigo-500/30 to-purple-500/30 -translate-x-1/2"></div>
       <div
-        v-for="(project, index) in projects"
-        :key="index"
-        class="relative flex flex-col lg:flex-row items-center gap-8 lg:gap-16 mb-20 lg:mb-32 animate-slide-up"
-        :class="{ 'lg:flex-row-reverse': index % 2 }"
+        class="absolute left-1/2 lg:left-auto lg:static top-0 transform -translate-x-1/2 lg:translate-x-0 w-5 h-5 rounded-full bg-gradient-to-r from-indigo-500 to-purple-500 shadow-[0_0_20px_#6366f1] animate-pulse"
+      ></div>
+
+      <!-- Project Card -->
+      <div
+        class="flex-1 w-full max-w-md sm:max-w-lg backdrop-blur-lg bg-white/5 rounded-3xl border border-white/10 p-6 sm:p-8 shadow-xl
+                transition-all duration-300 ease-in-out transform group-hover:scale-[1.03] hover:shadow-[0_0_50px_rgba(139,92,246,0.4)]
+                hover:-translate-y-2 hover:border-indigo-400 perspective"
       >
-        <!-- Timeline Connector and Dot -->
-        <div class="absolute left-1/2 top-0 hidden lg:block w-1 bg-gradient-to-b from-indigo-500/30 to-purple-500/30 -translate-x-1/2"></div>
-        <div
-          class="absolute left-1/2 lg:left-auto lg:static top-0 transform -translate-x-1/2 lg:translate-x-0 w-5 h-5 rounded-full bg-gradient-to-r from-indigo-500 to-purple-500 shadow-[0_0_20px_#6366f1] animate-pulse"
-        ></div>
+        <h3 class="text-2xl sm:text-3xl font-bold text-indigo-300 mb-3 tracking-tight">
+          {{ project.title }}
+        </h3>
+        <p class="text-gray-300 text-sm sm:text-base leading-relaxed mb-4">
+          {{ project.description }}
+        </p>
 
-        <!-- Project Card -->
-        <div
-          class="flex-1 w-full max-w-md sm:max-w-lg backdrop-blur-md bg-white/5 rounded-2xl border border-white/10 p-6 sm:p-8 shadow-lg transition transform hover:scale-105 hover:shadow-[0_0_30px_rgba(139,92,246,0.4)] hover:border-indigo-400"
-        >
-          <h3 class="text-2xl sm:text-3xl font-bold text-indigo-300 mb-3">
-            {{ project.title }}
-          </h3>
-          <p class="text-gray-300 text-sm sm:text-base leading-relaxed mb-4">
-            {{ project.description }}
-          </p>
+        <!-- Features -->
+        <ul class="text-gray-400 text-xs sm:text-sm list-disc list-inside mb-4 space-y-1">
+          <li v-for="(feature, i) in project.features" :key="i">{{ feature }}</li>
+        </ul>
 
-          <!-- Features -->
-          <ul class="text-gray-400 text-xs sm:text-sm list-disc list-inside mb-4 space-y-1">
-            <li v-for="(feature, i) in project.features" :key="i">{{ feature }}</li>
-          </ul>
-
-          <!-- Tech Tags -->
-          <div class="flex flex-wrap gap-2 mb-4">
-            <span
-              v-for="(tag, i) in project.tech"
-              :key="i"
-              class="text-xs sm:text-sm px-3 py-1 rounded-full bg-white/5 border border-white/10
-                     hover:bg-indigo-500/10 hover:border-indigo-400 transition select-none backdrop-blur-sm"
-            >
-              {{ tag }}
-            </span>
-          </div>
-
-          <!-- Link -->
-          <a
-            :href="project.url"
-            target="_blank"
-            rel="noopener"
-            class="inline-block mt-2 px-6 py-2.5 rounded-lg text-sm font-semibold
-                   bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700
-                   transition transform hover:scale-105 shadow-lg shadow-indigo-500/30 animate-glow"
+        <!-- Tech Tags -->
+        <div class="flex flex-wrap gap-2 mb-4">
+          <span
+            v-for="(tag, i) in project.tech"
+            :key="i"
+            class="text-xs sm:text-sm px-3 py-1 rounded-full bg-white/10 border border-white/20
+                   hover:bg-indigo-600/20 hover:border-indigo-400 transition-all duration-300
+                   backdrop-blur-md text-indigo-100 shadow-sm"
           >
-            🚀 Visit Project
-          </a>
+            {{ tag }}
+          </span>
         </div>
+
+        <!-- Button -->
+        <a
+          :href="project.url"
+          target="_blank"
+          rel="noopener"
+          class="inline-block mt-2 px-6 py-2.5 rounded-lg text-sm font-semibold
+                 bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700
+                 transition-all transform hover:scale-105 shadow-lg shadow-indigo-500/30 animate-glow
+                 text-white no-underline backdrop-blur-sm"
+        >
+          Visit Project
+        </a>
       </div>
     </div>
-  </section>
+  </div>
+</section>
+
 </template>
 
 <script setup>
