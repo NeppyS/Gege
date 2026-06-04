@@ -1,144 +1,175 @@
 <template>
-  <div class="app-container">
-    <!-- Background Glow -->
-    <div class="absolute inset-0 overflow-hidden pointer-events-none z-0">
-      <div class="bg-glow" />
-    </div>
-
-    <!-- Navbar -->
-    <Navbar class="fixed top-0 left-0 w-full z-50 navbar-blur" />
-
-    <!-- Main Content -->
-    <main id="main-scroll" class="main-content">
-      <Transition name="fade-slide" mode="out-in">
-        <router-view :key="$route.fullPath" />
-      </Transition>
+  <div class="app-shell">
+    <Navbar />
+    <main id="main-content" class="app-main">
+      <HomeView />
     </main>
 
-<footer class="relative z-10 bg-black/40 border-t border-white/10 text-sm text-center py-6 px-4 backdrop-blur-md">
-  <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4 text-gray-400">
-    <div>&copy; 2025 Nephten. All rights reserved.</div>
-    <div class="flex gap-4">
-      <a href="#" class="hover:text-white transition">GitHub</a>
-      <a href="#" class="hover:text-white transition">LinkedIn</a>
-    </div>
-  </div>
-</footer>
+    <footer class="site-footer">
+      <div>
+        <p>{{ profile.company }}</p>
+        <h2>{{ profile.name }}</h2>
+      </div>
 
-
-    <!-- Scroll to Top -->
-    <transition name="fade">
-      <button
-        v-show="showScrollTop"
-        @click="scrollToTop"
-        class="scroll-top-btn"
-        aria-label="Scroll to top"
-      >
-        ⬆
-      </button>
-    </transition>
+      <div class="footer-links" aria-label="Footer links">
+        <a
+          v-for="social in footerLinks"
+          :key="social.name"
+          :href="social.href"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          {{ social.name }}
+        </a>
+      </div>
+    </footer>
   </div>
 </template>
 
 <script setup>
-import { onMounted, ref, onUnmounted } from 'vue'
+import HomeView from './views/HomeView.vue'
 import Navbar from './components/Navbar.vue'
+import { profile, socials } from './data/portfolio'
 
-const showScrollTop = ref(false)
-
-const handleScroll = () => {
-  showScrollTop.value = window.scrollY > 300
-}
-
-onMounted(() => {
-  window.addEventListener('scroll', handleScroll)
-})
-onUnmounted(() => {
-  window.removeEventListener('scroll', handleScroll)
-})
-
-const scrollToTop = () => {
-  window.scrollTo({ top: 0, behavior: 'smooth' })
-}
+const footerLinks = socials.filter((social) => ['Email', 'GitHub', 'Facebook', 'Instagram'].includes(social.name))
 </script>
 
 <style scoped>
-/* Layout Utilities */
-.app-container {
-  @apply relative min-h-screen w-full bg-gradient-to-br from-black via-gray-900 to-black text-gray-100 overflow-x-hidden flex flex-col;
-}
-.navbar-blur {
-  @apply backdrop-blur-md bg-black/30 border-b border-white/10 shadow-lg;
-}
-.main-content {
-  @apply relative z-10 flex-grow pt-24 pb-20 px-4 sm:px-6 md:px-8;
-}
-.footer {
-  @apply relative z-10 bg-black/40 border-t border-white/10 text-sm text-center py-6 px-4 backdrop-blur-md;
-}
-.footer-container {
-  @apply max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4 text-white;
-}
-.footer-links {
-  @apply flex gap-4 text-white/80 text-xs uppercase tracking-wide font-semibold;
-}
-.footer-link {
-  @apply hover:text-indigo-400 transition no-underline;
+.app-shell {
+  position: relative;
+  overflow: hidden;
+  min-height: 100vh;
+  color: var(--ink);
+  background:
+    linear-gradient(135deg, rgba(98, 255, 156, 0.08), transparent 28%),
+    linear-gradient(225deg, rgba(94, 217, 255, 0.08), transparent 34%),
+    linear-gradient(180deg, rgba(255, 107, 122, 0.035), transparent 42%),
+    var(--paper);
 }
 
-/* Scroll Top Button */
-.scroll-top-btn {
-  @apply fixed bottom-6 right-6 w-12 h-12 flex items-center justify-center rounded-full 
-         bg-indigo-600 hover:bg-indigo-500 text-white shadow-lg 
-         hover:shadow-indigo-500/50 transition duration-300 z-50 focus:outline-none;
+.app-shell::before,
+.app-shell::after {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  content: "";
 }
 
-/* Transitions */
-.fade-slide-enter-active, .fade-slide-leave-active {
-  transition: all 0.5s ease;
-}
-.fade-slide-enter-from {
-  opacity: 0;
-  transform: translateY(30px);
-}
-.fade-slide-leave-to {
-  opacity: 0;
-  transform: translateY(-30px);
-}
-.fade-enter-active, .fade-leave-active {
-  transition: opacity 0.3s ease;
-}
-.fade-enter-from, .fade-leave-to {
-  opacity: 0;
+.app-shell::before {
+  background:
+    linear-gradient(rgba(98, 255, 156, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(94, 217, 255, 0.065) 1px, transparent 1px);
+  background-position: 0 0;
+  background-size: 44px 44px;
+  -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.88), rgba(0, 0, 0, 0.18));
+  mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.88), rgba(0, 0, 0, 0.18));
+  animation: gridShift 24s linear infinite;
 }
 
-/* Background Glow */
-.bg-glow {
-  position: absolute;
-  inset: -50%;
-  width: 200%;
-  height: 200%;
-  background: radial-gradient(circle at 30% 30%, rgba(99,102,241,0.08), transparent 60%),
-              radial-gradient(circle at 70% 70%, rgba(236,72,153,0.08), transparent 60%);
-  animation: bgMove 20s linear infinite;
-}
-@keyframes bgMove {
-  0% { transform: translate(0,0) rotate(0deg); }
-  50% { transform: translate(-5%, 5%) rotate(180deg); }
-  100% { transform: translate(0,0) rotate(360deg); }
+.app-shell::after {
+  background:
+    linear-gradient(90deg, transparent, rgba(98, 255, 156, 0.12), transparent),
+    repeating-linear-gradient(90deg, transparent 0 112px, rgba(244, 190, 79, 0.14) 112px 113px, transparent 113px 224px),
+    repeating-linear-gradient(180deg, transparent 0 172px, rgba(94, 217, 255, 0.12) 172px 173px, transparent 173px 344px);
+  background-size:
+    42% 100%,
+    auto,
+    auto;
+  background-position:
+    -60% 0,
+    0 0,
+    0 0;
+  opacity: 0.52;
+  animation: signalSweep 13s linear infinite;
 }
 
-/* Global Reset for App */
-html, body, #app {
+.app-main {
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
+}
+
+.site-footer {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 24px;
+  width: calc(100% - 48px);
+  max-width: 1180px;
+  margin: 0 auto;
+  border-top: 1px solid var(--line-strong);
+  padding: 30px 0 38px;
+}
+
+.site-footer p,
+.site-footer h2 {
   margin: 0;
-  padding: env(safe-area-inset-top) env(safe-area-inset-right)
-           env(safe-area-inset-bottom) env(safe-area-inset-left);
-  height: 100%;
-  width: 100%;
-  overflow-x: hidden;
-  font-family: 'Inter', sans-serif;
-  -webkit-tap-highlight-color: transparent;
-  scroll-behavior: smooth;
-  background-color: #000; /* fallback */
+}
+
+.site-footer p {
+  color: var(--green);
+  font-size: 0.78rem;
+  font-weight: 900;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.site-footer h2 {
+  margin-top: 6px;
+  font-family: var(--display-font);
+  font-size: 2rem;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+.footer-links a {
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: rgba(12, 18, 15, 0.72);
+  padding: 8px 11px;
+  font-weight: 850;
+}
+
+.footer-links a:hover {
+  border-color: var(--green);
+  color: var(--green);
+  box-shadow: 0 0 24px rgba(98, 255, 156, 0.16);
+}
+
+@keyframes gridShift {
+  to {
+    background-position: 44px 44px;
+  }
+}
+
+@keyframes signalSweep {
+  to {
+    background-position:
+      160% 0,
+      224px 0,
+      0 344px;
+  }
+}
+
+@media (max-width: 700px) {
+  .site-footer {
+    align-items: flex-start;
+    flex-direction: column;
+    width: calc(100% - 28px);
+  }
+
+  .footer-links {
+    justify-content: flex-start;
+  }
 }
 </style>

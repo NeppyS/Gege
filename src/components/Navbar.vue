@@ -1,144 +1,289 @@
 <template>
-  <nav
-    class="fixed top-0 left-0 w-full z-50 transition-all duration-500 overflow-hidden border-b border-white/10"
-    :class="{ 'backdrop-blur-xl bg-black/40 shadow-lg shadow-indigo-500/20': scrolled }"
-  >
-    <!-- Scroll Progress Bar -->
-    <div
-      class="absolute top-0 left-0 h-0.5 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 transition-all duration-200"
-      :style="{ width: scrollProgress + '%' }"
-    ></div>
+  <header class="site-nav" :class="{ compact: isCompact }">
+    <a class="skip-link" href="#main-content">Skip to content</a>
 
-    <div class="max-w-7xl mx-auto px-6 py-3 flex justify-between items-center">
-      <!-- New Logo -->
-      <router-link to="/" class="flex items-center gap-3 select-none group" aria-label="Homepage">
-        <svg class="w-10 h-10 text-white" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M12 2L2 7l10 5 10-5-10-5z" fill="url(#grad1)" />
-          <path d="M2 17l10 5 10-5" stroke="url(#grad1)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-          <defs>
-            <linearGradient id="grad1" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0%" stop-color="#6366f1" />
-              <stop offset="50%" stop-color="#a855f7" />
-              <stop offset="100%" stop-color="#ec4899" />
-            </linearGradient>
-          </defs>
-        </svg>
-        <span
-          class="text-2xl font-extrabold bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent tracking-wide group-hover:opacity-80 transition"
-        >
-          Nephten
+    <nav class="nav-inner" aria-label="Portfolio sections">
+      <a class="brand" href="#home" @click="closeMenu">
+        <span class="brand-mark">NF</span>
+        <span class="brand-copy">
+          <strong>{{ profile.shortName }}</strong>
+          <small>{{ profile.brandRole }}</small>
         </span>
-      </router-link>
+      </a>
 
-      <!-- Desktop Nav -->
-      <ul class="hidden md:flex gap-10 text-sm font-semibold uppercase tracking-widest">
-        <li
-          v-for="(link, idx) in links"
-          :key="link.path"
-          class="relative group opacity-0 animate-stagger"
-          :style="{ animationDelay: (idx * 0.15) + 's' }"
-        >
-          <router-link
-            :to="link.path"
-            class="px-2 py-1 text-white no-underline transition duration-300 hover:text-indigo-400"
-            active-class="text-indigo-400"
-          >
-            {{ link.name }}
-            <span
-              class="absolute left-0 bottom-0 w-0 h-0.5 bg-gradient-to-r from-indigo-400 to-purple-500 transition-all duration-300 group-hover:w-full"
-            ></span>
-          </router-link>
-        </li>
-      </ul>
-
-      <!-- Mobile Menu Toggle -->
-      <button
-        @click="toggleMenu"
-        aria-label="Toggle menu"
-        :aria-expanded="isOpen.toString()"
-        class="md:hidden text-white hover:text-indigo-400 transition duration-300"
-      >
-        <svg v-if="!isOpen" class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M4 6h16M4 12h16M4 18h16" />
-        </svg>
-        <svg v-else class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M6 18L18 6M6 6l12 12" />
-        </svg>
-      </button>
-    </div>
-
-    <!-- Mobile Nav -->
-    <transition name="slide-fade">
-      <div
-        v-if="isOpen"
-        class="md:hidden px-6 pb-6 pt-2 bg-black/80 backdrop-blur-xl rounded-b-xl shadow-lg border-t border-white/10"
-      >
-        <ul class="space-y-4 text-base text-white font-semibold uppercase tracking-widest">
-          <li v-for="link in links" :key="link.path">
-            <router-link
-              :to="link.path"
-              @click="toggleMenu"
-              class="block px-4 py-2 rounded-lg no-underline hover:bg-indigo-600/30 transition duration-300 hover:shadow-[0_0_15px_#6366f1]"
-            >
-              {{ link.name }}
-            </router-link>
-          </li>
-        </ul>
+      <div class="nav-links" :class="{ open: isOpen }">
+        <template v-for="(link, index) in navLinks" :key="link.href">
+          <a :href="link.href" @click="closeMenu">{{ link.name }}</a>
+          <span v-if="index < navLinks.length - 1" class="nav-separator" aria-hidden="true">/</span>
+        </template>
       </div>
-    </transition>
-  </nav>
+
+      <div class="nav-actions">
+        <a class="icon-link" :href="github.href" target="_blank" rel="noopener noreferrer" aria-label="Open GitHub">
+          <Github :size="18" stroke-width="2.3" />
+        </a>
+        <a class="hire-link" href="#contact" @click="closeMenu">
+          Contact
+          <ArrowUpRight :size="17" stroke-width="2.4" />
+        </a>
+        <button class="menu-button" type="button" :aria-expanded="isOpen" aria-label="Toggle menu" @click="isOpen = !isOpen">
+          <Menu v-if="!isOpen" :size="23" stroke-width="2.4" />
+          <X v-else :size="23" stroke-width="2.4" />
+        </button>
+      </div>
+    </nav>
+  </header>
 </template>
 
 <script setup>
-import { ref, onMounted, onBeforeUnmount } from 'vue'
+import { computed, onMounted, onUnmounted, ref } from 'vue'
+import { ArrowUpRight, Github, Menu, X } from 'lucide-vue-next'
+import { navLinks, profile, socials } from '../data/portfolio'
+
+defineOptions({
+  name: 'SiteNavbar',
+})
 
 const isOpen = ref(false)
-const scrolled = ref(false)
-const scrollProgress = ref(0)
+const isCompact = ref(false)
+const github = computed(() => socials.find((social) => social.name === 'GitHub'))
 
-const links = [
-  { name: 'About', path: '/about' },
-  { name: 'Projects', path: '/projects' },
-  { name: 'Contact', path: '/contact' },
-]
-
-const toggleMenu = () => (isOpen.value = !isOpen.value)
-
-const handleScroll = () => {
-  scrolled.value = window.scrollY > 10
-  const scrollTop = window.scrollY
-  const docHeight = document.documentElement.scrollHeight - window.innerHeight
-  scrollProgress.value = Math.min((scrollTop / docHeight) * 100, 100)
+const closeMenu = () => {
+  isOpen.value = false
 }
 
-onMounted(() => window.addEventListener('scroll', handleScroll))
-onBeforeUnmount(() => window.removeEventListener('scroll', handleScroll))
+const onScroll = () => {
+  isCompact.value = window.scrollY > 12
+}
+
+onMounted(() => {
+  onScroll()
+  window.addEventListener('scroll', onScroll, { passive: true })
+})
+
+onUnmounted(() => {
+  window.removeEventListener('scroll', onScroll)
+})
 </script>
 
-<style scoped>
-@keyframes spin-slow {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
-.animate-spin-slow {
-  animation: spin-slow 8s linear infinite;
-}
-
-@keyframes stagger {
-  from { opacity: 0; transform: translateY(-10px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-.animate-stagger {
-  animation: stagger 0.6s ease forwards;
+<style>
+.site-nav {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  border-bottom: 1px solid var(--line);
+  background: rgba(6, 8, 7, 0.78);
+  backdrop-filter: blur(18px);
+  transition:
+    background 180ms ease,
+    box-shadow 180ms ease;
 }
 
-.slide-fade-enter-active,
-.slide-fade-leave-active {
-  transition: opacity 0.3s ease, transform 0.3s ease;
+.site-nav.compact {
+  background: rgba(6, 8, 7, 0.94);
+  box-shadow: 0 18px 44px rgba(0, 0, 0, 0.42);
 }
-.slide-fade-enter-from,
-.slide-fade-leave-to {
-  opacity: 0;
-  transform: translateY(-10px);
+
+.skip-link {
+  position: absolute;
+  left: 16px;
+  top: -48px;
+  border-radius: 999px;
+  background: var(--green);
+  color: #030504;
+  padding: 8px 14px;
+  font-weight: 900;
+}
+
+.skip-link:focus {
+  top: 12px;
+}
+
+.nav-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  width: calc(100% - 48px);
+  max-width: 1180px;
+  min-height: 76px;
+  margin: 0 auto;
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 210px;
+}
+
+.brand-mark {
+  display: inline-flex;
+  width: 42px;
+  height: 42px;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--green);
+  border-radius: 50%;
+  background: #07110c;
+  color: var(--green);
+  box-shadow:
+    inset 0 0 18px rgba(98, 255, 156, 0.1),
+    0 0 26px rgba(98, 255, 156, 0.12);
+  font-family: var(--mono-font);
+  font-size: 0.78rem;
+  font-weight: 950;
+}
+
+.brand-copy strong,
+.brand-copy small {
+  display: block;
+  line-height: 1.1;
+}
+
+.brand-copy strong {
+  font-family: var(--display-font);
+  font-size: 1.02rem;
+  font-weight: 950;
+}
+
+.brand-copy small {
+  margin-top: 4px;
+  color: var(--muted);
+  font-family: var(--mono-font);
+  font-size: 0.74rem;
+  font-weight: 800;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  background: rgba(13, 20, 16, 0.76);
+  box-shadow: inset 0 0 20px rgba(98, 255, 156, 0.04);
+  padding: 6px 10px;
+}
+
+.nav-links a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  color: var(--ink-soft);
+  padding: 8px 10px;
+  font-family: var(--mono-font);
+  font-size: 0.8rem;
+  font-weight: 900;
+}
+
+.nav-links a:hover {
+  background: rgba(98, 255, 156, 0.12);
+  color: var(--green);
+}
+
+.nav-separator {
+  color: rgba(94, 217, 255, 0.34);
+  font-weight: 800;
+}
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+  min-width: 210px;
+}
+
+.icon-link,
+.hire-link,
+.menu-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--line-strong);
+}
+
+.icon-link,
+.menu-button {
+  width: 42px;
+  height: 42px;
+  border-radius: 999px;
+  background: rgba(13, 20, 16, 0.8);
+}
+
+.hire-link {
+  gap: 8px;
+  min-height: 42px;
+  border-radius: 999px;
+  background: var(--green);
+  color: #030504;
+  padding: 0 16px;
+  font-weight: 950;
+}
+
+.icon-link:hover,
+.menu-button:hover,
+.hire-link:hover {
+  border-color: var(--blue);
+  background: var(--blue);
+  color: #030504;
+  box-shadow: 0 0 26px rgba(94, 217, 255, 0.22);
+}
+
+.menu-button {
+  display: none;
+}
+
+@media (max-width: 980px) {
+  .nav-inner {
+    width: calc(100% - 32px);
+  }
+
+  .brand,
+  .nav-actions {
+    min-width: auto;
+  }
+
+  .icon-link,
+  .nav-links {
+    display: none;
+  }
+
+  .menu-button {
+    display: inline-flex;
+  }
+
+  .nav-links.open {
+    position: absolute;
+    inset: 78px 16px auto;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 6px;
+    border-radius: 16px;
+    background: rgba(13, 20, 16, 0.96);
+    box-shadow: var(--shadow);
+    padding: 12px;
+  }
+
+  .nav-links.open .nav-separator {
+    display: none;
+  }
+
+  .nav-links.open a {
+    justify-content: flex-start;
+    border-radius: 10px;
+    padding: 13px 14px;
+  }
+}
+
+@media (max-width: 560px) {
+  .brand-copy small,
+  .hire-link {
+    display: none;
+  }
 }
 </style>

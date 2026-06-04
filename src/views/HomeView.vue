@@ -1,216 +1,1126 @@
 <template>
-  <section
-    class="relative w-full min-h-screen flex flex-col-reverse lg:flex-row items-center justify-center px-4 sm:px-6 pt-10 pb-16 text-white z-0 overflow-x-hidden"
-    role="region"
-    aria-label="Hero Section"
-  >
-    <!-- Particle Background -->
-    <canvas id="particles-bg" class="absolute inset-0 z-0 pointer-events-none"></canvas>
+  <div class="portfolio-page">
+    <section id="home" class="hero-section" aria-labelledby="home-title">
+      <div class="hero-copy">
+        <p class="eyebrow">{{ profile.company }}</p>
+        <h1 id="home-title">{{ profile.headline }}</h1>
+        <p class="hero-role">{{ profile.name }} / {{ profile.role }}</p>
+        <p class="hero-lead">{{ profile.intro }}</p>
 
-    <!-- Content Area -->
-    <div class="relative z-10 w-full max-w-3xl mx-auto flex flex-col items-center lg:items-start text-center lg:text-left space-y-6 px-4 sm:px-8 lg:pl-12">
-      <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-tight tracking-tight">
-        Hello, I'm <br />
-        <span class="bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent animate-gradient-move">
-          Nephten Fajardo Ilon
-        </span>
-      </h1>
-
-      <p class="text-base sm:text-lg lg:text-xl text-white/90 leading-relaxed animate-typewriter overflow-hidden whitespace-nowrap border-r-4 border-indigo-400 pr-2 max-w-full">
-        Full Stack Developer & UI Enthusiast
-      </p>
-
-      <p class="text-sm sm:text-base text-white/80 max-w-prose leading-relaxed">
-        I build interactive websites and applications with clean UI and a focus on performance, responsiveness, and user experience. Vue.js and Tailwind are my go-to tools.
-      </p>
-
-      <!-- CTA Buttons -->
-      <div class="flex flex-col sm:flex-row justify-center lg:justify-start gap-3 pt-4 w-full sm:w-auto">
-        <router-link
-          to="/projects"
-          class="btn-primary text-center px-6 py-2 min-w-[180px] sm:min-w-[auto]"
-        >
-          🚀 View Projects
-        </router-link>
-        <router-link
-          to="/contact"
-          class="btn-secondary text-center px-6 py-2 min-w-[180px] sm:min-w-[auto]"
-        >
-          📩 Contact Me
-        </router-link>
-      </div>
-
-      <!-- Social Icons -->
-      <div class="flex flex-wrap justify-center lg:justify-start gap-4 mt-6">
-        <!-- Facebook -->
-        <a href="https://www.facebook.com/nephtenllon" target="_blank" class="social-btn bg-[#1877f2]" aria-label="Facebook">
-          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M22.675 0H1.325C.593 0 0 .593 0 1.326v21.348C0 23.407.593 24 1.325 24h11.483V14.709h-3.13v-3.62h3.13V8.413c0-3.1 1.894-4.788 4.659-4.788 1.325 0 2.463.099 2.794.143v3.24l-1.918.001c-1.504 0-1.796.715-1.796 1.763v2.31h3.59l-.467 3.62h-3.123V24h6.116c.73 0 1.324-.593 1.324-1.326V1.326C24 .593 23.407 0 22.675 0z"/>
-          </svg>
-        </a>
-
-        <!-- Instagram -->
-        <a href="https://www.instagram.com/nephtenllon" target="_blank" class="social-btn" aria-label="Instagram"
-          style="background: radial-gradient(circle at 30% 30%, #feda75,#d62976,#962fbf,#4f5bd5)">
-          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M12 2.2c3.2 0 3.584.012 4.85.07 1.206.056 2.003.24 2.466.404a4.921 4.921 0 0 1 1.79 1.165 4.923 4.923 0 0 1 1.165 1.79c.164.463.348 1.26.404 2.466.058 1.266.07 1.65.07 4.85s-.012 3.584-.07 4.85c-.056 1.206-.24 2.003-.404 2.466a4.923 4.923 0 0 1-1.165 1.79 4.921 4.921 0 0 1-1.79 1.165c-.463.164-1.26.348-2.466.404-1.266.058-1.65.07-4.85.07s-3.584-.012-4.85-.07c-1.206-.056-2.003-.24-2.466-.404a4.921 4.921 0 0 1-1.79-1.165 4.921 4.921 0 0 1-1.165-1.79c-.164-.463-.348-1.26-.404-2.466C2.212 15.784 2.2 15.4 2.2 12.2s.012-3.584.07-4.85c.056-1.206.24-2.003.404-2.466A4.923 4.923 0 0 1 3.84 3.094a4.923 4.923 0 0 1 1.79-1.165c.463-.164 1.26-.348 2.466-.404C8.616 2.212 9 2.2 12 2.2zm0 3.8a6 6 0 1 0 0 12.001A6 6 0 0 0 12 6zm0 9.8a3.8 3.8 0 1 1 0-7.6 3.8 3.8 0 0 1 0 7.6zm6.406-11.845a1.44 1.44 0 1 0 0 2.88 1.44 1.44 0 0 0 0-2.88z"/>
-          </svg>
-        </a>
-
-        <!-- Gmail -->
-        <a href="mailto:nephtenilon@gmail.com" class="social-btn bg-[#ea4335]" aria-label="Email">
-          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M12 13.5l-12-9v18h24v-18zm0-3l12-9h-24z"/>
-          </svg>
-        </a>
-
-        <!-- Twitter / X -->
-        <a href="https://x.com/Nephten2" target="_blank" class="social-btn bg-black" aria-label="X / Twitter">
-          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M22.46 0H1.54C.69 0 0 .69 0 1.54v20.92C0 23.31.69 24 1.54 24h20.92c.85 0 1.54-.69 1.54-1.54V1.54C24 .69 23.31 0 22.46 0zM17.29 7.44l-4.08 4.81 4.85 6.31h-3.03l-3.41-4.57-3.91 4.57H6.07l4.34-5.09-4.68-5.85h3.06l3.24 4.37 3.73-4.37h2.53z"/>
-          </svg>
-        </a>
-      </div>
-
-      <!-- Tech Stack -->
-      <div class="mt-10 w-full">
-        <h2 class="text-xl sm:text-2xl font-bold mb-4 text-center lg:text-left">Tech Stack</h2>
-        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 justify-items-center">
-          <span class="tech-tag">💚 Vue.js</span>
-          <span class="tech-tag">🎨 TailwindCSS</span>
-          <span class="tech-tag">🖥 Node.js</span>
-          <span class="tech-tag">⚛ React</span>
-          <span class="tech-tag">🐘 PHP</span>
-          <span class="tech-tag">🐬 MySQL</span>
-          <span class="tech-tag">🗄 phpMyAdmin</span>
-          <span class="tech-tag">⚙ Express.js</span>
+        <div class="hero-actions">
+          <a class="button-dark" href="#work">
+            View work
+            <ArrowRight :size="18" stroke-width="2.5" />
+          </a>
+          <a class="button-light" href="#contact">Contact</a>
         </div>
       </div>
-    </div>
 
-    <!-- Right Video Panel -->
-    <div class="w-full max-w-2xl h-48 sm:h-64 md:h-80 lg:w-1/2 lg:h-full relative z-10 clip-slash mb-6 lg:mb-0">
-      <video autoplay muted loop playsinline class="w-full h-full object-cover filter grayscale contrast-150 rounded-xl lg:rounded-none">
-        <source src="@/assets/video1.mp4" type="video/mp4" />
-      </video>
-      <div class="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
-    </div>
-  </section>
+      <aside class="hero-card" aria-label="Profile summary">
+        <div class="portrait-wrap">
+          <img src="@/assets/profile.jpg" :alt="profile.name" />
+        </div>
+        <div class="profile-panel">
+          <span>Currently</span>
+          <strong>ERP / POS / IT Support</strong>
+          <small>{{ profile.availability }}</small>
+        </div>
+      </aside>
+    </section>
+
+    <section class="stats-strip" aria-label="Core work highlights">
+      <article v-for="stat in stats" :key="stat.value">
+        <strong>{{ stat.value }}</strong>
+        <span>{{ stat.label }}</span>
+      </article>
+    </section>
+
+    <section id="about" class="content-section about-section" aria-labelledby="about-title">
+      <div class="about-copy">
+        <p class="eyebrow">About me</p>
+        <h2 id="about-title">I build systems from the support desk to the database.</h2>
+
+        <div class="about-text">
+          <p v-for="paragraph in aboutParagraphs" :key="paragraph">{{ paragraph }}</p>
+        </div>
+
+        <div class="about-highlights">
+          <article v-for="highlight in aboutHighlights" :key="highlight.title">
+            <h3>{{ highlight.title }}</h3>
+            <p>{{ highlight.text }}</p>
+          </article>
+        </div>
+      </div>
+
+      <div class="about-terminal" aria-label="Developer profile">
+        <span>profile.run</span>
+        <p>Frontend, backend, database, deployment, and technician work connected into one practical system.</p>
+      </div>
+    </section>
+
+    <section class="content-section image-story-section" aria-labelledby="visual-title">
+      <div class="section-header">
+        <p class="eyebrow">Visual log</p>
+        <h2 id="visual-title">Three frames, three working modes.</h2>
+      </div>
+
+      <div class="image-story-list">
+        <article v-for="image in aboutImages" :key="image.src" :class="['image-story-card', image.className]">
+          <figure class="image-frame">
+            <img :src="image.src" :alt="image.alt" loading="lazy" decoding="async" />
+            <figcaption>{{ image.caption }}</figcaption>
+          </figure>
+
+          <div class="image-story-copy">
+            <span>{{ image.meta }}</span>
+            <h3>{{ image.title }}</h3>
+            <p>{{ image.text }}</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="work" class="content-section two-column" aria-labelledby="work-title">
+      <div class="section-intro">
+        <p class="eyebrow">Work</p>
+        <h2 id="work-title">Clean systems for daily operations.</h2>
+      </div>
+
+      <div class="work-stack">
+        <div class="work-list">
+          <article v-for="(area, index) in focusAreas" :key="area.title">
+            <span>0{{ index + 1 }}</span>
+            <div>
+              <h3>{{ area.title }}</h3>
+              <p>{{ area.text }}</p>
+            </div>
+          </article>
+        </div>
+
+        <div class="workflow-grid">
+          <article v-for="(step, index) in workflowSteps" :key="step.title">
+            <span>SYS.0{{ index + 1 }}</span>
+            <h3>{{ step.title }}</h3>
+            <p>{{ step.text }}</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="skills" class="content-section" aria-labelledby="skills-title">
+      <div class="section-header">
+        <p class="eyebrow">Skills</p>
+        <h2 id="skills-title">The stack behind the systems.</h2>
+      </div>
+
+      <div class="skills-grid">
+        <article v-for="group in skillGroups" :key="group.title">
+          <h3>{{ group.title }}</h3>
+          <div>
+            <span v-for="item in group.items" :key="item">{{ item }}</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="systems" class="content-section" aria-labelledby="systems-title">
+      <div class="section-header">
+        <p class="eyebrow">Systems</p>
+        <h2 id="systems-title">What I work on.</h2>
+      </div>
+
+      <div class="systems-grid">
+        <article v-for="system in systems" :key="system.title">
+          <p>{{ system.meta }}</p>
+          <h3>{{ system.title }}</h3>
+          <span>{{ system.text }}</span>
+          <div>
+            <small v-for="tech in system.stack" :key="tech">{{ tech }}</small>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="contact" class="content-section contact-section" aria-labelledby="contact-title">
+      <div class="contact-copy">
+        <p class="eyebrow">Contact</p>
+        <h2 id="contact-title">Let’s talk systems.</h2>
+        <p>For ERP, POS, full-stack, database, support, or troubleshooting work.</p>
+
+        <div class="social-row" aria-label="Social links">
+          <a v-for="social in socials" :key="social.name" :href="social.href" target="_blank" rel="noopener noreferrer">
+            {{ social.name }}
+          </a>
+        </div>
+      </div>
+
+      <form class="contact-form" @submit.prevent="submitForm">
+        <div class="reason-grid">
+          <button
+            v-for="reason in contactReasons"
+            :key="reason"
+            type="button"
+            :class="{ active: selectedReason === reason }"
+            @click="selectedReason = reason"
+          >
+            {{ reason }}
+          </button>
+        </div>
+
+        <label>
+          <span>Name</span>
+          <input v-model.trim="name" type="text" autocomplete="name" required />
+        </label>
+
+        <label>
+          <span>Email</span>
+          <input v-model.trim="email" type="email" autocomplete="email" required />
+        </label>
+
+        <label>
+          <span>Message</span>
+          <textarea v-model.trim="message" rows="5" required />
+        </label>
+
+        <button class="submit-button" type="submit">
+          Prepare email
+          <Send :size="18" stroke-width="2.4" />
+        </button>
+        <p v-if="statusMessage" class="status-message">{{ statusMessage }}</p>
+      </form>
+    </section>
+  </div>
 </template>
 
-
-
-
 <script setup>
-import { onMounted } from 'vue'
+import { ref } from 'vue'
+import { ArrowRight, Send } from 'lucide-vue-next'
+import poolImage from '../assets/image.png'
+import cityImage from '../assets/111111111.jpg'
+import skyImage from '../assets/222222.jpg'
+import {
+  aboutHighlights,
+  aboutParagraphs,
+  contactReasons,
+  focusAreas,
+  profile,
+  skillGroups,
+  socials,
+  stats,
+  systems,
+  workflowSteps,
+} from '../data/portfolio'
 
-onMounted(() => {
-  const canvas = document.getElementById('particles-bg')
-  const ctx = canvas.getContext('2d')
-  let particles = []
-
-  const resizeCanvas = () => {
-    canvas.width = window.innerWidth
-    canvas.height = window.innerHeight
-  }
-
-  const createParticles = () => {
-    particles = Array.from({ length: 400 }, () => ({
-      x: Math.random() * canvas.width,
-      y: Math.random() * canvas.height,
-      radius: Math.random() * 2 + 0.5,
-      dx: (Math.random() - 0.5) * 0.4,
-      dy: (Math.random() - 0.5) * 0.4,
-      opacity: Math.random() * 0.4 + 0.3,
-      pulse: 0,
-    }))
-  }
-
-  const animate = () => {
-    ctx.clearRect(0, 0, canvas.width, canvas.height)
-    particles.forEach(p => {
-      p.x += p.dx
-      p.y += p.dy
-      p.pulse += 0.02
-      const pulseRadius = p.radius + Math.sin(p.pulse) * 0.5
-
-      // Bounce on edges
-      if (p.x < 0 || p.x > canvas.width) p.dx *= -1
-      if (p.y < 0 || p.y > canvas.height) p.dy *= -1
-
-      ctx.beginPath()
-      ctx.arc(p.x, p.y, pulseRadius, 0, Math.PI * 2)
-      ctx.fillStyle = `rgba(140, 160, 255, ${p.opacity})`
-      ctx.shadowColor = 'rgba(140, 160, 255, 0.5)'
-      ctx.shadowBlur = 15
-      ctx.fill()
-    })
-    requestAnimationFrame(animate)
-  }
-
-  resizeCanvas()
-  createParticles()
-  animate()
-
-  window.addEventListener('resize', () => {
-    resizeCanvas()
-    createParticles()
-  })
+defineOptions({
+  name: 'HomePage',
 })
+
+const name = ref('')
+const email = ref('')
+const message = ref('')
+const selectedReason = ref(contactReasons[0])
+const statusMessage = ref('')
+
+const aboutImages = [
+  {
+    src: poolImage,
+    alt: 'Nephten standing in silhouette near a pool',
+    caption: 'quiet focus',
+    meta: 'mode 01',
+    title: 'Quiet focus before the build.',
+    text: 'The calm side of the work: reading the flow, understanding what users need, and thinking through the system before touching the code.',
+    className: 'pool-card',
+  },
+  {
+    src: cityImage,
+    alt: 'Nephten standing in front of a tall city building',
+    caption: 'systems scale',
+    meta: 'mode 02',
+    title: 'Big-system perspective.',
+    text: 'ERP and POS work needs structure. I like seeing every layer: screen, API, data, support, and the business process behind it.',
+    className: 'city-card',
+  },
+  {
+    src: skyImage,
+    alt: 'Nephten in silhouette under a cloudy sky',
+    caption: 'after-hours thinking',
+    meta: 'mode 03',
+    title: 'Troubleshooting mindset.',
+    text: 'When something breaks, I trace it carefully: reproduce the issue, inspect the data, fix the cause, and make the next support case easier.',
+    className: 'sky-card',
+  },
+]
+
+const submitForm = () => {
+  const subject = encodeURIComponent(`${selectedReason.value} - ${name.value}`)
+  const body = encodeURIComponent(
+    `Name: ${name.value}\nEmail: ${email.value}\nReason: ${selectedReason.value}\n\n${message.value}`,
+  )
+
+  window.location.href = `mailto:${profile.email}?subject=${subject}&body=${body}`
+  statusMessage.value = 'Your email app should open with the message prepared.'
+}
 </script>
 
-<style scoped>
-@keyframes typewriter {
-  from { width: 0 }
-  to { width: 100% }
-}
-@keyframes gradientMove {
-  0%, 100% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
+<style>
+.portfolio-page {
+  position: relative;
+  width: 100%;
 }
 
-.animate-typewriter {
-  display: inline-block;
-  width: 0;
-  animation: typewriter 3s steps(40, end) 1s forwards;
+.hero-section,
+.stats-strip,
+.content-section {
+  width: calc(100% - 48px);
+  max-width: 1180px;
+  margin: 0 auto;
 }
-.animate-gradient-move {
-  background-size: 200% auto;
-  animation: gradientMove 6s ease-in-out infinite;
+
+.hero-section {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 390px;
+  gap: 64px;
+  align-items: center;
+  min-height: calc(100svh - 76px);
+  padding: 72px 0 58px;
 }
-.clip-slash {
-  clip-path: polygon(0 0, 100% 10%, 100% 100%, 0 90%);
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 14px;
+  color: var(--green);
+  font-family: var(--mono-font);
+  font-size: 0.78rem;
+  font-weight: 900;
+  letter-spacing: 0;
+  text-transform: uppercase;
 }
-.social-btn {
+
+.eyebrow::before {
+  width: 36px;
+  height: 1px;
+  background: var(--green);
+  box-shadow: 0 0 18px rgba(98, 255, 156, 0.45);
+  content: "";
+}
+
+.hero-copy h1 {
+  max-width: 760px;
+  margin: 0;
+  background: linear-gradient(90deg, var(--ink), var(--green) 56%, var(--blue));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  font-family: var(--display-font);
+  font-size: 4.15rem;
+  font-weight: 950;
+  letter-spacing: 0;
+  line-height: 0.95;
+  overflow-wrap: anywhere;
+  text-shadow: 0 0 34px rgba(98, 255, 156, 0.1);
+  animation: fadeUp 580ms ease both;
+}
+
+.hero-role {
+  margin: 18px 0 0;
+  color: var(--blue);
+  font-family: var(--mono-font);
+  font-size: 1rem;
+  font-weight: 900;
+}
+
+.hero-lead {
+  max-width: 620px;
+  margin: 16px 0 0;
+  color: var(--ink-soft);
+  font-size: 1.05rem;
+}
+
+.hero-actions {
   display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 30px;
+}
+
+.button-dark,
+.button-light,
+.submit-button {
+  display: inline-flex;
+  min-height: 48px;
   align-items: center;
   justify-content: center;
-  width: 46px;
-  height: 46px;
-  border-radius: 9999px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  color: white;
-  text-decoration: none;
-}
-.social-btn:hover {
-  transform: scale(1.1);
-  box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
-}
-.tech-tag {
-  @apply text-white text-sm font-medium px-4 py-2 rounded-full 
-         border border-white/20 backdrop-blur-md bg-white/5 
-         hover:bg-white/10 transition-all duration-300 
-         shadow-md hover:shadow-lg hover:scale-105 
-         cursor-default tracking-wide;
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  padding: 0 18px;
+  font-weight: 950;
+  transition:
+    transform 180ms ease,
+    border-color 180ms ease,
+    background 180ms ease,
+    box-shadow 180ms ease;
 }
 
-.btn-primary, .btn-secondary {
-  text-decoration: none;
+.button-dark,
+.submit-button {
+  gap: 10px;
+  background: var(--green);
+  color: #030504;
 }
-.btn-primary {
-  @apply px-6 py-3 font-semibold rounded-xl bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 transition-all text-white shadow-lg;
+
+.button-light {
+  background: rgba(13, 20, 16, 0.74);
+  color: var(--ink);
 }
-.btn-secondary {
-  @apply px-6 py-3 font-semibold rounded-xl border border-indigo-400/60 bg-white/5 backdrop-blur-sm hover:bg-indigo-500/20 hover:border-indigo-400 transition-all text-white;
+
+.button-dark:hover,
+.button-light:hover,
+.submit-button:hover {
+  border-color: var(--blue);
+  background: var(--blue);
+  color: #030504;
+  box-shadow: 0 0 28px rgba(94, 217, 255, 0.2);
+  transform: translateY(-2px);
+}
+
+.hero-card {
+  position: relative;
+  max-width: 390px;
+  animation: riseIn 650ms ease both;
+}
+
+.portrait-wrap {
+  overflow: hidden;
+  border: 1px solid var(--line-strong);
+  border-radius: 26px;
+  background: var(--panel-solid);
+  box-shadow: var(--shadow);
+}
+
+.portrait-wrap img {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  filter: grayscale(1) contrast(1.18) brightness(0.88);
+}
+
+.profile-panel {
+  position: absolute;
+  right: 18px;
+  bottom: -26px;
+  display: grid;
+  gap: 5px;
+  width: min(260px, calc(100% - 36px));
+  border: 1px solid var(--line-strong);
+  border-radius: 18px;
+  background: rgba(10, 15, 12, 0.94);
+  padding: 16px;
+  box-shadow: var(--shadow);
+}
+
+.profile-panel span {
+  color: var(--green);
+  font-family: var(--mono-font);
+  font-size: 0.72rem;
+  font-weight: 900;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.profile-panel strong {
+  color: var(--ink);
+  font-family: var(--display-font);
+  font-size: 1.18rem;
+  line-height: 1.05;
+}
+
+.profile-panel small {
+  color: var(--muted);
+  font-weight: 760;
+}
+
+.stats-strip {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+  border-block: 1px solid var(--line-strong);
+  padding: 18px 0;
+}
+
+.stats-strip article {
+  position: relative;
+  min-height: 118px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: var(--panel);
+  padding: 18px;
+  animation: fadeUp 560ms ease both;
+}
+
+.stats-strip article::after {
+  position: absolute;
+  inset: auto 18px 14px;
+  height: 2px;
+  background: linear-gradient(90deg, var(--green), transparent);
+  content: "";
+}
+
+.stats-strip strong {
+  display: block;
+  color: var(--ink);
+  font-family: var(--mono-font);
+  font-size: 1.9rem;
+  font-weight: 950;
+  line-height: 1;
+}
+
+.stats-strip span {
+  display: block;
+  margin-top: 12px;
+  color: var(--muted);
+  font-weight: 760;
+}
+
+.content-section {
+  padding: 78px 0;
+  border-bottom: 1px solid var(--line-strong);
+}
+
+.about-section {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 430px;
+  gap: 54px;
+  align-items: center;
+}
+
+.about-copy h2 {
+  max-width: 720px;
+  margin: 0;
+  color: var(--ink);
+  font-family: var(--display-font);
+  font-size: 3rem;
+  font-weight: 950;
+  line-height: 1;
+}
+
+.about-text {
+  display: grid;
+  gap: 14px;
+  margin-top: 22px;
+}
+
+.about-text p {
+  margin: 0;
+  color: var(--ink-soft);
+}
+
+.about-highlights {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 26px;
+}
+
+.about-highlights article,
+.workflow-grid article {
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: var(--panel);
+  padding: 18px;
+}
+
+.about-highlights h3,
+.workflow-grid h3 {
+  margin: 0;
+  color: var(--ink);
+  font-size: 1rem;
+  font-weight: 950;
+}
+
+.about-highlights p,
+.workflow-grid p {
+  margin: 8px 0 0;
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
+.about-terminal {
+  align-self: stretch;
+  display: grid;
+  align-content: end;
+  min-height: 360px;
+  border: 1px solid var(--line-strong);
+  border-radius: 24px;
+  background:
+    linear-gradient(rgba(98, 255, 156, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(94, 217, 255, 0.06) 1px, transparent 1px),
+    rgba(10, 15, 12, 0.82);
+  background-size:
+    26px 26px,
+    26px 26px,
+    auto;
+  box-shadow: var(--shadow);
+  padding: 24px;
+}
+
+.about-terminal span,
+.image-story-copy span {
+  color: var(--green);
+  font-family: var(--mono-font);
+  font-size: 0.78rem;
+  font-weight: 950;
+  text-transform: uppercase;
+}
+
+.about-terminal p {
+  max-width: 340px;
+  margin: 14px 0 0;
+  color: var(--ink-soft);
+  font-size: 1.12rem;
+  font-weight: 850;
+}
+
+.image-story-section {
+  display: grid;
+  gap: 28px;
+}
+
+.image-story-list {
+  display: grid;
+  gap: 18px;
+}
+
+.image-story-card {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 0.92fr) minmax(280px, 0.72fr);
+  gap: 22px;
+  align-items: stretch;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 28px;
+  background: rgba(10, 15, 12, 0.84);
+  box-shadow: var(--shadow);
+  padding: 14px;
+}
+
+.image-story-card::before {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, rgba(98, 255, 156, 0.1), transparent 38%),
+    repeating-linear-gradient(135deg, transparent 0 18px, rgba(94, 217, 255, 0.045) 18px 19px);
+  opacity: 0.8;
+  pointer-events: none;
+  content: "";
+}
+
+.image-story-card:nth-child(even) {
+  grid-template-columns: minmax(280px, 0.72fr) minmax(0, 0.92fr);
+}
+
+.image-story-card:nth-child(even) .image-frame {
+  grid-column: 2;
+}
+
+.image-story-card:nth-child(even) .image-story-copy {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.image-frame,
+.image-story-copy {
+  position: relative;
+  z-index: 1;
+}
+
+.image-frame {
+  overflow: hidden;
+  margin: 0;
+  border: 1px solid var(--line-strong);
+  border-radius: 22px;
+  background: var(--panel-solid);
+}
+
+.image-frame img {
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  min-height: 340px;
+  object-fit: cover;
+  filter: saturate(0.78) contrast(1.12) brightness(0.78);
+  transform: scale(1.01);
+  transition:
+    filter 220ms ease,
+    transform 220ms ease;
+}
+
+.image-story-card:hover .image-frame img {
+  filter: saturate(1) contrast(1.08) brightness(0.92);
+  transform: scale(1.045);
+}
+
+.image-frame figcaption {
+  position: absolute;
+  left: 14px;
+  bottom: 14px;
+  border: 1px solid rgba(98, 255, 156, 0.38);
+  border-radius: 999px;
+  background: rgba(3, 5, 4, 0.78);
+  color: var(--green);
+  font-family: var(--mono-font);
+  font-size: 0.72rem;
+  font-weight: 900;
+  padding: 7px 10px;
+}
+
+.image-story-copy {
+  display: grid;
+  align-content: center;
+  min-height: 340px;
+  border: 1px solid var(--line);
+  border-radius: 22px;
+  background: rgba(6, 8, 7, 0.62);
+  padding: 28px;
+}
+
+.image-story-copy h3 {
+  max-width: 420px;
+  margin: 12px 0 0;
+  color: var(--ink);
+  font-family: var(--display-font);
+  font-size: 2.15rem;
+  font-weight: 950;
+  line-height: 1;
+}
+
+.image-story-copy p {
+  max-width: 440px;
+  margin: 16px 0 0;
+  color: var(--muted);
+}
+
+.pool-card .image-frame img {
+  object-position: center;
+}
+
+.city-card .image-frame img {
+  object-position: center 62%;
+}
+
+.sky-card .image-frame img {
+  object-position: center;
+}
+
+.two-column,
+.contact-section {
+  display: grid;
+  grid-template-columns: 0.72fr 1fr;
+  gap: 54px;
+  align-items: start;
+}
+
+.section-intro h2,
+.section-header h2,
+.contact-copy h2 {
+  max-width: 720px;
+  margin: 0;
+  color: var(--ink);
+  font-family: var(--display-font);
+  font-size: 3rem;
+  font-weight: 950;
+  line-height: 1;
+}
+
+.work-list {
+  display: grid;
+}
+
+.work-stack {
+  display: grid;
+  gap: 22px;
+}
+
+.work-list article {
+  display: grid;
+  grid-template-columns: 52px 1fr;
+  gap: 18px;
+  border-bottom: 1px solid var(--line);
+  padding: 0 0 20px;
+}
+
+.work-list article + article {
+  padding-top: 20px;
+}
+
+.work-list > article > span {
+  color: var(--rust);
+  font-family: var(--mono-font);
+  font-weight: 950;
+}
+
+.workflow-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.workflow-grid article {
+  position: relative;
+  overflow: hidden;
+}
+
+.workflow-grid article::after {
+  position: absolute;
+  inset: auto 18px 14px;
+  height: 2px;
+  background: linear-gradient(90deg, var(--blue), transparent);
+  content: "";
+}
+
+.workflow-grid article > span {
+  display: block;
+  margin-bottom: 10px;
+  color: var(--blue);
+  font-family: var(--mono-font);
+  font-size: 0.72rem;
+  font-weight: 900;
+}
+
+.work-list h3,
+.skills-grid h3,
+.systems-grid h3 {
+  margin: 0;
+  color: var(--ink);
+  font-size: 1.18rem;
+  font-weight: 950;
+}
+
+.work-list p,
+.systems-grid article > span,
+.contact-copy p {
+  margin: 8px 0 0;
+  color: var(--muted);
+}
+
+.section-header {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 32px;
+  margin-bottom: 28px;
+}
+
+.skills-grid,
+.systems-grid {
+  display: grid;
+  gap: 14px;
+}
+
+.skills-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.systems-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.skills-grid article,
+.systems-grid article {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: var(--panel);
+  padding: 20px;
+  transition:
+    transform 180ms ease,
+    border-color 180ms ease,
+    background 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.skills-grid article::before,
+.systems-grid article::before {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(120deg, transparent, rgba(98, 255, 156, 0.08), transparent);
+  transform: translateX(-110%);
+  transition: transform 520ms ease;
+  content: "";
+}
+
+.skills-grid article:hover,
+.systems-grid article:hover {
+  border-color: var(--green);
+  background: rgba(14, 24, 18, 0.96);
+  box-shadow: 0 0 34px rgba(98, 255, 156, 0.13);
+  transform: translateY(-6px);
+}
+
+.skills-grid article:hover::before,
+.systems-grid article:hover::before {
+  transform: translateX(110%);
+}
+
+.skills-grid div,
+.systems-grid div {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 18px;
+}
+
+.skills-grid span,
+.systems-grid small {
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: rgba(6, 8, 7, 0.54);
+  padding: 6px 9px;
+  color: var(--ink-soft);
+  font-family: var(--mono-font);
+  font-size: 0.78rem;
+  font-weight: 820;
+}
+
+.skills-grid article:hover span,
+.systems-grid article:hover small {
+  border-color: rgba(94, 217, 255, 0.4);
+  color: var(--blue);
+}
+
+.systems-grid article > p {
+  margin: 0 0 12px;
+  color: var(--green);
+  font-family: var(--mono-font);
+  font-size: 0.72rem;
+  font-weight: 900;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.contact-section {
+  border-bottom: 0;
+}
+
+.social-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 24px;
+}
+
+.social-row a {
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  background: rgba(13, 20, 16, 0.72);
+  padding: 9px 12px;
+  font-weight: 850;
+}
+
+.social-row a:hover {
+  border-color: var(--blue);
+  color: var(--blue);
+  box-shadow: 0 0 24px rgba(94, 217, 255, 0.14);
+}
+
+.contact-form {
+  display: grid;
+  gap: 15px;
+  border: 1px solid var(--line-strong);
+  border-radius: 24px;
+  background: rgba(10, 15, 12, 0.9);
+  padding: 22px;
+  box-shadow: var(--shadow);
+}
+
+.reason-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.reason-grid button {
+  min-height: 44px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: rgba(6, 8, 7, 0.42);
+  color: var(--ink-soft);
+  padding: 8px 10px;
+  font-size: 0.82rem;
+  font-weight: 850;
+}
+
+.reason-grid button:hover,
+.reason-grid button.active {
+  border-color: var(--green);
+  background: rgba(98, 255, 156, 0.14);
+  color: var(--green);
+}
+
+.contact-form label span {
+  display: block;
+  margin-bottom: 7px;
+  color: var(--green);
+  font-family: var(--mono-font);
+  font-size: 0.72rem;
+  font-weight: 900;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: rgba(6, 8, 7, 0.72);
+  color: var(--ink);
+  padding: 12px 13px;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+  border-color: var(--blue);
+  outline: none;
+  box-shadow: 0 0 0 4px rgba(94, 217, 255, 0.1);
+}
+
+.contact-form textarea {
+  resize: vertical;
+}
+
+.status-message {
+  margin: 0;
+  color: var(--muted);
+  font-weight: 760;
+}
+
+@keyframes riseIn {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 1080px) {
+  .hero-section,
+  .about-section,
+  .two-column,
+  .contact-section {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-section {
+    min-height: auto;
+  }
+
+  .hero-card {
+    max-width: 420px;
+  }
+
+  .about-terminal {
+    min-height: 260px;
+  }
+
+  .image-story-card,
+  .image-story-card:nth-child(even) {
+    grid-template-columns: 1fr;
+  }
+
+  .image-story-card:nth-child(even) .image-frame,
+  .image-story-card:nth-child(even) .image-story-copy {
+    grid-column: auto;
+    grid-row: auto;
+  }
+
+  .skills-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 760px) {
+  .hero-section,
+  .stats-strip,
+  .content-section {
+    width: calc(100% - 28px);
+  }
+
+  .hero-section {
+    padding-top: 52px;
+  }
+
+  .hero-copy h1 {
+    font-size: 2.75rem;
+  }
+
+  .section-intro h2,
+  .about-copy h2,
+  .section-header h2,
+  .contact-copy h2 {
+    font-size: 2.15rem;
+  }
+
+  .stats-strip,
+  .about-highlights,
+  .workflow-grid,
+  .skills-grid,
+  .systems-grid,
+  .reason-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .image-story-card {
+    border-radius: 22px;
+    padding: 10px;
+  }
+
+  .image-frame img {
+    min-height: 260px;
+  }
+
+  .image-story-copy {
+    min-height: auto;
+    padding: 22px;
+  }
+
+  .image-story-copy h3 {
+    font-size: 1.75rem;
+  }
+
+  .section-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .work-list article {
+    grid-template-columns: 1fr;
+    gap: 6px;
+  }
+
+  .hero-actions,
+  .button-dark,
+  .button-light {
+    width: 100%;
+  }
 }
 </style>
