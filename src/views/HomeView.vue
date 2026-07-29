@@ -1,200 +1,244 @@
 <template>
   <div class="portfolio-page">
-    <section id="home" class="hero-section" aria-labelledby="home-title">
-      <div class="hero-copy">
-        <p class="eyebrow">{{ profile.company }}</p>
-        <h1 id="home-title">{{ profile.headline }}</h1>
-        <p class="hero-role">{{ profile.name }} / {{ profile.role }}</p>
-        <p class="hero-lead">{{ profile.intro }}</p>
+    <section v-if="activePage === 'home'" class="page-view home-page" aria-labelledby="home-title">
+      <div class="hero-index" aria-hidden="true">
+        <span>01</span>
+        <small>systems portfolio</small>
+      </div>
 
-        <div class="hero-actions">
-          <a class="button-dark" href="#work">
-            View work
-            <ArrowRight :size="18" stroke-width="2.5" />
-          </a>
-          <a class="button-light" href="#contact">Contact</a>
+      <div class="home-statement">
+        <p class="eyebrow">Developer & IT builder</p>
+        <h1 id="home-title">
+          <span>Building daily</span>
+          <span>systems that</span>
+          <span>hold up.</span>
+        </h1>
+        <p>
+          I work across ERP, POS, database, support, and full-stack development, turning operational
+          problems into clear interfaces and dependable workflows.
+        </p>
+
+        <div class="action-row">
+          <a class="text-link" href="/work">View work</a>
+          <a class="ghost-link" href="/graph">Open graph</a>
+        </div>
+
+        <div class="home-signals" aria-label="Core work areas">
+          <article v-for="stat in stats" :key="stat.value">
+            <strong>{{ stat.value }}</strong>
+            <span>{{ stat.label }}</span>
+          </article>
         </div>
       </div>
 
-      <aside class="hero-card" aria-label="Profile summary">
-        <div class="portrait-wrap">
-          <img src="@/assets/profile.jpg" :alt="profile.name" />
-        </div>
-        <div class="profile-panel">
-          <span>Currently</span>
+      <aside class="home-visual" aria-label="Profile snapshot">
+        <figure class="portrait-panel">
+          <img :src="profileImage" :alt="profile.name" loading="eager" decoding="async" />
+          <figcaption>{{ profile.location }}</figcaption>
+        </figure>
+
+        <div class="status-strip">
+          <span>Current</span>
           <strong>ERP / POS / IT Support</strong>
           <small>{{ profile.availability }}</small>
         </div>
       </aside>
     </section>
 
-    <section class="stats-strip" aria-label="Core work highlights">
-      <article v-for="stat in stats" :key="stat.value">
-        <strong>{{ stat.value }}</strong>
-        <span>{{ stat.label }}</span>
-      </article>
-    </section>
-
-    <section id="about" class="content-section about-section" aria-labelledby="about-title">
-      <div class="about-copy">
-        <p class="eyebrow">About me</p>
-        <h2 id="about-title">I build systems from the support desk to the database.</h2>
-
-        <div class="about-text">
-          <p v-for="paragraph in aboutParagraphs" :key="paragraph">{{ paragraph }}</p>
-        </div>
-
-        <div class="about-highlights">
-          <article v-for="highlight in aboutHighlights" :key="highlight.title">
-            <h3>{{ highlight.title }}</h3>
-            <p>{{ highlight.text }}</p>
-          </article>
-        </div>
-      </div>
-
-      <div class="about-terminal" aria-label="Developer profile">
-        <span>profile.run</span>
-        <p>Frontend, backend, database, deployment, and technician work connected into one practical system.</p>
-      </div>
-    </section>
-
-    <section class="content-section image-story-section" aria-labelledby="visual-title">
-      <div class="section-header">
-        <p class="eyebrow">Visual log</p>
-        <h2 id="visual-title">Three frames, three working modes.</h2>
-      </div>
-
-      <div class="image-story-list">
-        <article v-for="image in aboutImages" :key="image.src" :class="['image-story-card', image.className]">
-          <figure class="image-frame">
-            <img :src="image.src" :alt="image.alt" loading="lazy" decoding="async" />
-            <figcaption>{{ image.caption }}</figcaption>
-          </figure>
-
-          <div class="image-story-copy">
-            <span>{{ image.meta }}</span>
-            <h3>{{ image.title }}</h3>
-            <p>{{ image.text }}</p>
-          </div>
-        </article>
-      </div>
-    </section>
-
-    <section id="work" class="content-section two-column" aria-labelledby="work-title">
-      <div class="section-intro">
+    <section
+      v-else-if="activePage === 'work'"
+      class="page-view content-page work-page"
+      aria-labelledby="work-title"
+    >
+      <header class="page-header">
         <p class="eyebrow">Work</p>
-        <h2 id="work-title">Clean systems for daily operations.</h2>
-      </div>
+        <h1 id="work-title">Systems for operations that move every day.</h1>
+        <a class="text-link" href="/graph">Open graph</a>
+      </header>
 
-      <div class="work-stack">
-        <div class="work-list">
-          <article v-for="(area, index) in focusAreas" :key="area.title">
-            <span>0{{ index + 1 }}</span>
-            <div>
-              <h3>{{ area.title }}</h3>
-              <p>{{ area.text }}</p>
-            </div>
-          </article>
-        </div>
-
-        <div class="workflow-grid">
-          <article v-for="(step, index) in workflowSteps" :key="step.title">
-            <span>SYS.0{{ index + 1 }}</span>
-            <h3>{{ step.title }}</h3>
-            <p>{{ step.text }}</p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section id="skills" class="content-section" aria-labelledby="skills-title">
-      <div class="section-header">
-        <p class="eyebrow">Skills</p>
-        <h2 id="skills-title">The stack behind the systems.</h2>
-      </div>
-
-      <div class="skills-grid">
-        <article v-for="group in skillGroups" :key="group.title">
-          <h3>{{ group.title }}</h3>
+      <div class="work-list">
+        <article v-for="(system, index) in systems" :key="system.title">
+          <span>0{{ index + 1 }}</span>
           <div>
-            <span v-for="item in group.items" :key="item">{{ item }}</span>
+            <p>{{ system.meta }}</p>
+            <h2>{{ system.title }}</h2>
           </div>
-        </article>
-      </div>
-    </section>
-
-    <section id="systems" class="content-section" aria-labelledby="systems-title">
-      <div class="section-header">
-        <p class="eyebrow">Systems</p>
-        <h2 id="systems-title">What I work on.</h2>
-      </div>
-
-      <div class="systems-grid">
-        <article v-for="system in systems" :key="system.title">
-          <p>{{ system.meta }}</p>
-          <h3>{{ system.title }}</h3>
-          <span>{{ system.text }}</span>
-          <div>
+          <div class="work-copy">
+            <strong>{{ system.text }}</strong>
+            <em>{{ system.outcome }}</em>
+          </div>
+          <div class="tag-row">
             <small v-for="tech in system.stack" :key="tech">{{ tech }}</small>
           </div>
         </article>
       </div>
     </section>
 
-    <section id="contact" class="content-section contact-section" aria-labelledby="contact-title">
-      <div class="contact-copy">
-        <p class="eyebrow">Contact</p>
-        <h2 id="contact-title">Let’s talk systems.</h2>
-        <p>For ERP, POS, full-stack, database, support, or troubleshooting work.</p>
+    <section v-else-if="activePage === 'graph'" class="graph-page" aria-label="Systems graph">
+      <SystemsGraph immersive />
+    </section>
 
-        <div class="social-row" aria-label="Social links">
-          <a v-for="social in socials" :key="social.name" :href="social.href" target="_blank" rel="noopener noreferrer">
-            {{ social.name }}
-          </a>
+    <section
+      v-else-if="activePage === 'writing'"
+      class="page-view content-page writing-page"
+      aria-labelledby="writing-title"
+    >
+      <header class="page-header">
+        <p class="eyebrow">Writing</p>
+        <h1 id="writing-title">How I move from issue to stable workflow.</h1>
+      </header>
+
+      <div class="writing-list">
+        <article v-for="(step, index) in workflowSteps" :key="step.title">
+          <span>0{{ index + 1 }}</span>
+          <h2>{{ step.title }}</h2>
+          <p>{{ step.text }}</p>
+        </article>
+      </div>
+    </section>
+
+    <section
+      v-else-if="activePage === 'about'"
+      class="page-view content-page about-page"
+      aria-labelledby="about-title"
+    >
+      <header class="page-header">
+        <p class="eyebrow">About</p>
+        <h1 id="about-title">Support-aware, database-minded, full-stack practical.</h1>
+      </header>
+
+      <div class="about-layout">
+        <div class="about-copy">
+          <p v-for="paragraph in aboutParagraphs" :key="paragraph">{{ paragraph }}</p>
+
+          <div class="highlight-list" aria-label="Working strengths">
+            <article v-for="highlight in aboutHighlights" :key="highlight.title">
+              <h2>{{ highlight.title }}</h2>
+              <p>{{ highlight.text }}</p>
+            </article>
+          </div>
+        </div>
+
+        <div class="skill-board">
+          <article v-for="group in skillGroups" :key="group.title">
+            <h2>{{ group.title }}</h2>
+            <div class="tag-row">
+              <span v-for="item in group.items" :key="item">{{ item }}</span>
+            </div>
+          </article>
         </div>
       </div>
+    </section>
 
-      <form class="contact-form" @submit.prevent="submitForm">
-        <div class="reason-grid">
-          <button
-            v-for="reason in contactReasons"
-            :key="reason"
-            type="button"
-            :class="{ active: selectedReason === reason }"
-            @click="selectedReason = reason"
-          >
-            {{ reason }}
-          </button>
+    <section
+      v-else-if="activePage === 'contact'"
+      class="page-view content-page contact-page"
+      aria-labelledby="contact-title"
+    >
+      <header class="page-header">
+        <p class="eyebrow">Contact</p>
+        <h1 id="contact-title">Send the problem. I will trace the system.</h1>
+      </header>
+
+      <div class="contact-layout">
+        <div class="contact-copy">
+          <p>For ERP, POS, full-stack, database, support, or troubleshooting work.</p>
+
+          <div class="contact-quick" aria-label="Contact details">
+            <article>
+              <span>Email</span>
+              <a :href="`mailto:${profile.email}`">{{ profile.email }}</a>
+            </article>
+            <article>
+              <span>GitHub</span>
+              <a :href="githubProfile.href" target="_blank" rel="noopener noreferrer">
+                {{ githubProfile.handle }}
+              </a>
+            </article>
+            <article>
+              <span>Location</span>
+              <strong>{{ profile.location }}</strong>
+            </article>
+          </div>
+
+          <div class="social-row" aria-label="Social links">
+            <a
+              v-for="social in socials"
+              :key="social.name"
+              :href="social.href"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {{ social.name }}
+            </a>
+          </div>
         </div>
 
-        <label>
-          <span>Name</span>
-          <input v-model.trim="name" type="text" autocomplete="name" required />
-        </label>
+        <form class="contact-form" @submit.prevent="submitForm">
+          <div class="reason-grid">
+            <button
+              v-for="reason in contactReasons"
+              :key="reason"
+              type="button"
+              :class="{ active: selectedReason === reason }"
+              :aria-pressed="selectedReason === reason"
+              @click="selectedReason = reason"
+            >
+              {{ reason }}
+            </button>
+          </div>
 
-        <label>
-          <span>Email</span>
-          <input v-model.trim="email" type="email" autocomplete="email" required />
-        </label>
+          <label>
+            <span>Name</span>
+            <input v-model.trim="name" type="text" autocomplete="name" required />
+          </label>
 
-        <label>
-          <span>Message</span>
-          <textarea v-model.trim="message" rows="5" required />
-        </label>
+          <label>
+            <span>Email</span>
+            <input v-model.trim="email" type="email" autocomplete="email" required />
+          </label>
 
-        <button class="submit-button" type="submit">
-          Prepare email
-          <Send :size="18" stroke-width="2.4" />
-        </button>
-        <p v-if="statusMessage" class="status-message">{{ statusMessage }}</p>
-      </form>
+          <label>
+            <span>Message</span>
+            <textarea v-model.trim="message" rows="5" required />
+          </label>
+
+          <button class="submit-button" type="submit">
+            Prepare email
+            <Send :size="17" stroke-width="1.8" />
+          </button>
+          <p v-if="statusMessage" class="status-message" role="status" aria-live="polite">
+            {{ statusMessage }}
+          </p>
+        </form>
+      </div>
+    </section>
+
+    <section
+      v-else
+      class="page-view content-page photography-page"
+      aria-labelledby="photography-title"
+    >
+      <header class="page-header">
+        <p class="eyebrow">Photography</p>
+        <h1 id="photography-title">Quiet frames around the work.</h1>
+      </header>
+
+      <div class="photo-grid">
+        <figure v-for="image in aboutImages" :key="image.src">
+          <img :src="image.src" :alt="image.alt" loading="lazy" decoding="async" />
+          <figcaption>{{ image.caption }}</figcaption>
+        </figure>
+      </div>
     </section>
   </div>
 </template>
 
 <script setup>
 import { ref } from 'vue'
-import { ArrowRight, Send } from 'lucide-vue-next'
+import { Send } from 'lucide-vue-next'
+import SystemsGraph from '../components/SystemsGraph.vue'
+import profileImage from '../assets/3573004f-d764-4371-8e4a-d5d4eca24bba.jpg'
 import poolImage from '../assets/image.png'
 import cityImage from '../assets/111111111.jpg'
 import skyImage from '../assets/222222.jpg'
@@ -202,7 +246,6 @@ import {
   aboutHighlights,
   aboutParagraphs,
   contactReasons,
-  focusAreas,
   profile,
   skillGroups,
   socials,
@@ -215,39 +258,38 @@ defineOptions({
   name: 'HomePage',
 })
 
+defineProps({
+  activePage: {
+    type: String,
+    default: 'home',
+  },
+})
+
 const name = ref('')
 const email = ref('')
 const message = ref('')
 const selectedReason = ref(contactReasons[0])
 const statusMessage = ref('')
+const githubProfile = socials.find((social) => social.name === 'GitHub') || {
+  href: 'https://github.com/NeppyS',
+  handle: '@NeppyS',
+}
 
 const aboutImages = [
   {
     src: poolImage,
     alt: 'Nephten standing in silhouette near a pool',
     caption: 'quiet focus',
-    meta: 'mode 01',
-    title: 'Quiet focus before the build.',
-    text: 'The calm side of the work: reading the flow, understanding what users need, and thinking through the system before touching the code.',
-    className: 'pool-card',
   },
   {
     src: cityImage,
     alt: 'Nephten standing in front of a tall city building',
     caption: 'systems scale',
-    meta: 'mode 02',
-    title: 'Big-system perspective.',
-    text: 'ERP and POS work needs structure. I like seeing every layer: screen, API, data, support, and the business process behind it.',
-    className: 'city-card',
   },
   {
     src: skyImage,
     alt: 'Nephten in silhouette under a cloudy sky',
     caption: 'after-hours thinking',
-    meta: 'mode 03',
-    title: 'Troubleshooting mindset.',
-    text: 'When something breaks, I trace it carefully: reproduce the issue, inspect the data, fix the cause, and make the next support case easier.',
-    className: 'sky-card',
   },
 ]
 
@@ -262,680 +304,592 @@ const submitForm = () => {
 }
 </script>
 
-<style>
+<style scoped>
 .portfolio-page {
-  position: relative;
+  min-height: calc(100vh - var(--nav-height));
+}
+
+.page-view {
   width: 100%;
+  min-height: calc(100svh - var(--nav-height) - var(--footer-height));
+  padding: clamp(24px, 3vh, 40px) clamp(24px, 5vw, 72px);
+  animation: pageIn 560ms ease both;
 }
 
-.hero-section,
-.stats-strip,
-.content-section {
-  width: calc(100% - 48px);
-  max-width: 1180px;
-  margin: 0 auto;
-}
-
-.hero-section {
+.home-page {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 390px;
-  gap: 64px;
+  grid-template-columns: 68px minmax(0, 1fr) minmax(360px, 0.72fr);
+  gap: clamp(30px, 4vw, 76px);
   align-items: center;
-  min-height: calc(100svh - 76px);
-  padding: 72px 0 58px;
+}
+
+.hero-index {
+  align-self: stretch;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  writing-mode: vertical-rl;
+}
+
+.hero-index span,
+.hero-index small,
+.eyebrow,
+.text-link,
+.ghost-link,
+.home-signals strong,
+.home-signals span,
+.work-list article > span,
+.work-list article > div > p,
+.work-copy em,
+.writing-list article > span,
+.highlight-list h2,
+.tag-row small,
+.tag-row span,
+.social-row a,
+.contact-quick span,
+.contact-quick a,
+.contact-quick strong,
+.contact-form label span,
+.reason-grid button,
+.submit-button {
+  font-family: var(--mono-font);
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.hero-index span {
+  color: var(--ink);
+  font-size: 2.8rem;
+}
+
+.hero-index small {
+  color: var(--muted);
+  font-size: 0.72rem;
+}
+
+.home-statement {
+  max-width: 780px;
 }
 
 .eyebrow {
+  position: relative;
   display: inline-flex;
   align-items: center;
-  gap: 10px;
-  margin: 0 0 14px;
-  color: var(--green);
-  font-family: var(--mono-font);
-  font-size: 0.78rem;
-  font-weight: 900;
-  letter-spacing: 0;
-  text-transform: uppercase;
+  gap: 12px;
+  margin: 0 0 24px;
+  color: var(--muted);
+  font-size: 0.72rem;
+  font-weight: 800;
 }
 
 .eyebrow::before {
-  width: 36px;
+  width: 34px;
   height: 1px;
-  background: var(--green);
-  box-shadow: 0 0 18px rgba(98, 255, 156, 0.45);
-  content: "";
+  background: var(--line-strong);
+  content: '';
 }
 
-.hero-copy h1 {
-  max-width: 760px;
+.home-statement h1,
+.page-header h1 {
   margin: 0;
-  background: linear-gradient(90deg, var(--ink), var(--green) 56%, var(--blue));
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+  color: var(--ink);
   font-family: var(--display-font);
-  font-size: 4.15rem;
-  font-weight: 950;
+  font-weight: 400;
   letter-spacing: 0;
-  line-height: 0.95;
-  overflow-wrap: anywhere;
-  text-shadow: 0 0 34px rgba(98, 255, 156, 0.1);
-  animation: fadeUp 580ms ease both;
 }
 
-.hero-role {
-  margin: 18px 0 0;
-  color: var(--blue);
-  font-family: var(--mono-font);
-  font-size: 1rem;
-  font-weight: 900;
+.home-statement h1 {
+  max-width: 780px;
+  font-size: 5.08rem;
+  line-height: 0.9;
 }
 
-.hero-lead {
-  max-width: 620px;
-  margin: 16px 0 0;
-  color: var(--ink-soft);
-  font-size: 1.05rem;
+.home-statement h1 span {
+  display: block;
+  animation: revealLine 720ms cubic-bezier(0.2, 0.75, 0.2, 1) both;
 }
 
-.hero-actions {
+.home-statement h1 span:nth-child(2) {
+  animation-delay: 90ms;
+}
+
+.home-statement h1 span:nth-child(3) {
+  animation-delay: 180ms;
+}
+
+.home-statement p {
+  max-width: 600px;
+  margin: 22px 0 0;
+  color: var(--ink);
+  font-size: 1.03rem;
+  line-height: 1.72;
+}
+
+.action-row {
   display: flex;
   flex-wrap: wrap;
-  gap: 12px;
-  margin-top: 30px;
-}
-
-.button-dark,
-.button-light,
-.submit-button {
-  display: inline-flex;
-  min-height: 48px;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid var(--line-strong);
-  border-radius: 999px;
-  padding: 0 18px;
-  font-weight: 950;
-  transition:
-    transform 180ms ease,
-    border-color 180ms ease,
-    background 180ms ease,
-    box-shadow 180ms ease;
-}
-
-.button-dark,
-.submit-button {
-  gap: 10px;
-  background: var(--green);
-  color: #030504;
-}
-
-.button-light {
-  background: rgba(13, 20, 16, 0.74);
-  color: var(--ink);
-}
-
-.button-dark:hover,
-.button-light:hover,
-.submit-button:hover {
-  border-color: var(--blue);
-  background: var(--blue);
-  color: #030504;
-  box-shadow: 0 0 28px rgba(94, 217, 255, 0.2);
-  transform: translateY(-2px);
-}
-
-.hero-card {
-  position: relative;
-  max-width: 390px;
-  animation: riseIn 650ms ease both;
-}
-
-.portrait-wrap {
-  overflow: hidden;
-  border: 1px solid var(--line-strong);
-  border-radius: 26px;
-  background: var(--panel-solid);
-  box-shadow: var(--shadow);
-}
-
-.portrait-wrap img {
-  width: 100%;
-  aspect-ratio: 4 / 5;
-  object-fit: cover;
-  filter: grayscale(1) contrast(1.18) brightness(0.88);
-}
-
-.profile-panel {
-  position: absolute;
-  right: 18px;
-  bottom: -26px;
-  display: grid;
-  gap: 5px;
-  width: min(260px, calc(100% - 36px));
-  border: 1px solid var(--line-strong);
-  border-radius: 18px;
-  background: rgba(10, 15, 12, 0.94);
-  padding: 16px;
-  box-shadow: var(--shadow);
-}
-
-.profile-panel span {
-  color: var(--green);
-  font-family: var(--mono-font);
-  font-size: 0.72rem;
-  font-weight: 900;
-  letter-spacing: 0;
-  text-transform: uppercase;
-}
-
-.profile-panel strong {
-  color: var(--ink);
-  font-family: var(--display-font);
-  font-size: 1.18rem;
-  line-height: 1.05;
-}
-
-.profile-panel small {
-  color: var(--muted);
-  font-weight: 760;
-}
-
-.stats-strip {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 12px;
-  border-block: 1px solid var(--line-strong);
-  padding: 18px 0;
-}
-
-.stats-strip article {
-  position: relative;
-  min-height: 118px;
-  overflow: hidden;
-  border: 1px solid var(--line);
-  border-radius: 18px;
-  background: var(--panel);
-  padding: 18px;
-  animation: fadeUp 560ms ease both;
-}
-
-.stats-strip article::after {
-  position: absolute;
-  inset: auto 18px 14px;
-  height: 2px;
-  background: linear-gradient(90deg, var(--green), transparent);
-  content: "";
-}
-
-.stats-strip strong {
-  display: block;
-  color: var(--ink);
-  font-family: var(--mono-font);
-  font-size: 1.9rem;
-  font-weight: 950;
-  line-height: 1;
-}
-
-.stats-strip span {
-  display: block;
-  margin-top: 12px;
-  color: var(--muted);
-  font-weight: 760;
-}
-
-.content-section {
-  padding: 78px 0;
-  border-bottom: 1px solid var(--line-strong);
-}
-
-.about-section {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) 430px;
-  gap: 54px;
-  align-items: center;
-}
-
-.about-copy h2 {
-  max-width: 720px;
-  margin: 0;
-  color: var(--ink);
-  font-family: var(--display-font);
-  font-size: 3rem;
-  font-weight: 950;
-  line-height: 1;
-}
-
-.about-text {
-  display: grid;
-  gap: 14px;
-  margin-top: 22px;
-}
-
-.about-text p {
-  margin: 0;
-  color: var(--ink-soft);
-}
-
-.about-highlights {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 12px;
+  gap: 18px;
   margin-top: 26px;
 }
 
-.about-highlights article,
-.workflow-grid article {
-  border: 1px solid var(--line);
-  border-radius: 18px;
-  background: var(--panel);
-  padding: 18px;
-}
-
-.about-highlights h3,
-.workflow-grid h3 {
-  margin: 0;
-  color: var(--ink);
-  font-size: 1rem;
-  font-weight: 950;
-}
-
-.about-highlights p,
-.workflow-grid p {
-  margin: 8px 0 0;
-  color: var(--muted);
-  font-size: 0.92rem;
-}
-
-.about-terminal {
-  align-self: stretch;
+.home-signals {
   display: grid;
-  align-content: end;
-  min-height: 360px;
-  border: 1px solid var(--line-strong);
-  border-radius: 24px;
-  background:
-    linear-gradient(rgba(98, 255, 156, 0.08) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(94, 217, 255, 0.06) 1px, transparent 1px),
-    rgba(10, 15, 12, 0.82);
-  background-size:
-    26px 26px,
-    26px 26px,
-    auto;
-  box-shadow: var(--shadow);
-  padding: 24px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 28px;
+  max-width: 720px;
 }
 
-.about-terminal span,
-.image-story-copy span {
-  color: var(--green);
-  font-family: var(--mono-font);
-  font-size: 0.78rem;
-  font-weight: 950;
-  text-transform: uppercase;
-}
-
-.about-terminal p {
-  max-width: 340px;
-  margin: 14px 0 0;
-  color: var(--ink-soft);
-  font-size: 1.12rem;
-  font-weight: 850;
-}
-
-.image-story-section {
-  display: grid;
-  gap: 28px;
-}
-
-.image-story-list {
-  display: grid;
-  gap: 18px;
-}
-
-.image-story-card {
-  position: relative;
-  display: grid;
-  grid-template-columns: minmax(0, 0.92fr) minmax(280px, 0.72fr);
-  gap: 22px;
-  align-items: stretch;
-  overflow: hidden;
-  border: 1px solid var(--line);
-  border-radius: 28px;
-  background: rgba(10, 15, 12, 0.84);
-  box-shadow: var(--shadow);
-  padding: 14px;
-}
-
-.image-story-card::before {
-  position: absolute;
-  inset: 0;
-  background:
-    linear-gradient(90deg, rgba(98, 255, 156, 0.1), transparent 38%),
-    repeating-linear-gradient(135deg, transparent 0 18px, rgba(94, 217, 255, 0.045) 18px 19px);
-  opacity: 0.8;
-  pointer-events: none;
-  content: "";
-}
-
-.image-story-card:nth-child(even) {
-  grid-template-columns: minmax(280px, 0.72fr) minmax(0, 0.92fr);
-}
-
-.image-story-card:nth-child(even) .image-frame {
-  grid-column: 2;
-}
-
-.image-story-card:nth-child(even) .image-story-copy {
-  grid-column: 1;
-  grid-row: 1;
-}
-
-.image-frame,
-.image-story-copy {
-  position: relative;
-  z-index: 1;
-}
-
-.image-frame {
-  overflow: hidden;
-  margin: 0;
-  border: 1px solid var(--line-strong);
-  border-radius: 22px;
-  background: var(--panel-solid);
-}
-
-.image-frame img {
-  width: 100%;
-  height: 100%;
-  max-width: none;
-  min-height: 340px;
-  object-fit: cover;
-  filter: saturate(0.78) contrast(1.12) brightness(0.78);
-  transform: scale(1.01);
+.home-signals article {
+  border-top: 1px solid var(--line);
+  padding-top: 11px;
   transition:
-    filter 220ms ease,
+    border-color 180ms ease,
+    transform 180ms ease;
+}
+
+.home-signals article:hover {
+  border-color: var(--ink);
+  transform: translateY(-2px);
+}
+
+.home-signals strong,
+.home-signals span {
+  display: block;
+}
+
+.home-signals strong {
+  color: var(--ink);
+  font-size: 0.82rem;
+  font-weight: 900;
+}
+
+.home-signals span {
+  margin-top: 6px;
+  color: var(--muted);
+  font-size: 0.66rem;
+  line-height: 1.45;
+}
+
+.text-link,
+.ghost-link {
+  position: relative;
+  display: inline-flex;
+  min-height: 42px;
+  align-items: center;
+  border-bottom: 1px solid var(--ink);
+  color: var(--ink);
+  font-size: 0.75rem;
+  font-weight: 900;
+}
+
+.ghost-link {
+  border-bottom-color: var(--line-strong);
+  color: var(--muted);
+}
+
+.text-link::after,
+.ghost-link::after,
+.social-row a::after {
+  position: absolute;
+  left: 0;
+  bottom: -1px;
+  width: 0;
+  height: 1px;
+  background: var(--ink);
+  content: '';
+  transition: width 220ms ease;
+}
+
+.text-link:hover::after,
+.text-link:focus-visible::after,
+.ghost-link:hover::after,
+.ghost-link:focus-visible::after,
+.social-row a:hover::after,
+.social-row a:focus-visible::after {
+  width: 100%;
+}
+
+.home-visual {
+  justify-self: end;
+  display: grid;
+  gap: 16px;
+  width: min(100%, 460px);
+  animation: floatIn 700ms ease 160ms both;
+}
+
+.portrait-panel {
+  position: relative;
+  margin: 0;
+  overflow: hidden;
+  border: 1px solid var(--line-strong);
+  background: var(--paper-soft);
+  box-shadow: var(--shadow);
+  transform-origin: center;
+  transition:
+    border-color 220ms ease,
     transform 220ms ease;
 }
 
-.image-story-card:hover .image-frame img {
-  filter: saturate(1) contrast(1.08) brightness(0.92);
-  transform: scale(1.045);
+.portrait-panel:hover {
+  border-color: var(--ink);
+  transform: translateY(-4px);
 }
 
-.image-frame figcaption {
+.portrait-panel::after {
   position: absolute;
-  left: 14px;
-  bottom: 14px;
-  border: 1px solid rgba(98, 255, 156, 0.38);
-  border-radius: 999px;
-  background: rgba(3, 5, 4, 0.78);
-  color: var(--green);
+  inset: 16px;
+  border: 1px solid var(--photo-frame);
+  content: '';
+  pointer-events: none;
+}
+
+.portrait-panel img {
+  width: 100%;
+  aspect-ratio: 5 / 6;
+  object-fit: cover;
+  object-position: center 40%;
+  filter: grayscale(0.18) saturate(0.82) contrast(1.05);
+  transition:
+    filter 260ms ease,
+    transform 260ms ease;
+}
+
+.portrait-panel:hover img {
+  filter: grayscale(0.04) saturate(0.96) contrast(1.04);
+  transform: scale(1.035);
+}
+
+.portrait-panel figcaption {
+  position: absolute;
+  left: 18px;
+  bottom: 18px;
+  background: var(--paper);
+  color: var(--ink);
+  padding: 8px 10px;
+  font-family: var(--mono-font);
+  font-size: 0.7rem;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.status-strip {
+  display: grid;
+  grid-template-columns: 0.34fr 1fr;
+  gap: 8px 18px;
+  border-top: 1px solid var(--ink);
+  padding-top: 16px;
+}
+
+.status-strip span,
+.status-strip small {
+  color: var(--muted);
   font-family: var(--mono-font);
   font-size: 0.72rem;
-  font-weight: 900;
-  padding: 7px 10px;
+  letter-spacing: 0;
+  text-transform: uppercase;
 }
 
-.image-story-copy {
-  display: grid;
-  align-content: center;
-  min-height: 340px;
-  border: 1px solid var(--line);
-  border-radius: 22px;
-  background: rgba(6, 8, 7, 0.62);
-  padding: 28px;
-}
-
-.image-story-copy h3 {
-  max-width: 420px;
-  margin: 12px 0 0;
+.status-strip strong {
   color: var(--ink);
   font-family: var(--display-font);
-  font-size: 2.15rem;
-  font-weight: 950;
+  font-size: 1.42rem;
+  font-weight: 400;
   line-height: 1;
 }
 
-.image-story-copy p {
-  max-width: 440px;
-  margin: 16px 0 0;
-  color: var(--muted);
+.status-strip small {
+  grid-column: 2;
+  line-height: 1.55;
 }
 
-.pool-card .image-frame img {
-  object-position: center;
-}
-
-.city-card .image-frame img {
-  object-position: center 62%;
-}
-
-.sky-card .image-frame img {
-  object-position: center;
-}
-
-.two-column,
-.contact-section {
+.content-page {
   display: grid;
-  grid-template-columns: 0.72fr 1fr;
-  gap: 54px;
-  align-items: start;
+  align-content: start;
+  gap: clamp(22px, 3vh, 36px);
 }
 
-.section-intro h2,
-.section-header h2,
-.contact-copy h2 {
-  max-width: 720px;
-  margin: 0;
-  color: var(--ink);
-  font-family: var(--display-font);
-  font-size: 3rem;
-  font-weight: 950;
+.page-header {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 28px;
+  align-items: end;
+  max-width: 1180px;
+}
+
+.page-header .eyebrow {
+  grid-column: 1 / -1;
+  margin-bottom: -6px;
+}
+
+.page-header h1 {
+  max-width: 860px;
+  font-size: 3.48rem;
   line-height: 1;
 }
 
-.work-list {
+.work-list,
+.writing-list,
+.skill-board {
   display: grid;
+  border-top: 1px solid var(--line);
 }
 
-.work-stack {
-  display: grid;
-  gap: 22px;
+.work-list article,
+.writing-list article,
+.skill-board article {
+  animation: rowIn 520ms ease both;
+}
+
+.work-list article:nth-child(2),
+.writing-list article:nth-child(2),
+.skill-board article:nth-child(2) {
+  animation-delay: 80ms;
+}
+
+.work-list article:nth-child(3),
+.writing-list article:nth-child(3),
+.skill-board article:nth-child(3) {
+  animation-delay: 160ms;
 }
 
 .work-list article {
   display: grid;
-  grid-template-columns: 52px 1fr;
-  gap: 18px;
+  grid-template-columns: 64px minmax(210px, 0.65fr) minmax(280px, 1fr) minmax(220px, 0.65fr);
+  gap: 28px;
+  align-items: start;
   border-bottom: 1px solid var(--line);
-  padding: 0 0 20px;
+  padding: clamp(14px, 2vh, 22px) 0;
+  transition:
+    border-color 200ms ease,
+    transform 200ms ease;
 }
 
-.work-list article + article {
-  padding-top: 20px;
+.work-list article:hover {
+  border-color: var(--ink);
+  transform: translateX(8px);
 }
 
-.work-list > article > span {
-  color: var(--rust);
-  font-family: var(--mono-font);
-  font-weight: 950;
+.work-list article > span,
+.writing-list article > span {
+  color: var(--muted);
+  font-size: 0.75rem;
 }
 
-.workflow-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 12px;
-}
-
-.workflow-grid article {
-  position: relative;
-  overflow: hidden;
-}
-
-.workflow-grid article::after {
-  position: absolute;
-  inset: auto 18px 14px;
-  height: 2px;
-  background: linear-gradient(90deg, var(--blue), transparent);
-  content: "";
-}
-
-.workflow-grid article > span {
-  display: block;
-  margin-bottom: 10px;
-  color: var(--blue);
-  font-family: var(--mono-font);
-  font-size: 0.72rem;
-  font-weight: 900;
-}
-
-.work-list h3,
-.skills-grid h3,
-.systems-grid h3 {
+.work-list h2,
+.writing-list h2,
+.skill-board h2 {
   margin: 0;
   color: var(--ink);
-  font-size: 1.18rem;
-  font-weight: 950;
+  font-family: var(--display-font);
+  font-size: 2.12rem;
+  font-weight: 400;
+  line-height: 1;
 }
 
-.work-list p,
-.systems-grid article > span,
+.work-list article > div > p {
+  margin: 0 0 10px;
+  color: var(--muted);
+  font-size: 0.72rem;
+  font-weight: 800;
+}
+
+.work-list article > strong,
+.work-copy strong,
+.writing-list p,
+.about-copy p,
 .contact-copy p {
-  margin: 8px 0 0;
+  margin: 0;
+  color: var(--ink);
+  font-size: 1.01rem;
+  font-weight: 400;
+  line-height: 1.72;
+}
+
+.work-copy {
+  display: grid;
+  gap: 8px;
+}
+
+.work-copy strong {
+  display: block;
+}
+
+.work-copy em {
+  display: block;
+  color: var(--muted);
+  font-size: 0.69rem;
+  font-style: normal;
+  line-height: 1.5;
+}
+
+.tag-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+
+.tag-row small,
+.tag-row span {
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 7px 9px;
+  color: var(--muted);
+  font-size: 0.7rem;
+  transition:
+    border-color 180ms ease,
+    color 180ms ease,
+    transform 180ms ease;
+}
+
+.tag-row small:hover,
+.tag-row span:hover {
+  border-color: var(--ink);
+  color: var(--ink);
+  transform: translateY(-1px);
+}
+
+.inline-route {
+  justify-self: start;
+  margin-top: -22px;
+}
+
+.graph-page {
+  height: calc(100svh - var(--nav-height));
+  overflow: hidden;
+  background: #030504;
+}
+
+.writing-list article {
+  display: grid;
+  grid-template-columns: 64px minmax(220px, 0.45fr) minmax(0, 1fr);
+  gap: 30px;
+  border-bottom: 1px solid var(--line);
+  padding: 30px 0;
+}
+
+.writing-list article:hover h2 {
+  transform: translateX(8px);
+}
+
+.writing-list h2 {
+  transition: transform 180ms ease;
+}
+
+.writing-list p {
   color: var(--muted);
 }
 
-.section-header {
-  display: flex;
-  align-items: end;
-  justify-content: space-between;
-  gap: 32px;
-  margin-bottom: 28px;
-}
-
-.skills-grid,
-.systems-grid {
+.about-layout,
+.contact-layout {
   display: grid;
-  gap: 14px;
+  grid-template-columns: minmax(280px, 0.75fr) minmax(320px, 1fr);
+  gap: 70px;
+  align-items: start;
 }
 
-.skills-grid {
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+.about-copy {
+  display: grid;
+  gap: 22px;
 }
 
-.systems-grid {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+.highlight-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
 }
 
-.skills-grid article,
-.systems-grid article {
-  position: relative;
-  overflow: hidden;
-  border: 1px solid var(--line);
-  border-radius: 18px;
-  background: var(--panel);
-  padding: 20px;
+.highlight-list article {
+  border-top: 1px solid var(--line);
+  padding-top: 12px;
   transition:
-    transform 180ms ease,
     border-color 180ms ease,
-    background 180ms ease,
-    box-shadow 180ms ease;
+    transform 180ms ease;
 }
 
-.skills-grid article::before,
-.systems-grid article::before {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(120deg, transparent, rgba(98, 255, 156, 0.08), transparent);
-  transform: translateX(-110%);
-  transition: transform 520ms ease;
-  content: "";
+.highlight-list article:hover {
+  border-color: var(--ink);
+  transform: translateY(-2px);
 }
 
-.skills-grid article:hover,
-.systems-grid article:hover {
-  border-color: var(--green);
-  background: rgba(14, 24, 18, 0.96);
-  box-shadow: 0 0 34px rgba(98, 255, 156, 0.13);
-  transform: translateY(-6px);
-}
-
-.skills-grid article:hover::before,
-.systems-grid article:hover::before {
-  transform: translateX(110%);
-}
-
-.skills-grid div,
-.systems-grid div {
-  position: relative;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-top: 18px;
-}
-
-.skills-grid span,
-.systems-grid small {
-  border: 1px solid var(--line);
-  border-radius: 999px;
-  background: rgba(6, 8, 7, 0.54);
-  padding: 6px 9px;
-  color: var(--ink-soft);
-  font-family: var(--mono-font);
-  font-size: 0.78rem;
-  font-weight: 820;
-}
-
-.skills-grid article:hover span,
-.systems-grid article:hover small {
-  border-color: rgba(94, 217, 255, 0.4);
-  color: var(--blue);
-}
-
-.systems-grid article > p {
-  margin: 0 0 12px;
-  color: var(--green);
-  font-family: var(--mono-font);
+.highlight-list h2 {
+  margin: 0 0 8px;
+  color: var(--ink);
   font-size: 0.72rem;
   font-weight: 900;
-  letter-spacing: 0;
-  text-transform: uppercase;
 }
 
-.contact-section {
-  border-bottom: 0;
+.highlight-list p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.86rem;
+  line-height: 1.5;
+}
+
+.skill-board article {
+  display: grid;
+  grid-template-columns: minmax(160px, 0.45fr) 1fr;
+  gap: 24px;
+  border-bottom: 1px solid var(--line);
+  padding: 24px 0;
+  transition:
+    border-color 180ms ease,
+    transform 180ms ease;
+}
+
+.skill-board article:hover {
+  border-color: var(--ink);
+  transform: translateX(8px);
 }
 
 .social-row {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
-  margin-top: 24px;
+  gap: 18px;
+  margin-top: 34px;
+}
+
+.contact-quick {
+  display: grid;
+  gap: 12px;
+  margin-top: 30px;
+}
+
+.contact-quick article {
+  display: grid;
+  grid-template-columns: 88px minmax(0, 1fr);
+  gap: 18px;
+  align-items: baseline;
+  border-top: 1px solid var(--line);
+  padding-top: 12px;
+}
+
+.contact-quick span {
+  color: var(--muted);
+  font-size: 0.68rem;
+  font-weight: 900;
+}
+
+.contact-quick a,
+.contact-quick strong {
+  color: var(--ink);
+  font-size: 0.76rem;
+  font-weight: 900;
+  overflow-wrap: anywhere;
 }
 
 .social-row a {
-  border: 1px solid var(--line-strong);
-  border-radius: 999px;
-  background: rgba(13, 20, 16, 0.72);
-  padding: 9px 12px;
-  font-weight: 850;
-}
-
-.social-row a:hover {
-  border-color: var(--blue);
-  color: var(--blue);
-  box-shadow: 0 0 24px rgba(94, 217, 255, 0.14);
+  position: relative;
+  border-bottom: 1px solid var(--line-strong);
+  padding-bottom: 7px;
+  color: var(--ink);
+  font-size: 0.74rem;
+  font-weight: 800;
 }
 
 .contact-form {
   display: grid;
-  gap: 15px;
-  border: 1px solid var(--line-strong);
-  border-radius: 24px;
-  background: rgba(10, 15, 12, 0.9);
-  padding: 22px;
-  box-shadow: var(--shadow);
+  gap: 13px;
 }
 
 .reason-grid {
@@ -944,66 +898,122 @@ const submitForm = () => {
   gap: 8px;
 }
 
-.reason-grid button {
+.reason-grid button,
+.submit-button {
   min-height: 44px;
   border: 1px solid var(--line);
-  border-radius: 999px;
-  background: rgba(6, 8, 7, 0.42);
-  color: var(--ink-soft);
-  padding: 8px 10px;
-  font-size: 0.82rem;
-  font-weight: 850;
+  background: transparent;
+  color: var(--ink);
+  padding: 0 14px;
+  font-size: 0.72rem;
+  font-weight: 800;
+  transition:
+    border-color 180ms ease,
+    transform 180ms ease;
 }
 
+.reason-grid button.active,
 .reason-grid button:hover,
-.reason-grid button.active {
-  border-color: var(--green);
-  background: rgba(98, 255, 156, 0.14);
-  color: var(--green);
+.submit-button:hover {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--paper);
+  transform: translateY(-1px);
 }
 
 .contact-form label span {
   display: block;
-  margin-bottom: 7px;
-  color: var(--green);
-  font-family: var(--mono-font);
+  margin-bottom: 8px;
+  color: var(--muted);
   font-size: 0.72rem;
-  font-weight: 900;
-  letter-spacing: 0;
-  text-transform: uppercase;
+  font-weight: 800;
 }
 
 .contact-form input,
 .contact-form textarea {
   width: 100%;
   border: 1px solid var(--line);
-  border-radius: 14px;
-  background: rgba(6, 8, 7, 0.72);
+  background: var(--field);
   color: var(--ink);
-  padding: 12px 13px;
+  padding: 13px 14px;
+  transition:
+    border-color 180ms ease,
+    background 180ms ease;
+}
+
+.contact-form textarea {
+  max-height: 130px;
+  resize: vertical;
 }
 
 .contact-form input:focus,
 .contact-form textarea:focus {
-  border-color: var(--blue);
+  border-color: var(--ink);
+  background: var(--paper);
   outline: none;
-  box-shadow: 0 0 0 4px rgba(94, 217, 255, 0.1);
 }
 
-.contact-form textarea {
-  resize: vertical;
+.submit-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
 }
 
 .status-message {
   margin: 0;
   color: var(--muted);
-  font-weight: 760;
 }
 
-@keyframes riseIn {
+.photo-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+}
+
+.photo-grid figure {
+  margin: 0;
+  animation: rowIn 520ms ease both;
+}
+
+.photo-grid figure:nth-child(2) {
+  margin-top: 54px;
+  animation-delay: 80ms;
+}
+
+.photo-grid figure:nth-child(3) {
+  margin-top: 108px;
+  animation-delay: 160ms;
+}
+
+.photo-grid img {
+  width: 100%;
+  aspect-ratio: 5 / 6;
+  object-fit: cover;
+  filter: grayscale(0.22) saturate(0.82) contrast(1.04);
+  transition:
+    filter 240ms ease,
+    transform 240ms ease;
+}
+
+.photo-grid figure:hover img {
+  filter: grayscale(0.06) saturate(0.96) contrast(1.03);
+  transform: translateY(-6px);
+}
+
+.photo-grid figcaption {
+  margin-top: 10px;
+  color: var(--muted);
+  font-family: var(--mono-font);
+  font-size: 0.72rem;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+@keyframes pageIn {
   from {
     opacity: 0;
-    transform: translateY(18px);
+    transform: translateY(16px);
   }
   to {
     opacity: 1;
@@ -1011,7 +1021,29 @@ const submitForm = () => {
   }
 }
 
-@keyframes fadeUp {
+@keyframes revealLine {
+  from {
+    opacity: 0;
+    transform: translateY(0.28em);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes floatIn {
+  from {
+    opacity: 0;
+    transform: translateY(24px) rotate(1deg);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) rotate(0);
+  }
+}
+
+@keyframes rowIn {
   from {
     opacity: 0;
     transform: translateY(14px);
@@ -1022,105 +1054,259 @@ const submitForm = () => {
   }
 }
 
-@media (max-width: 1080px) {
-  .hero-section,
-  .about-section,
-  .two-column,
-  .contact-section {
-    grid-template-columns: 1fr;
+@media (min-width: 821px) {
+  .page-view {
+    height: calc(100svh - var(--nav-height) - var(--footer-height));
+    min-height: 0;
+    overflow: hidden;
   }
 
-  .hero-section {
-    min-height: auto;
+  .content-page {
+    align-content: center;
   }
 
-  .hero-card {
-    max-width: 420px;
-  }
-
-  .about-terminal {
-    min-height: 260px;
-  }
-
-  .image-story-card,
-  .image-story-card:nth-child(even) {
-    grid-template-columns: 1fr;
-  }
-
-  .image-story-card:nth-child(even) .image-frame,
-  .image-story-card:nth-child(even) .image-story-copy {
-    grid-column: auto;
-    grid-row: auto;
-  }
-
-  .skills-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-}
-
-@media (max-width: 760px) {
-  .hero-section,
-  .stats-strip,
-  .content-section {
-    width: calc(100% - 28px);
-  }
-
-  .hero-section {
-    padding-top: 52px;
-  }
-
-  .hero-copy h1 {
-    font-size: 2.75rem;
-  }
-
-  .section-intro h2,
-  .about-copy h2,
-  .section-header h2,
-  .contact-copy h2 {
-    font-size: 2.15rem;
-  }
-
-  .stats-strip,
-  .about-highlights,
-  .workflow-grid,
-  .skills-grid,
-  .systems-grid,
   .reason-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
   }
 
-  .image-story-card {
-    border-radius: 22px;
-    padding: 10px;
-  }
-
-  .image-frame img {
-    min-height: 260px;
-  }
-
-  .image-story-copy {
-    min-height: auto;
-    padding: 22px;
-  }
-
-  .image-story-copy h3 {
-    font-size: 1.75rem;
-  }
-
-  .section-header {
-    align-items: flex-start;
-    flex-direction: column;
+  .reason-grid button {
+    padding: 0 8px;
+    font-size: 0.65rem;
+    line-height: 1.25;
   }
 
   .work-list article {
-    grid-template-columns: 1fr;
-    gap: 6px;
+    padding: 14px 0;
   }
 
-  .hero-actions,
-  .button-dark,
-  .button-light {
-    width: 100%;
+  .writing-list article,
+  .skill-board article {
+    padding: 18px 0;
+  }
+
+  .about-layout,
+  .contact-layout {
+    gap: clamp(36px, 5vw, 64px);
+  }
+
+  .about-copy {
+    gap: 16px;
+  }
+
+  .about-copy p,
+  .contact-copy p {
+    line-height: 1.6;
+  }
+
+  .photo-grid {
+    align-items: start;
+  }
+
+  .photo-grid img {
+    height: min(46svh, 500px);
+    aspect-ratio: auto;
+  }
+
+  .photo-grid figure:nth-child(2) {
+    margin-top: min(5svh, 42px);
+  }
+
+  .photo-grid figure:nth-child(3) {
+    margin-top: min(9svh, 78px);
+  }
+}
+
+@media (min-width: 821px) and (max-height: 820px) {
+  .page-view {
+    padding-top: 24px;
+    padding-bottom: 24px;
+  }
+
+  .home-statement h1 {
+    font-size: 4.35rem;
+  }
+
+  .home-statement p {
+    margin-top: 16px;
+    line-height: 1.6;
+  }
+
+  .action-row {
+    margin-top: 18px;
+  }
+
+  .home-signals {
+    gap: 8px;
+    margin-top: 18px;
+  }
+
+  .home-signals article {
+    padding-top: 8px;
+  }
+
+  .home-signals span {
+    margin-top: 4px;
+    line-height: 1.3;
+  }
+
+  .home-visual {
+    width: min(100%, 380px);
+    gap: 12px;
+  }
+
+  .portrait-panel::after {
+    inset: 14px;
+  }
+
+  .status-strip {
+    padding-top: 12px;
+  }
+
+  .status-strip strong {
+    font-size: 1.18rem;
+  }
+
+  .status-strip small {
+    line-height: 1.35;
+  }
+
+  .content-page {
+    gap: 20px;
+  }
+
+  .highlight-list {
+    gap: 10px;
+  }
+
+  .highlight-list article {
+    padding-top: 9px;
+  }
+
+  .highlight-list p {
+    font-size: 0.8rem;
+    line-height: 1.35;
+  }
+
+  .contact-quick {
+    gap: 8px;
+    margin-top: 20px;
+  }
+
+  .contact-quick article {
+    padding-top: 9px;
+  }
+
+  .page-header h1 {
+    font-size: 3rem;
+  }
+
+  .photo-grid img {
+    height: min(40svh, 380px);
+  }
+
+  .contact-form textarea {
+    max-height: 100px;
+  }
+}
+
+@media (max-width: 1120px) {
+  .home-page {
+    grid-template-columns: 64px minmax(0, 1fr);
+  }
+
+  .home-visual {
+    grid-column: 2;
+    justify-self: start;
+    width: min(100%, 460px);
+  }
+
+  .work-list article {
+    grid-template-columns: 54px minmax(220px, 0.7fr) minmax(0, 1fr);
+  }
+
+  .work-list .tag-row {
+    grid-column: 2 / -1;
+  }
+}
+
+@media (max-width: 820px) {
+  .page-view {
+    min-height: auto;
+    padding: 42px 22px;
+  }
+
+  .home-page,
+  .about-layout,
+  .contact-layout,
+  .page-header,
+  .work-list article,
+  .writing-list article,
+  .skill-board article,
+  .photo-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .home-signals,
+  .highlight-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .hero-index {
+    display: none;
+  }
+
+  .home-statement h1 {
+    font-size: 3.6rem;
+  }
+
+  .page-header h1 {
+    font-size: 2.7rem;
+  }
+
+  .home-visual {
+    grid-column: auto;
+    justify-self: stretch;
+    width: min(100%, 520px);
+  }
+
+  .portrait-panel img {
+    aspect-ratio: 4 / 5;
+    object-position: center 38%;
+  }
+
+  .work-list .tag-row {
+    grid-column: auto;
+  }
+
+  .photo-grid figure:nth-child(2),
+  .photo-grid figure:nth-child(3) {
+    margin-top: 0;
+  }
+}
+
+@media (max-width: 520px) {
+  .home-statement h1 {
+    font-size: 3rem;
+  }
+
+  .page-header h1 {
+    font-size: 2.4rem;
+  }
+
+  .home-statement p {
+    font-size: 1rem;
+  }
+
+  .status-strip,
+  .reason-grid,
+  .home-signals,
+  .highlight-list,
+  .contact-quick article {
+    grid-template-columns: 1fr;
+  }
+
+  .status-strip small {
+    grid-column: auto;
   }
 }
 </style>

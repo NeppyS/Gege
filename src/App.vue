@@ -1,175 +1,281 @@
 <template>
-  <div class="app-shell">
-    <Navbar />
+  <div class="app-shell" :data-theme="theme">
+    <div class="ambient-lines" aria-hidden="true"></div>
+    <Navbar :active-page="activePage" :theme="theme" @toggle-theme="toggleTheme" />
+
     <main id="main-content" class="app-main">
-      <HomeView />
+      <HomeView :active-page="activePage" :key="activePage" />
     </main>
 
-    <footer class="site-footer">
-      <div>
-        <p>{{ profile.company }}</p>
-        <h2>{{ profile.name }}</h2>
-      </div>
+    <footer v-if="activePage !== 'graph'" class="site-footer">
+      <span>(c) {{ year }} {{ profile.shortName.toUpperCase() }} ILON</span>
 
-      <div class="footer-links" aria-label="Footer links">
-        <a
-          v-for="social in footerLinks"
-          :key="social.name"
-          :href="social.href"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          {{ social.name }}
+      <nav aria-label="Footer navigation">
+        <a v-for="link in footerLinks" :key="link.page" :href="link.href">
+          {{ link.name }}
         </a>
-      </div>
+      </nav>
     </footer>
   </div>
 </template>
 
 <script setup>
+import { onMounted, onUnmounted, ref } from 'vue'
 import HomeView from './views/HomeView.vue'
 import Navbar from './components/Navbar.vue'
-import { profile, socials } from './data/portfolio'
+import { navLinks, profile } from './data/portfolio'
 
-const footerLinks = socials.filter((social) => ['Email', 'GitHub', 'Facebook', 'Instagram'].includes(social.name))
+const pageSlugs = ['home', ...navLinks.map((link) => link.page), 'photography']
+const activePage = ref('home')
+const year = new Date().getFullYear()
+const footerLinks = [
+  ...navLinks,
+  { name: 'Photography', page: 'photography', href: '/photography' },
+]
+const internalPaths = new Set(['/', ...footerLinks.map((link) => link.href)])
+const themeStorageKey = 'portfolio-theme'
+
+const getStoredTheme = () => {
+  if (typeof window === 'undefined') {
+    return null
+  }
+
+  try {
+    return window.localStorage.getItem(themeStorageKey)
+  } catch {
+    return null
+  }
+}
+
+const getInitialTheme = () => {
+  const storedTheme = getStoredTheme()
+
+  if (storedTheme === 'light' || storedTheme === 'dark') {
+    return storedTheme
+  }
+
+  if (typeof window === 'undefined' || !window.matchMedia) {
+    return 'light'
+  }
+
+  return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+}
+
+const theme = ref(getInitialTheme())
+
+const applyTheme = (nextTheme) => {
+  theme.value = nextTheme
+
+  if (typeof document === 'undefined') {
+    return
+  }
+
+  document.documentElement.dataset.theme = nextTheme
+  document.documentElement.style.colorScheme = nextTheme
+}
+
+const loadTheme = () => {
+  applyTheme(theme.value)
+}
+
+const toggleTheme = () => {
+  const nextTheme = theme.value === 'dark' ? 'light' : 'dark'
+
+  try {
+    window.localStorage.setItem(themeStorageKey, nextTheme)
+  } catch {
+    // The theme still changes even when private storage is unavailable.
+  }
+
+  applyTheme(nextTheme)
+}
+
+applyTheme(theme.value)
+
+const syncPageFromPath = () => {
+  const hashPage = window.location.hash.replace(/^#\/?/, '')
+  const pathPage = window.location.pathname.replace(/^\/+|\/+$/g, '') || 'home'
+  const nextPage = hashPage || pathPage
+
+  activePage.value = pageSlugs.includes(nextPage) ? nextPage : 'home'
+  window.scrollTo({ top: 0 })
+}
+
+const handleInternalNavigation = (event) => {
+  if (
+    event.defaultPrevented ||
+    event.button !== 0 ||
+    event.metaKey ||
+    event.ctrlKey ||
+    event.shiftKey ||
+    event.altKey
+  ) {
+    return
+  }
+
+  const target = event.target instanceof Element ? event.target : event.target?.parentElement
+  const anchor = target?.closest('a')
+
+  if (!anchor || anchor.target) {
+    return
+  }
+
+  if (anchor.getAttribute('href')?.startsWith('#')) {
+    return
+  }
+
+  const url = new URL(anchor.href)
+
+  if (url.origin !== window.location.origin || !internalPaths.has(url.pathname)) {
+    return
+  }
+
+  event.preventDefault()
+  window.history.pushState({}, '', url.pathname)
+  syncPageFromPath()
+}
+
+onMounted(() => {
+  loadTheme()
+  syncPageFromPath()
+  window.addEventListener('popstate', syncPageFromPath)
+  window.addEventListener('hashchange', syncPageFromPath)
+  document.addEventListener('click', handleInternalNavigation)
+})
+
+onUnmounted(() => {
+  window.removeEventListener('popstate', syncPageFromPath)
+  window.removeEventListener('hashchange', syncPageFromPath)
+  document.removeEventListener('click', handleInternalNavigation)
+})
 </script>
 
 <style scoped>
 .app-shell {
   position: relative;
-  overflow: hidden;
+  display: flex;
+  flex-direction: column;
   min-height: 100vh;
+  overflow-x: hidden;
   color: var(--ink);
   background:
-    linear-gradient(135deg, rgba(98, 255, 156, 0.08), transparent 28%),
-    linear-gradient(225deg, rgba(94, 217, 255, 0.08), transparent 34%),
-    linear-gradient(180deg, rgba(255, 107, 122, 0.035), transparent 42%),
-    var(--paper);
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px),
+    linear-gradient(180deg, var(--grid-line-soft) 1px, transparent 1px), var(--paper);
+  background-size:
+    96px 96px,
+    96px 96px,
+    auto;
 }
 
-.app-shell::before,
-.app-shell::after {
+.ambient-lines {
   position: fixed;
   inset: 0;
   z-index: 0;
   pointer-events: none;
-  content: "";
 }
 
-.app-shell::before {
-  background:
-    linear-gradient(rgba(98, 255, 156, 0.08) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(94, 217, 255, 0.065) 1px, transparent 1px);
-  background-position: 0 0;
-  background-size: 44px 44px;
-  -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.88), rgba(0, 0, 0, 0.18));
-  mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.88), rgba(0, 0, 0, 0.18));
-  animation: gridShift 24s linear infinite;
+.ambient-lines::before,
+.ambient-lines::after {
+  position: absolute;
+  content: '';
 }
 
-.app-shell::after {
-  background:
-    linear-gradient(90deg, transparent, rgba(98, 255, 156, 0.12), transparent),
-    repeating-linear-gradient(90deg, transparent 0 112px, rgba(244, 190, 79, 0.14) 112px 113px, transparent 113px 224px),
-    repeating-linear-gradient(180deg, transparent 0 172px, rgba(94, 217, 255, 0.12) 172px 173px, transparent 173px 344px);
-  background-size:
-    42% 100%,
-    auto,
-    auto;
-  background-position:
-    -60% 0,
-    0 0,
-    0 0;
-  opacity: 0.52;
-  animation: signalSweep 13s linear infinite;
+.ambient-lines::before {
+  top: var(--nav-height);
+  bottom: 0;
+  left: clamp(22px, 4vw, 56px);
+  width: 1px;
+  background: linear-gradient(180deg, transparent, var(--line-strong), transparent);
+  transform-origin: top;
+  animation: lineDrop 1200ms ease both;
+}
+
+.ambient-lines::after {
+  right: -15vw;
+  bottom: 16vh;
+  width: 42vw;
+  height: 1px;
+  background: var(--line);
+  transform: rotate(-18deg);
+  animation: lineSweep 1400ms ease 180ms both;
 }
 
 .app-main {
   position: relative;
   z-index: 1;
-  min-height: 100vh;
+  flex: 1;
+  padding-top: var(--nav-height);
 }
 
 .site-footer {
   position: relative;
   z-index: 1;
   display: flex;
-  align-items: end;
+  align-items: center;
   justify-content: space-between;
   gap: 24px;
-  width: calc(100% - 48px);
-  max-width: 1180px;
-  margin: 0 auto;
-  border-top: 1px solid var(--line-strong);
-  padding: 30px 0 38px;
-}
-
-.site-footer p,
-.site-footer h2 {
-  margin: 0;
-}
-
-.site-footer p {
-  color: var(--green);
-  font-size: 0.78rem;
-  font-weight: 900;
+  width: 100%;
+  border-top: 1px solid var(--line);
+  min-height: var(--footer-height);
+  padding: 18px clamp(24px, 5vw, 64px);
+  color: var(--muted);
+  font-family: var(--mono-font);
+  font-size: 0.7rem;
   letter-spacing: 0;
   text-transform: uppercase;
 }
 
-.site-footer h2 {
-  margin-top: 6px;
-  font-family: var(--display-font);
-  font-size: 2rem;
-  font-weight: 900;
-  line-height: 1;
-}
-
-.footer-links {
+.site-footer nav {
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-end;
-  gap: 12px;
+  gap: 24px;
 }
 
-.footer-links a {
-  border: 1px solid var(--line);
-  border-radius: 999px;
-  background: rgba(12, 18, 15, 0.72);
-  padding: 8px 11px;
-  font-weight: 850;
+.site-footer a {
+  color: var(--muted);
+  transition: color 160ms ease;
 }
 
-.footer-links a:hover {
-  border-color: var(--green);
-  color: var(--green);
-  box-shadow: 0 0 24px rgba(98, 255, 156, 0.16);
+.site-footer a:hover,
+.site-footer a:focus-visible {
+  color: var(--ink);
 }
 
-@keyframes gridShift {
+@keyframes lineDrop {
+  from {
+    transform: scaleY(0);
+  }
   to {
-    background-position: 44px 44px;
+    transform: scaleY(1);
   }
 }
 
-@keyframes signalSweep {
+@keyframes lineSweep {
+  from {
+    opacity: 0;
+    transform: translateX(80px) rotate(-18deg);
+  }
   to {
-    background-position:
-      160% 0,
-      224px 0,
-      0 344px;
+    opacity: 1;
+    transform: translateX(0) rotate(-18deg);
   }
 }
 
-@media (max-width: 700px) {
+@media (max-width: 720px) {
+  .ambient-lines::before {
+    left: 14px;
+  }
+
   .site-footer {
     align-items: flex-start;
     flex-direction: column;
-    width: calc(100% - 28px);
+    min-height: auto;
   }
 
-  .footer-links {
+  .site-footer nav {
     justify-content: flex-start;
+    gap: 14px 20px;
   }
 }
 </style>

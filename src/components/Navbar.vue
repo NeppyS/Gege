@@ -1,34 +1,62 @@
 <template>
-  <header class="site-nav" :class="{ compact: isCompact }">
+  <header class="site-nav">
     <a class="skip-link" href="#main-content">Skip to content</a>
 
-    <nav class="nav-inner" aria-label="Portfolio sections">
-      <a class="brand" href="#home" @click="closeMenu">
-        <span class="brand-mark">NF</span>
-        <span class="brand-copy">
-          <strong>{{ profile.shortName }}</strong>
-          <small>{{ profile.brandRole }}</small>
-        </span>
+    <nav class="nav-inner" aria-label="Primary navigation">
+      <a
+        class="brand"
+        href="/"
+        :aria-current="activePage === 'home' ? 'page' : undefined"
+        @click="closeMenu"
+      >
+        <span>NI</span>
+        <strong>{{ profile.shortName }} Ilon</strong>
       </a>
 
+      <p class="nav-context">Full-stack systems / Bacolod City</p>
+
       <div class="nav-links" :class="{ open: isOpen }">
-        <template v-for="(link, index) in navLinks" :key="link.href">
-          <a :href="link.href" @click="closeMenu">{{ link.name }}</a>
-          <span v-if="index < navLinks.length - 1" class="nav-separator" aria-hidden="true">/</span>
-        </template>
+        <a
+          v-for="(link, index) in navLinks"
+          :key="link.page"
+          :href="link.href"
+          :aria-current="activePage === link.page ? 'page' : undefined"
+          @click="closeMenu"
+        >
+          <span>0{{ index + 1 }}</span>
+          {{ link.name }}
+        </a>
       </div>
 
       <div class="nav-actions">
-        <a class="icon-link" :href="github.href" target="_blank" rel="noopener noreferrer" aria-label="Open GitHub">
-          <Github :size="18" stroke-width="2.3" />
+        <a
+          class="github-link"
+          :href="github.href"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Open GitHub"
+        >
+          <Github :size="16" stroke-width="1.8" />
+          <span>GitHub</span>
         </a>
-        <a class="hire-link" href="#contact" @click="closeMenu">
-          Contact
-          <ArrowUpRight :size="17" stroke-width="2.4" />
-        </a>
-        <button class="menu-button" type="button" :aria-expanded="isOpen" aria-label="Toggle menu" @click="isOpen = !isOpen">
-          <Menu v-if="!isOpen" :size="23" stroke-width="2.4" />
-          <X v-else :size="23" stroke-width="2.4" />
+        <button
+          class="theme-button"
+          type="button"
+          :aria-label="`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`"
+          @click="$emit('toggle-theme')"
+        >
+          <Sun v-if="theme === 'dark'" :size="17" stroke-width="1.8" />
+          <Moon v-else :size="17" stroke-width="1.8" />
+        </button>
+        <button
+          class="menu-button"
+          type="button"
+          :aria-expanded="isOpen"
+          aria-label="Toggle menu"
+          @click="isOpen = !isOpen"
+        >
+          <Menu v-if="!isOpen" :size="22" stroke-width="1.8" />
+          <X v-else :size="22" stroke-width="1.8" />
         </button>
       </div>
     </nav>
@@ -36,254 +64,277 @@
 </template>
 
 <script setup>
-import { computed, onMounted, onUnmounted, ref } from 'vue'
-import { ArrowUpRight, Github, Menu, X } from 'lucide-vue-next'
+import { computed, ref } from 'vue'
+import { Github, Menu, Moon, Sun, X } from 'lucide-vue-next'
 import { navLinks, profile, socials } from '../data/portfolio'
 
 defineOptions({
   name: 'SiteNavbar',
 })
 
+defineProps({
+  activePage: {
+    type: String,
+    default: 'home',
+  },
+  theme: {
+    type: String,
+    default: 'light',
+  },
+})
+
+defineEmits(['toggle-theme'])
+
 const isOpen = ref(false)
-const isCompact = ref(false)
 const github = computed(() => socials.find((social) => social.name === 'GitHub'))
 
 const closeMenu = () => {
   isOpen.value = false
 }
-
-const onScroll = () => {
-  isCompact.value = window.scrollY > 12
-}
-
-onMounted(() => {
-  onScroll()
-  window.addEventListener('scroll', onScroll, { passive: true })
-})
-
-onUnmounted(() => {
-  window.removeEventListener('scroll', onScroll)
-})
 </script>
 
-<style>
+<style scoped>
 .site-nav {
-  position: sticky;
+  position: fixed;
   top: 0;
-  z-index: 50;
+  left: 0;
+  z-index: 100;
+  width: 100%;
   border-bottom: 1px solid var(--line);
-  background: rgba(6, 8, 7, 0.78);
+  background: color-mix(in srgb, var(--paper) 88%, transparent);
   backdrop-filter: blur(18px);
-  transition:
-    background 180ms ease,
-    box-shadow 180ms ease;
-}
-
-.site-nav.compact {
-  background: rgba(6, 8, 7, 0.94);
-  box-shadow: 0 18px 44px rgba(0, 0, 0, 0.42);
 }
 
 .skip-link {
   position: absolute;
-  left: 16px;
+  left: 20px;
   top: -48px;
-  border-radius: 999px;
-  background: var(--green);
-  color: #030504;
-  padding: 8px 14px;
-  font-weight: 900;
+  border: 1px solid var(--line-strong);
+  background: var(--paper);
+  color: var(--ink);
+  padding: 8px 12px;
+  font-family: var(--mono-font);
+  font-size: 0.72rem;
+  letter-spacing: 0;
+  text-transform: uppercase;
 }
 
 .skip-link:focus {
-  top: 12px;
+  top: 14px;
 }
 
 .nav-inner {
-  display: flex;
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(190px, 0.75fr) minmax(180px, 0.65fr) minmax(0, 1.4fr) auto;
+  gap: 24px;
   align-items: center;
-  justify-content: space-between;
-  gap: 18px;
-  width: calc(100% - 48px);
-  max-width: 1180px;
-  min-height: 76px;
-  margin: 0 auto;
+  min-height: var(--nav-height);
+  padding: 0 clamp(24px, 5vw, 64px);
 }
 
 .brand {
   display: inline-flex;
   align-items: center;
   gap: 12px;
-  min-width: 210px;
+  color: var(--ink);
 }
 
-.brand-mark {
+.brand span {
   display: inline-flex;
-  width: 42px;
-  height: 42px;
-  flex: 0 0 auto;
+  width: 38px;
+  height: 38px;
   align-items: center;
   justify-content: center;
-  border: 1px solid var(--green);
+  border: 1px solid var(--ink);
   border-radius: 50%;
-  background: #07110c;
-  color: var(--green);
-  box-shadow:
-    inset 0 0 18px rgba(98, 255, 156, 0.1),
-    0 0 26px rgba(98, 255, 156, 0.12);
-  font-family: var(--mono-font);
-  font-size: 0.78rem;
-  font-weight: 950;
-}
-
-.brand-copy strong,
-.brand-copy small {
-  display: block;
-  line-height: 1.1;
-}
-
-.brand-copy strong {
   font-family: var(--display-font);
-  font-size: 1.02rem;
-  font-weight: 950;
+  font-size: 1rem;
+  line-height: 1;
+  transition:
+    background 220ms ease,
+    color 220ms ease,
+    transform 220ms ease;
 }
 
-.brand-copy small {
-  margin-top: 4px;
-  color: var(--muted);
+.brand strong,
+.nav-context,
+.nav-links a {
   font-family: var(--mono-font);
-  font-size: 0.74rem;
+  font-size: 0.72rem;
   font-weight: 800;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.brand:hover span,
+.brand:focus-visible span,
+.brand[aria-current='page'] span {
+  background: var(--ink);
+  color: var(--paper);
+  transform: rotate(-12deg);
+}
+
+.nav-context {
+  margin: 0;
+  color: var(--muted);
 }
 
 .nav-links {
+  justify-self: end;
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 7px;
-  border: 1px solid var(--line-strong);
-  border-radius: 999px;
-  background: rgba(13, 20, 16, 0.76);
-  box-shadow: inset 0 0 20px rgba(98, 255, 156, 0.04);
-  padding: 6px 10px;
+  gap: 8px;
 }
 
 .nav-links a {
+  position: relative;
   display: inline-flex;
+  gap: 7px;
   align-items: center;
-  justify-content: center;
+  border: 1px solid transparent;
   border-radius: 999px;
-  color: var(--ink-soft);
-  padding: 8px 10px;
-  font-family: var(--mono-font);
-  font-size: 0.8rem;
-  font-weight: 900;
+  color: var(--muted);
+  padding: 9px 12px;
+  transition:
+    border-color 180ms ease,
+    color 180ms ease,
+    transform 180ms ease;
 }
 
-.nav-links a:hover {
-  background: rgba(98, 255, 156, 0.12);
-  color: var(--green);
+.nav-links a span {
+  color: color-mix(in srgb, var(--muted) 70%, transparent);
 }
 
-.nav-separator {
-  color: rgba(94, 217, 255, 0.34);
-  font-weight: 800;
+.nav-links a:hover,
+.nav-links a:focus-visible,
+.nav-links a[aria-current='page'] {
+  border-color: var(--line-strong);
+  color: var(--ink);
+  transform: translateY(-1px);
 }
 
 .nav-actions {
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  gap: 10px;
-  min-width: 210px;
+  gap: 8px;
 }
 
-.icon-link,
-.hire-link,
+.github-link,
+.theme-button,
 .menu-button {
   display: inline-flex;
+  height: 36px;
   align-items: center;
   justify-content: center;
-  border: 1px solid var(--line-strong);
-}
-
-.icon-link,
-.menu-button {
-  width: 42px;
-  height: 42px;
+  border: 1px solid var(--line);
   border-radius: 999px;
-  background: rgba(13, 20, 16, 0.8);
+  background: transparent;
+  color: var(--ink);
+  transition:
+    background 180ms ease,
+    border-color 180ms ease,
+    transform 180ms ease;
 }
 
-.hire-link {
+.github-link {
   gap: 8px;
-  min-height: 42px;
-  border-radius: 999px;
-  background: var(--green);
-  color: #030504;
-  padding: 0 16px;
-  font-weight: 950;
+  padding: 0 12px;
+  font-family: var(--mono-font);
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0;
+  text-transform: uppercase;
 }
 
-.icon-link:hover,
+.theme-button,
+.menu-button {
+  width: 36px;
+  padding: 0;
+}
+
+.github-link:hover,
+.github-link:focus-visible,
+.theme-button:hover,
+.theme-button:focus-visible,
 .menu-button:hover,
-.hire-link:hover {
-  border-color: var(--blue);
-  background: var(--blue);
-  color: #030504;
-  box-shadow: 0 0 26px rgba(94, 217, 255, 0.22);
+.menu-button:focus-visible {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--paper);
+}
+
+.theme-button:hover,
+.theme-button:focus-visible,
+.menu-button:hover,
+.menu-button:focus-visible {
+  transform: rotate(18deg);
 }
 
 .menu-button {
   display: none;
 }
 
-@media (max-width: 980px) {
+@media (max-width: 1050px) {
   .nav-inner {
-    width: calc(100% - 32px);
+    grid-template-columns: 1fr auto;
   }
 
-  .brand,
-  .nav-actions {
-    min-width: auto;
-  }
-
-  .icon-link,
-  .nav-links {
+  .nav-context {
     display: none;
+  }
+
+  .nav-links {
+    position: absolute;
+    top: calc(var(--nav-height) - 1px);
+    left: clamp(16px, 4vw, 42px);
+    right: clamp(16px, 4vw, 42px);
+    display: none;
+    border: 1px solid var(--line);
+    background: var(--paper);
+    padding: 12px;
+  }
+
+  .nav-links.open {
+    display: grid;
+    gap: 8px;
+    animation: menuDrop 220ms ease both;
+  }
+
+  .nav-links a {
+    justify-content: space-between;
+    border-radius: 0;
   }
 
   .menu-button {
     display: inline-flex;
   }
-
-  .nav-links.open {
-    position: absolute;
-    inset: 78px 16px auto;
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 6px;
-    border-radius: 16px;
-    background: rgba(13, 20, 16, 0.96);
-    box-shadow: var(--shadow);
-    padding: 12px;
-  }
-
-  .nav-links.open .nav-separator {
-    display: none;
-  }
-
-  .nav-links.open a {
-    justify-content: flex-start;
-    border-radius: 10px;
-    padding: 13px 14px;
-  }
 }
 
 @media (max-width: 560px) {
-  .brand-copy small,
-  .hire-link {
+  .brand strong {
     display: none;
+  }
+
+  .github-link span {
+    display: none;
+  }
+
+  .github-link {
+    width: 36px;
+    padding: 0;
+  }
+}
+
+@keyframes menuDrop {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 </style>
