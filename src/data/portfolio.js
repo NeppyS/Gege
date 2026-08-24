@@ -1,15 +1,15 @@
 export const profile = {
   name: 'Nephten Fajardo Ilon',
   shortName: 'Nephten',
-  role: 'Full Stack IT Developer / Technician',
+  role: 'Full-Stack Developer & IT Systems Specialist',
   brandRole: 'BR&V IT Developer',
   company: 'BR&V Company',
   location: 'Bacolod City, Philippines',
   email: 'nephtenilon@gmail.com',
-  headline: 'Operational systems that stay usable.',
+  headline: 'I build the software businesses run on.',
   intro:
-    'I build, maintain, and support ERP and POS systems across frontend, backend, database, troubleshooting, and daily IT operations.',
-  availability: 'Building and supporting business systems at BR&V Company',
+    'Full-stack developer specializing in ERP, purchasing, inventory, accounting, reporting, and the operational support behind them.',
+  availability: 'Open to full-stack, frontend, backend, and IT systems opportunities',
 }
 
 export const navLinks = [
@@ -44,16 +44,16 @@ export const socials = [
 ]
 
 export const stats = [
-  { value: 'ERP', label: 'Business modules, records, and internal workflows' },
-  { value: 'POS', label: 'Transaction screens, data flow, and daily support' },
-  { value: 'DATA', label: 'MySQL, PHPMyAdmin, Directus, and record checking' },
-  { value: 'SUPPORT', label: 'Troubleshooting, user assistance, and IT technician work' },
+  { value: 'FULL STACK', label: 'From responsive interfaces to APIs and database records' },
+  { value: 'ERP', label: 'Purchasing, inventory, accounting, and reporting workflows' },
+  { value: 'DATA', label: 'MySQL, Directus, validation, exports, and reconciliation' },
+  { value: 'OPS', label: 'Docker, troubleshooting, user support, and production fixes' },
 ]
 
 export const aboutParagraphs = [
-  'I am Nephten Fajardo Ilon, a Full Stack IT Developer / Technician focused on systems that real teams use every day. My work sits between software development and hands-on support: building features, checking data, tracking issues, and keeping business tools usable while operations are moving.',
-  'At BR&V Company, I work across ERP and POS systems, touching frontend screens, backend behavior, Directus/API work, MySQL records, Docker-supported environments, and user support. I care about interfaces that match real business habits and fixes that prevent the same issue from coming back twice.',
-  'My style is direct and system-minded. I trace the whole path: what the user sees, what the workflow expects, what the API does, how the database stores it, and what support needs to know after the fix ships.',
+  'I am Nephten Fajardo Ilon, a full-stack developer and IT systems specialist in Bacolod City. I build practical software for teams whose work cannot stop: purchasing, inventory, accounting, project reporting, point-of-sale, and company administration.',
+  'At BR&V Company, I work across the complete delivery path—Next.js and React interfaces, TypeScript server actions, Directus extensions and APIs, MySQL data, Docker environments, styled Excel exports, print layouts, and day-to-day user support. That breadth helps me find the real cause of a problem instead of treating only the visible symptom.',
+  'I bring a support-aware engineering mindset. I reproduce issues from the user’s point of view, trace data across the stack, protect existing workflows, and validate the result in the way people actually use it. I am most useful on teams that value ownership, clear communication, and dependable systems.',
 ]
 
 export const aboutHighlights = [
@@ -116,50 +116,66 @@ export const workflowSteps = [
 export const skillGroups = [
   {
     title: 'Frontend',
-    items: ['Next.js', 'React.js', 'Vue.js', 'TypeScript', 'Tailwind CSS'],
+    items: ['Next.js', 'React', 'Vue 3', 'TypeScript', 'JavaScript', 'Tailwind CSS', 'Responsive UI', 'Accessibility'],
   },
   {
     title: 'Backend',
-    items: ['Node.js', 'Directus', 'API Work', 'Feature Logic', 'System Maintenance'],
+    items: ['Node.js', 'Directus', 'REST APIs', 'Server Actions', 'Authentication', 'Business Logic', 'Data Validation'],
   },
   {
-    title: 'Systems',
-    items: ['ERP Development', 'POS Development', 'Technical Support', 'Troubleshooting'],
+    title: 'Business Systems',
+    items: ['ERP', 'POS', 'Purchasing', 'Inventory', 'Accounting', 'Reporting', 'Role-Based Access'],
   },
   {
     title: 'Data & Tools',
-    items: ['MySQL', 'PHPMyAdmin', 'Docker', 'Git/GitHub', 'Database Management'],
+    items: ['MySQL', 'phpMyAdmin', 'Docker', 'Git/GitHub', 'Excel Export', 'Print/PDF Layouts', 'Troubleshooting'],
   },
 ]
 
 export const systems = [
   {
-    title: 'ERP Module Work',
-    meta: 'Business workflows',
-    text: 'Build and maintain ERP modules that support records, internal operations, permissions, and daily business use.',
-    outcome: 'Clearer workflows for teams that rely on accurate records.',
-    stack: ['Next.js', 'TypeScript', 'Directus', 'MySQL'],
+    title: 'BR&V ERP Platform',
+    meta: 'Production system · Confidential',
+    text: 'Develop and maintain a modular internal ERP spanning purchasing, inventory, accounting, projects, users, companies, warehouses, and operational reporting.',
+    outcome: 'Role: full-stack development, data investigation, workflow design, bug fixing, and user support.',
+    stack: ['Next.js', 'React', 'TypeScript', 'Directus', 'MySQL', 'Docker'],
   },
   {
-    title: 'POS Workflow Support',
-    meta: 'Transaction systems',
-    text: 'Improve POS screens, transaction behavior, data-backed flows, and support paths for daily operations.',
-    outcome: 'More dependable transaction flow and faster issue tracing.',
-    stack: ['React.js', 'Node.js', 'MySQL', 'Tailwind CSS'],
+    title: 'Project Cost Reporting',
+    meta: 'ERP analytics · Confidential',
+    text: 'Built project cost summaries that combine purchasing and ledger data, with filtering, styled spreadsheet export, consistent project naming, and report-ready totals.',
+    outcome: 'Turns operational records into clearer cost visibility for review and decision-making.',
+    stack: ['Next.js', 'TypeScript', 'Directus', 'MySQL', 'Excel'],
   },
   {
-    title: 'Database & Admin Work',
-    meta: 'Data reliability',
-    text: 'Check records, inspect database behavior, support Directus-backed data, and help clean up operational issues.',
-    outcome: 'Cleaner data underneath the screens people use.',
-    stack: ['MySQL', 'PHPMyAdmin', 'Directus', 'Docker'],
+    title: 'Purchasing & Inventory Workflows',
+    meta: 'ERP operations · Confidential',
+    text: 'Improved material requests, supplier selection, purchase orders, item creation, item groups, warehouse data, inventory tables, and printable purchasing documents.',
+    outcome: 'Connects user-friendly forms to dependable records across the purchasing lifecycle.',
+    stack: ['React', 'TypeScript', 'Directus', 'MySQL', 'Tailwind CSS'],
   },
   {
-    title: 'IT & System Support',
-    meta: 'IT operations',
-    text: 'Diagnose issues, assist users, check data, troubleshoot devices or workflows, and support systems when something breaks.',
-    outcome: 'Shorter path from problem report to working system.',
-    stack: ['PHPMyAdmin', 'Docker', 'Git/GitHub', 'Troubleshooting'],
+    title: 'Directus Company Automation',
+    meta: 'Backend extensions · Confidential',
+    text: 'Worked on Directus hooks and initialization logic that prepare company-specific item types, item groups, units of measure, and accounting behavior.',
+    outcome: 'Makes new-company setup more consistent and reduces repetitive administrative work.',
+    stack: ['Node.js', 'Directus Extensions', 'JavaScript', 'Docker', 'MySQL'],
+  },
+  {
+    title: 'Gege Portfolio',
+    meta: 'Personal product · Public',
+    text: 'Designed and built this responsive multi-view portfolio with theme persistence, accessible navigation, animated transitions, and an interactive canvas systems graph.',
+    outcome: 'A custom Vue experience built without a portfolio template.',
+    stack: ['Vue 3', 'Vite', 'Canvas API', 'CSS', 'Accessibility'],
+    href: 'https://github.com/NeppyS/Gege',
+  },
+  {
+    title: 'Frontend Practice Collection',
+    meta: 'Web projects · Public',
+    text: 'A progression of responsive interfaces including MartialPro, an admin dashboard, TypeScript coursework, and deployed layout challenges.',
+    outcome: 'Shows continued practice across JavaScript, TypeScript, component layouts, and responsive CSS.',
+    stack: ['TypeScript', 'JavaScript', 'CSS', 'Responsive Design', 'Vercel'],
+    href: 'https://github.com/NeppyS?tab=repositories',
   },
 ]
 

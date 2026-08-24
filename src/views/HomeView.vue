@@ -9,13 +9,13 @@
       <div class="home-statement">
         <p class="eyebrow">Developer & IT builder</p>
         <h1 id="home-title">
-          <span>Building daily</span>
-          <span>systems that</span>
-          <span>hold up.</span>
+          <span>I build the</span>
+          <span>software teams</span>
+          <span>depend on.</span>
         </h1>
         <p>
-          I work across ERP, POS, database, support, and full-stack development, turning operational
-          problems into clear interfaces and dependable workflows.
+          Full-stack developer and IT systems specialist working across ERP, purchasing, inventory,
+          accounting, reporting, databases, and production support.
         </p>
 
         <div class="action-row">
@@ -39,7 +39,7 @@
 
         <div class="status-strip">
           <span>Current</span>
-          <strong>ERP / POS / IT Support</strong>
+          <strong>Full-stack / ERP / IT Systems</strong>
           <small>{{ profile.availability }}</small>
         </div>
       </aside>
@@ -52,7 +52,7 @@
     >
       <header class="page-header">
         <p class="eyebrow">Work</p>
-        <h1 id="work-title">Systems for operations that move every day.</h1>
+        <h1 id="work-title">Selected systems and projects I have built.</h1>
         <a class="text-link" href="/graph">Open graph</a>
       </header>
 
@@ -69,6 +69,15 @@
           </div>
           <div class="tag-row">
             <small v-for="tech in system.stack" :key="tech">{{ tech }}</small>
+            <a
+              v-if="system.href"
+              class="project-link"
+              :href="system.href"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              View project ↗
+            </a>
           </div>
         </article>
       </div>
@@ -137,12 +146,12 @@
     >
       <header class="page-header">
         <p class="eyebrow">Contact</p>
-        <h1 id="contact-title">Send the problem. I will trace the system.</h1>
+        <h1 id="contact-title">Let’s build something dependable.</h1>
       </header>
 
       <div class="contact-layout">
         <div class="contact-copy">
-          <p>For ERP, POS, full-stack, database, support, or troubleshooting work.</p>
+          <p>I am open to full-stack, frontend, backend, ERP, and IT systems opportunities—on-site, hybrid, or remote.</p>
 
           <div class="contact-quick" aria-label="Contact details">
             <article>
@@ -742,6 +751,24 @@ const submitForm = () => {
     transform 180ms ease;
 }
 
+.project-link {
+  display: inline-flex;
+  align-items: center;
+  border-bottom: 1px solid var(--ink);
+  margin-left: 4px;
+  color: var(--ink);
+  font-family: var(--mono-font);
+  font-size: 0.68rem;
+  font-weight: 850;
+  text-transform: uppercase;
+}
+
+.project-link:hover,
+.project-link:focus-visible {
+  color: var(--green);
+  border-color: var(--green);
+}
+
 .tag-row small:hover,
 .tag-row span:hover {
   border-color: var(--ink);
@@ -1063,6 +1090,13 @@ const submitForm = () => {
 
   .content-page {
     align-content: center;
+  }
+
+  .work-page {
+    height: auto;
+    min-height: calc(100svh - var(--nav-height) - var(--footer-height));
+    overflow: visible;
+    align-content: start;
   }
 
   .reason-grid {
