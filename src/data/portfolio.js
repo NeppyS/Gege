@@ -1,3 +1,11 @@
+import erpLogin from '../assets/1.png'
+import posDashboard from '../assets/1a.png'
+import dmsLogin from '../assets/1b.png'
+import erpFleet from '../assets/2.png'
+import posSales from '../assets/2a.png'
+import dmsDocuments from '../assets/2b.png'
+import erpRoles from '../assets/4.png'
+
 export const profile = {
   name: 'Nephten Fajardo Ilon',
   shortName: 'Nephten',
@@ -51,27 +59,28 @@ export const stats = [
 ]
 
 export const aboutParagraphs = [
-  'I am Nephten Fajardo Ilon, a full-stack developer and IT systems specialist in Bacolod City. I build practical software for teams whose work cannot stop: purchasing, inventory, accounting, project reporting, point-of-sale, and company administration.',
-  'At BR&V Company, I work across the complete delivery path—Next.js and React interfaces, TypeScript server actions, Directus extensions and APIs, MySQL data, Docker environments, styled Excel exports, print layouts, and day-to-day user support. That breadth helps me find the real cause of a problem instead of treating only the visible symptom.',
-  'I bring a support-aware engineering mindset. I reproduce issues from the user’s point of view, trace data across the stack, protect existing workflows, and validate the result in the way people actually use it. I am most useful on teams that value ownership, clear communication, and dependable systems.',
+  'I am Nephten Fajardo Ilon, a full-stack developer and IT systems specialist based in Bacolod City, Philippines. I build and support practical business software for work that cannot stop: ERP, purchasing, inventory, accounting, project reporting, document management, point-of-sale, company administration, and role-based access.',
+  'At BR&V Company, I develop and maintain ERP workflows across Next.js and React interfaces, TypeScript server actions, Directus extensions and APIs, MySQL records, and Docker environments. My work includes tracing production issues, fixing code across the stack, improving purchasing and inventory flows, building project cost reports, producing styled Excel exports and print layouts, and supporting the people who use those systems every day.',
+  'My current work also includes maintaining and debugging a company document management system with controlled documents, folders, permissions, metadata, history, retention, and administrative workflows. For KonekTaV POS, my role is Technical Support: I reproduce reported issues, investigate synchronization and transaction behavior, check system data, assist users, test fixes, and help keep daily store operations running.',
+  'I approach development with a support-aware mindset. I start from the user’s actual workflow, follow the data through the interface, API, backend, database, and configuration, then validate the result in realistic use. I value ownership, clear communication, careful data handling, accessible interfaces, and fixes that prevent the same problem from returning.',
 ]
 
 export const aboutHighlights = [
   {
-    title: 'Operational builder',
-    text: 'I turn daily business problems into clear screens, reliable records, and maintainable system behavior.',
+    title: 'Business-systems builder',
+    text: 'I turn real purchasing, inventory, accounting, reporting, document, and administration needs into maintainable software.',
   },
   {
-    title: 'Support-aware',
-    text: 'I use troubleshooting experience to make better interfaces, clearer flows, and fewer repeated support issues.',
+    title: 'Technical support',
+    text: 'I reproduce user issues, investigate POS and business-system behavior, explain solutions clearly, and verify that operations can continue.',
   },
   {
-    title: 'Full-stack view',
-    text: 'Frontend, backend, database, deployment, and technician tasks are connected parts of one system.',
+    title: 'Full-stack ownership',
+    text: 'I work across frontend, server actions, APIs, backend extensions, databases, Docker environments, exports, and print output.',
   },
   {
-    title: 'Data-minded',
-    text: 'I check records carefully, because good interfaces still depend on correct data underneath.',
+    title: 'Workflow and data minded',
+    text: 'I protect existing workflows and inspect the records underneath them, because dependable interfaces require dependable data.',
   },
 ]
 
@@ -116,19 +125,65 @@ export const workflowSteps = [
 export const skillGroups = [
   {
     title: 'Frontend',
-    items: ['Next.js', 'React', 'Vue 3', 'TypeScript', 'JavaScript', 'Tailwind CSS', 'Responsive UI', 'Accessibility'],
+    items: [
+      'Next.js',
+      'React',
+      'Vue 3',
+      'TypeScript',
+      'JavaScript',
+      'Tailwind CSS',
+      'Responsive UI',
+      'Accessibility',
+    ],
   },
   {
     title: 'Backend',
-    items: ['Node.js', 'Directus', 'REST APIs', 'Server Actions', 'Authentication', 'Business Logic', 'Data Validation'],
+    items: [
+      'Node.js',
+      'Directus',
+      'REST APIs',
+      'Server Actions',
+      'Authentication',
+      'Business Logic',
+      'Data Validation',
+    ],
   },
   {
     title: 'Business Systems',
-    items: ['ERP', 'POS', 'Purchasing', 'Inventory', 'Accounting', 'Reporting', 'Role-Based Access'],
+    items: [
+      'ERP',
+      'POS',
+      'Document Management',
+      'Purchasing',
+      'Inventory',
+      'Accounting',
+      'Project Cost Reporting',
+      'Role-Based Access',
+    ],
   },
   {
     title: 'Data & Tools',
-    items: ['MySQL', 'phpMyAdmin', 'Docker', 'Git/GitHub', 'Excel Export', 'Print/PDF Layouts', 'Troubleshooting'],
+    items: [
+      'MySQL',
+      'phpMyAdmin',
+      'Docker',
+      'Git/GitHub',
+      'Excel Export',
+      'Print/PDF Layouts',
+      'Data Investigation',
+    ],
+  },
+  {
+    title: 'Support & Quality',
+    items: [
+      'Technical Support',
+      'Issue Reproduction',
+      'Root-Cause Analysis',
+      'System Testing',
+      'User Assistance',
+      'Production Fixes',
+      'Workflow Validation',
+    ],
   },
 ]
 
@@ -137,14 +192,45 @@ export const systems = [
     title: 'BR&V ERP Platform',
     meta: 'Production system · Confidential',
     text: 'Develop and maintain a modular internal ERP spanning purchasing, inventory, accounting, projects, users, companies, warehouses, and operational reporting.',
-    outcome: 'Role: full-stack development, data investigation, workflow design, bug fixing, and user support.',
+    outcome:
+      'Role: full-stack development, data investigation, workflow design, bug fixing, and user support.',
     stack: ['Next.js', 'React', 'TypeScript', 'Directus', 'MySQL', 'Docker'],
+    images: [
+      { src: erpLogin, alt: 'ERP Lite sign-in screen' },
+      { src: erpFleet, alt: 'ERP Lite fleet management navigation' },
+      { src: erpRoles, alt: 'ERP Lite users and company roles screen' },
+    ],
+  },
+  {
+    title: 'KonekTaV POS',
+    meta: 'Point of sale · Current work',
+    text: 'Provide hands-on technical support for the POS platform, investigating sync, sales, transaction, and day-to-day operational issues reported by users.',
+    outcome:
+      'Role: Technical Support — reproducing issues, checking system behavior, assisting users, and helping keep store operations running.',
+    stack: ['Technical Support', 'POS', 'Troubleshooting', 'User Support', 'System Testing'],
+    images: [
+      { src: posDashboard, alt: 'KonekTaV POS operational dashboard' },
+      { src: posSales, alt: 'KonekTaV POS sales and recent transactions screen' },
+    ],
+  },
+  {
+    title: 'Company Document Management System',
+    meta: 'Document platform · Current work',
+    text: 'Maintain and fix code across a company document management system covering controlled documents, folders, access, metadata, history, retention, and administration.',
+    outcome:
+      'Current work: tracing defects through the interface and application flow, implementing fixes, and validating document workflows.',
+    stack: ['Full-Stack Fixes', 'DMS', 'Debugging', 'Access Control', 'Workflow Testing'],
+    images: [
+      { src: dmsDocuments, alt: 'Company DMS document browser and document properties' },
+      { src: dmsLogin, alt: 'Company DMS sign-in screen' },
+    ],
   },
   {
     title: 'Project Cost Reporting',
     meta: 'ERP analytics · Confidential',
     text: 'Built project cost summaries that combine purchasing and ledger data, with filtering, styled spreadsheet export, consistent project naming, and report-ready totals.',
-    outcome: 'Turns operational records into clearer cost visibility for review and decision-making.',
+    outcome:
+      'Turns operational records into clearer cost visibility for review and decision-making.',
     stack: ['Next.js', 'TypeScript', 'Directus', 'MySQL', 'Excel'],
   },
   {
@@ -173,7 +259,8 @@ export const systems = [
     title: 'Frontend Practice Collection',
     meta: 'Web projects · Public',
     text: 'A progression of responsive interfaces including MartialPro, an admin dashboard, TypeScript coursework, and deployed layout challenges.',
-    outcome: 'Shows continued practice across JavaScript, TypeScript, component layouts, and responsive CSS.',
+    outcome:
+      'Shows continued practice across JavaScript, TypeScript, component layouts, and responsive CSS.',
     stack: ['TypeScript', 'JavaScript', 'CSS', 'Responsive Design', 'Vercel'],
     href: 'https://github.com/NeppyS?tab=repositories',
   },

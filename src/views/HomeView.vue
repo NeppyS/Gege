@@ -59,25 +59,37 @@
       <div class="work-list">
         <article v-for="(system, index) in systems" :key="system.title">
           <span>0{{ index + 1 }}</span>
-          <div>
-            <p>{{ system.meta }}</p>
-            <h2>{{ system.title }}</h2>
+          <div class="project-body">
+            <div class="work-title">
+              <p>{{ system.meta }}</p>
+              <h2>{{ system.title }}</h2>
+            </div>
+            <div class="work-copy">
+              <strong>{{ system.text }}</strong>
+              <em>{{ system.outcome }}</em>
+            </div>
+            <div class="tag-row">
+              <small v-for="tech in system.stack" :key="tech">{{ tech }}</small>
+              <a
+                v-if="system.href"
+                class="project-link"
+                :href="system.href"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                View project ↗
+              </a>
+            </div>
           </div>
-          <div class="work-copy">
-            <strong>{{ system.text }}</strong>
-            <em>{{ system.outcome }}</em>
-          </div>
-          <div class="tag-row">
-            <small v-for="tech in system.stack" :key="tech">{{ tech }}</small>
-            <a
-              v-if="system.href"
-              class="project-link"
-              :href="system.href"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              View project ↗
-            </a>
+          <div
+            v-if="system.images"
+            class="project-gallery"
+            :class="{ 'project-gallery--trio': system.images.length === 3 }"
+          >
+            <figure v-for="(image, imageIndex) in system.images" :key="image.src">
+              <img :src="image.src" :alt="image.alt" loading="lazy" decoding="async" />
+              <figcaption>0{{ imageIndex + 1 }}</figcaption>
+            </figure>
           </div>
         </article>
       </div>
@@ -113,7 +125,7 @@
     >
       <header class="page-header">
         <p class="eyebrow">About</p>
-        <h1 id="about-title">Support-aware, database-minded, full-stack practical.</h1>
+        <h1 id="about-title">Full-stack builder. Systems fixer. Technical support partner.</h1>
       </header>
 
       <div class="about-layout">
@@ -151,7 +163,10 @@
 
       <div class="contact-layout">
         <div class="contact-copy">
-          <p>I am open to full-stack, frontend, backend, ERP, and IT systems opportunities—on-site, hybrid, or remote.</p>
+          <p>
+            I am open to full-stack, frontend, backend, ERP, and IT systems opportunities—on-site,
+            hybrid, or remote.
+          </p>
 
           <div class="contact-quick" aria-label="Contact details">
             <article>
@@ -348,7 +363,7 @@ const submitForm = () => {
 .home-signals strong,
 .home-signals span,
 .work-list article > span,
-.work-list article > div > p,
+.work-title > p,
 .work-copy em,
 .writing-list article > span,
 .highlight-list h2,
@@ -664,19 +679,96 @@ const submitForm = () => {
 
 .work-list article {
   display: grid;
-  grid-template-columns: 64px minmax(210px, 0.65fr) minmax(280px, 1fr) minmax(220px, 0.65fr);
-  gap: 28px;
+  grid-template-columns: 64px minmax(0, 1fr);
+  gap: 18px 28px;
   align-items: start;
   border-bottom: 1px solid var(--line);
-  padding: clamp(14px, 2vh, 22px) 0;
+  padding: clamp(24px, 3.5vh, 44px) 0;
   transition:
     border-color 200ms ease,
-    transform 200ms ease;
+    transform 280ms cubic-bezier(0.2, 0.8, 0.2, 1),
+    background-color 280ms ease;
 }
 
 .work-list article:hover {
   border-color: var(--ink);
-  transform: translateX(8px);
+  transform: translateY(-2px);
+  background: color-mix(in srgb, var(--ink) 3%, transparent);
+}
+
+.project-body {
+  display: grid;
+  grid-template-columns: minmax(220px, 0.7fr) minmax(300px, 1.15fr) minmax(230px, 0.8fr);
+  gap: 28px;
+  align-items: start;
+  min-width: 0;
+}
+
+.project-gallery {
+  grid-column: 2 / -1;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.project-gallery--trio {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.project-gallery figure {
+  position: relative;
+  aspect-ratio: 16 / 8.5;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  margin: 0;
+  background: var(--surface);
+  box-shadow: 0 18px 44px rgb(0 0 0 / 10%);
+  opacity: 0;
+  transform: translateY(18px) scale(0.985);
+  animation: projectImageIn 650ms cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+.project-gallery figure:nth-child(2) {
+  animation-delay: 90ms;
+}
+
+.project-gallery figure:nth-child(3) {
+  animation-delay: 180ms;
+}
+
+.project-gallery img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  object-position: top left;
+  filter: saturate(0.82);
+  transition:
+    transform 550ms cubic-bezier(0.2, 0.8, 0.2, 1),
+    filter 350ms ease;
+}
+
+.project-gallery figcaption {
+  position: absolute;
+  right: 8px;
+  bottom: 8px;
+  padding: 4px 7px;
+  color: white;
+  background: rgb(0 0 0 / 68%);
+  font-family: var(--mono-font);
+  font-size: 0.62rem;
+}
+
+.work-list article:hover .project-gallery img {
+  transform: scale(1.035);
+  filter: saturate(1);
+}
+
+@keyframes projectImageIn {
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
 }
 
 .work-list article > span,
@@ -696,7 +788,7 @@ const submitForm = () => {
   line-height: 1;
 }
 
-.work-list article > div > p {
+.work-title > p {
   margin: 0 0 10px;
   color: var(--muted);
   font-size: 0.72rem;
@@ -1099,6 +1191,13 @@ const submitForm = () => {
     align-content: start;
   }
 
+  .about-page {
+    height: auto;
+    min-height: calc(100svh - var(--nav-height) - var(--footer-height));
+    overflow: visible;
+    align-content: start;
+  }
+
   .reason-grid {
     grid-template-columns: repeat(5, minmax(0, 1fr));
   }
@@ -1110,7 +1209,7 @@ const submitForm = () => {
   }
 
   .work-list article {
-    padding: 14px 0;
+    padding: clamp(24px, 3.5vh, 44px) 0;
   }
 
   .writing-list article,
@@ -1255,11 +1354,15 @@ const submitForm = () => {
   }
 
   .work-list article {
-    grid-template-columns: 54px minmax(220px, 0.7fr) minmax(0, 1fr);
+    grid-template-columns: 54px minmax(0, 1fr);
   }
 
-  .work-list .tag-row {
-    grid-column: 2 / -1;
+  .project-body {
+    grid-template-columns: minmax(220px, 0.75fr) minmax(0, 1.25fr);
+  }
+
+  .project-body .tag-row {
+    grid-column: 1 / -1;
   }
 }
 
@@ -1273,7 +1376,6 @@ const submitForm = () => {
   .about-layout,
   .contact-layout,
   .page-header,
-  .work-list article,
   .writing-list article,
   .skill-board article,
   .photo-grid {
@@ -1308,8 +1410,26 @@ const submitForm = () => {
     object-position: center 38%;
   }
 
-  .work-list .tag-row {
+  .work-list article {
+    grid-template-columns: 34px minmax(0, 1fr);
+    gap: 14px;
+  }
+
+  .project-body {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .project-body .tag-row {
     grid-column: auto;
+  }
+
+  .project-gallery {
+    grid-column: 2;
+  }
+
+  .project-gallery--trio {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .photo-grid figure:nth-child(2),
@@ -1341,6 +1461,20 @@ const submitForm = () => {
 
   .status-strip small {
     grid-column: auto;
+  }
+
+  .project-gallery,
+  .project-gallery--trio {
+    grid-template-columns: 1fr;
+  }
+
+  .work-list article {
+    grid-template-columns: 1fr;
+  }
+
+  .work-list article > span,
+  .project-gallery {
+    grid-column: 1;
   }
 }
 </style>
