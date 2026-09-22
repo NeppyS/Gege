@@ -13,7 +13,7 @@
         <strong>{{ profile.shortName }} Ilon</strong>
       </a>
 
-      <p class="nav-context">Full-stack systems / Bacolod City</p>
+      <p class="nav-context">ERP · DMS · POS / Bacolod City</p>
 
       <div class="nav-links" :class="{ open: isOpen }">
         <a

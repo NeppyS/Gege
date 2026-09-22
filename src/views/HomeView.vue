@@ -7,15 +7,15 @@
       </div>
 
       <div class="home-statement">
-        <p class="eyebrow">Developer & IT builder</p>
+        <p class="eyebrow">Recent work · developer & IT systems specialist</p>
         <h1 id="home-title">
-          <span>I build the</span>
-          <span>software teams</span>
-          <span>depend on.</span>
+          <span>I build and</span>
+          <span>support systems</span>
+          <span>that keep work moving.</span>
         </h1>
         <p>
-          Full-stack developer and IT systems specialist working across ERP, purchasing, inventory,
-          accounting, reporting, databases, and production support.
+          Recently delivering ERP workflows and reporting, fixing document-management workflows, and
+          supporting POS operations through issue investigation, data checks, and validated fixes.
         </p>
 
         <div class="action-row">
@@ -39,7 +39,7 @@
 
         <div class="status-strip">
           <span>Current</span>
-          <strong>Full-stack / ERP / IT Systems</strong>
+          <strong>ERP / DMS / POS support</strong>
           <small>{{ profile.availability }}</small>
         </div>
       </aside>
@@ -52,7 +52,7 @@
     >
       <header class="page-header">
         <p class="eyebrow">Work</p>
-        <h1 id="work-title">Selected systems and projects I have built.</h1>
+        <h1 id="work-title">Recent systems work, support, and delivery.</h1>
         <a class="text-link" href="/graph">Open graph</a>
       </header>
 
@@ -106,7 +106,7 @@
     >
       <header class="page-header">
         <p class="eyebrow">Writing</p>
-        <h1 id="writing-title">How I move from issue to stable workflow.</h1>
+        <h1 id="writing-title">How I turn reported issues into stable workflows.</h1>
       </header>
 
       <div class="writing-list">

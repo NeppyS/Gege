@@ -14,9 +14,9 @@ export const profile = {
   company: 'BR&V Company',
   location: 'Bacolod City, Philippines',
   email: 'nephtenilon@gmail.com',
-  headline: 'I build the software businesses run on.',
+  headline: 'I build and support the systems businesses rely on.',
   intro:
-    'Full-stack developer specializing in ERP, purchasing, inventory, accounting, reporting, and the operational support behind them.',
+    'Full-stack developer specializing in ERP delivery, document-management fixes, POS support, reporting, and the operational work behind dependable software.',
   availability: 'Open to full-stack, frontend, backend, and IT systems opportunities',
 }
 
@@ -52,16 +52,16 @@ export const socials = [
 ]
 
 export const stats = [
-  { value: 'FULL STACK', label: 'From responsive interfaces to APIs and database records' },
-  { value: 'ERP', label: 'Purchasing, inventory, accounting, and reporting workflows' },
-  { value: 'DATA', label: 'MySQL, Directus, validation, exports, and reconciliation' },
-  { value: 'OPS', label: 'Docker, troubleshooting, user support, and production fixes' },
+  { value: 'ERP', label: 'Purchasing, inventory, accounting, and project-cost reporting' },
+  { value: 'DMS', label: 'Controlled documents, access, metadata, history, and retention' },
+  { value: 'POS', label: 'Transaction and synchronization investigation for daily operations' },
+  { value: 'FULL STACK', label: 'Interfaces, APIs, Directus, MySQL, exports, and production fixes' },
 ]
 
 export const aboutParagraphs = [
   'I am Nephten Fajardo Ilon, a full-stack developer and IT systems specialist based in Bacolod City, Philippines. I build and support practical business software for work that cannot stop: ERP, purchasing, inventory, accounting, project reporting, document management, point-of-sale, company administration, and role-based access.',
-  'At BR&V Company, I develop and maintain ERP workflows across Next.js and React interfaces, TypeScript server actions, Directus extensions and APIs, MySQL records, and Docker environments. My work includes tracing production issues, fixing code across the stack, improving purchasing and inventory flows, building project cost reports, producing styled Excel exports and print layouts, and supporting the people who use those systems every day.',
-  'My current work also includes maintaining and debugging a company document management system with controlled documents, folders, permissions, metadata, history, retention, and administrative workflows. For KonekTaV POS, my role is Technical Support: I reproduce reported issues, investigate synchronization and transaction behavior, check system data, assist users, test fixes, and help keep daily store operations running.',
+  'At BR&V Company, I develop and maintain ERP workflows across Next.js and React interfaces, TypeScript server actions, Directus extensions and APIs, MySQL records, and Docker environments. Recent delivery includes improving purchasing and inventory flows, building project-cost reports, producing styled Excel exports and print layouts, and supporting the people who use those systems every day.',
+  'My current work also includes maintaining and debugging a company document management system with controlled documents, folders, permissions, metadata, history, retention, and administration. For KonekTaV POS, I provide technical support: reproducing reported issues, investigating synchronization and transaction behavior, checking system data, testing fixes, and helping keep store operations running.',
   'I approach development with a support-aware mindset. I start from the user’s actual workflow, follow the data through the interface, API, backend, database, and configuration, then validate the result in realistic use. I value ownership, clear communication, careful data handling, accessible interfaces, and fixes that prevent the same problem from returning.',
 ]
 
@@ -204,7 +204,7 @@ export const systems = [
   {
     title: 'KonekTaV POS',
     meta: 'Point of sale · Current work',
-    text: 'Provide hands-on technical support for the POS platform, investigating sync, sales, transaction, and day-to-day operational issues reported by users.',
+    text: 'Provide hands-on technical support for the POS platform, investigating synchronization, sales, transaction, and day-to-day operational issues reported by users.',
     outcome:
       'Role: Technical Support — reproducing issues, checking system behavior, assisting users, and helping keep store operations running.',
     stack: ['Technical Support', 'POS', 'Troubleshooting', 'User Support', 'System Testing'],
@@ -216,7 +216,7 @@ export const systems = [
   {
     title: 'Company Document Management System',
     meta: 'Document platform · Current work',
-    text: 'Maintain and fix code across a company document management system covering controlled documents, folders, access, metadata, history, retention, and administration.',
+    text: 'Maintain and fix code across a company document-management system covering controlled documents, folders, access, metadata, history, retention, and administration.',
     outcome:
       'Current work: tracing defects through the interface and application flow, implementing fixes, and validating document workflows.',
     stack: ['Full-Stack Fixes', 'DMS', 'Debugging', 'Access Control', 'Workflow Testing'],
