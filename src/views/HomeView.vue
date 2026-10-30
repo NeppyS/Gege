@@ -81,15 +81,12 @@
               </a>
             </div>
           </div>
-          <div
-            v-if="system.images"
-            class="project-gallery"
-            :class="{ 'project-gallery--trio': system.images.length === 3 }"
-          >
-            <figure v-for="(image, imageIndex) in system.images" :key="image.src">
-              <img :src="image.src" :alt="image.alt" loading="lazy" decoding="async" />
-              <figcaption>0{{ imageIndex + 1 }}</figcaption>
-            </figure>
+          <div v-if="system.visual" class="project-visual" aria-label="Abstract project flow">
+            <span v-for="(label, visualIndex) in system.visual" :key="label">
+              <i aria-hidden="true">0{{ visualIndex + 1 }}</i>
+              {{ label }}
+            </span>
+            <small>Public-safe project representation</small>
           </div>
         </article>
       </div>
@@ -704,72 +701,74 @@ const submitForm = () => {
   min-width: 0;
 }
 
-.project-gallery {
+.project-visual {
   grid-column: 2 / -1;
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 10px;
-}
-
-.project-gallery--trio {
   grid-template-columns: repeat(3, minmax(0, 1fr));
-}
-
-.project-gallery figure {
+  gap: 10px;
   position: relative;
-  aspect-ratio: 16 / 8.5;
   overflow: hidden;
   border: 1px solid var(--line);
-  margin: 0;
-  background: var(--surface);
-  box-shadow: 0 18px 44px rgb(0 0 0 / 10%);
-  opacity: 0;
-  transform: translateY(18px) scale(0.985);
-  animation: projectImageIn 650ms cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+  padding: 18px;
+  min-height: 120px;
+  background:
+    linear-gradient(135deg, color-mix(in srgb, var(--green) 18%, transparent), transparent 48%),
+    repeating-linear-gradient(90deg, transparent 0 28px, var(--line) 29px 30px),
+    var(--surface, var(--paper-soft));
 }
 
-.project-gallery figure:nth-child(2) {
-  animation-delay: 90ms;
+.project-visual::before {
+  position: absolute;
+  top: 50%;
+  left: 10%;
+  width: 80%;
+  height: 1px;
+  background: var(--line-strong);
+  content: '';
 }
 
-.project-gallery figure:nth-child(3) {
-  animation-delay: 180ms;
+.project-visual span {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  gap: 5px;
+  min-height: 72px;
+  border: 1px solid var(--line-strong);
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--mono-font);
+  font-size: 0.68rem;
+  font-weight: 800;
+  text-align: center;
+  text-transform: uppercase;
+  transition: transform 220ms ease, border-color 220ms ease;
 }
 
-.project-gallery img {
-  width: 100%;
-  height: 100%;
-  display: block;
-  object-fit: cover;
-  object-position: top left;
-  filter: saturate(0.82);
-  transition:
-    transform 550ms cubic-bezier(0.2, 0.8, 0.2, 1),
-    filter 350ms ease;
+.project-visual span:hover {
+  border-color: var(--ink);
+  transform: translateY(-3px);
 }
 
-.project-gallery figcaption {
+.project-visual i {
+  color: var(--green);
+  font-style: normal;
+  font-size: 0.6rem;
+}
+
+.project-visual small {
   position: absolute;
   right: 8px;
   bottom: 8px;
+  z-index: 1;
   padding: 4px 7px;
-  color: white;
-  background: rgb(0 0 0 / 68%);
+  color: var(--muted);
+  background: var(--paper);
   font-family: var(--mono-font);
   font-size: 0.62rem;
+  text-transform: uppercase;
 }
 
-.work-list article:hover .project-gallery img {
-  transform: scale(1.035);
-  filter: saturate(1);
-}
-
-@keyframes projectImageIn {
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
-}
 
 .work-list article > span,
 .writing-list article > span {
@@ -1424,11 +1423,11 @@ const submitForm = () => {
     grid-column: auto;
   }
 
-  .project-gallery {
+  .project-visual {
     grid-column: 2;
   }
 
-  .project-gallery--trio {
+  .project-visual {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
@@ -1463,8 +1462,7 @@ const submitForm = () => {
     grid-column: auto;
   }
 
-  .project-gallery,
-  .project-gallery--trio {
+  .project-visual {
     grid-template-columns: 1fr;
   }
 
@@ -1473,7 +1471,7 @@ const submitForm = () => {
   }
 
   .work-list article > span,
-  .project-gallery {
+  .project-visual {
     grid-column: 1;
   }
 }

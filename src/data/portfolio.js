@@ -1,11 +1,3 @@
-import erpLogin from '../assets/1.png'
-import posDashboard from '../assets/1a.png'
-import dmsLogin from '../assets/1b.png'
-import erpFleet from '../assets/2.png'
-import posSales from '../assets/2a.png'
-import dmsDocuments from '../assets/2b.png'
-import erpRoles from '../assets/4.png'
-
 export const profile = {
   name: 'Nephten Fajardo Ilon',
   shortName: 'Nephten',
@@ -195,11 +187,7 @@ export const systems = [
     outcome:
       'Role: full-stack development, data investigation, workflow design, bug fixing, and user support.',
     stack: ['Next.js', 'React', 'TypeScript', 'Directus', 'MySQL', 'Docker'],
-    images: [
-      { src: erpLogin, alt: 'ERP Lite sign-in screen' },
-      { src: erpFleet, alt: 'ERP Lite fleet management navigation' },
-      { src: erpRoles, alt: 'ERP Lite users and company roles screen' },
-    ],
+    visual: ['Purchasing', 'Inventory', 'Reporting'],
   },
   {
     title: 'KonekTaV POS',
@@ -208,10 +196,7 @@ export const systems = [
     outcome:
       'Role: Technical Support — reproducing issues, checking system behavior, assisting users, and helping keep store operations running.',
     stack: ['Technical Support', 'POS', 'Troubleshooting', 'User Support', 'System Testing'],
-    images: [
-      { src: posDashboard, alt: 'KonekTaV POS operational dashboard' },
-      { src: posSales, alt: 'KonekTaV POS sales and recent transactions screen' },
-    ],
+    visual: ['Investigate', 'Validate', 'Support'],
   },
   {
     title: 'Company Document Management System',
@@ -220,10 +205,7 @@ export const systems = [
     outcome:
       'Current work: tracing defects through the interface and application flow, implementing fixes, and validating document workflows.',
     stack: ['Full-Stack Fixes', 'DMS', 'Debugging', 'Access Control', 'Workflow Testing'],
-    images: [
-      { src: dmsDocuments, alt: 'Company DMS document browser and document properties' },
-      { src: dmsLogin, alt: 'Company DMS sign-in screen' },
-    ],
+    visual: ['Access', 'Metadata', 'History'],
   },
   {
     title: 'Project Cost Reporting',
@@ -232,6 +214,7 @@ export const systems = [
     outcome:
       'Turns operational records into clearer cost visibility for review and decision-making.',
     stack: ['Next.js', 'TypeScript', 'Directus', 'MySQL', 'Excel'],
+    visual: ['Source data', 'Cost logic', 'Export'],
   },
   {
     title: 'Purchasing & Inventory Workflows',
@@ -239,6 +222,7 @@ export const systems = [
     text: 'Improved material requests, supplier selection, purchase orders, item creation, item groups, warehouse data, inventory tables, and printable purchasing documents.',
     outcome: 'Connects user-friendly forms to dependable records across the purchasing lifecycle.',
     stack: ['React', 'TypeScript', 'Directus', 'MySQL', 'Tailwind CSS'],
+    visual: ['Request', 'Supplier', 'Purchase order'],
   },
   {
     title: 'Directus Company Automation',
@@ -246,6 +230,7 @@ export const systems = [
     text: 'Worked on Directus hooks and initialization logic that prepare company-specific item types, item groups, units of measure, and accounting behavior.',
     outcome: 'Makes new-company setup more consistent and reduces repetitive administrative work.',
     stack: ['Node.js', 'Directus Extensions', 'JavaScript', 'Docker', 'MySQL'],
+    visual: ['Company', 'Defaults', 'Ready'],
   },
   {
     title: 'Gege Portfolio',
@@ -254,6 +239,7 @@ export const systems = [
     outcome: 'A custom Vue experience built without a portfolio template.',
     stack: ['Vue 3', 'Vite', 'Canvas API', 'CSS', 'Accessibility'],
     href: 'https://github.com/NeppyS/Gege',
+    visual: ['Design', 'Build', 'Refine'],
   },
   {
     title: 'Frontend Practice Collection',
@@ -263,6 +249,7 @@ export const systems = [
       'Shows continued practice across JavaScript, TypeScript, component layouts, and responsive CSS.',
     stack: ['TypeScript', 'JavaScript', 'CSS', 'Responsive Design', 'Vercel'],
     href: 'https://github.com/NeppyS?tab=repositories',
+    visual: ['Practice', 'Ship', 'Learn'],
   },
 ]
 
